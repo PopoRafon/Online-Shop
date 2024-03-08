@@ -1,3 +1,137 @@
+.navigation-header {
+  height: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  align-items: center;
+  padding: 0px 5px;
+}
+.navigation-header .navigation-header-buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.navigation-header .navigation-header-buttons-container .navigation-header-button {
+  cursor: pointer;
+  background-color: transparent;
+  width: 40px;
+  height: 40px;
+  border: 0px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transition: 0.3s;
+}
+.navigation-header .navigation-header-buttons-container .navigation-header-button:hover {
+  background-color: #F0F0F0;
+}
+.navigation-header .navigation-header-buttons-container .navigation-header-button .navigation-header-button-icon {
+  width: inherit;
+  height: inherit;
+}
+.navigation-header .navigation-header-buttons-container .navigation-header-account-dropdown {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  top: 44px;
+  right: 0px;
+  width: 220px;
+  height: 170px;
+  border: 1px solid #E0E0E0;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.2);
+  z-index: 50;
+}
+.navigation-header .navigation-header-buttons-container .navigation-header-account-dropdown::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;
+  right: 14px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #E0E0E0 transparent;
+}
+.navigation-header .navigation-header-buttons-container .navigation-header-account-dropdown .navigation-header-account-dropdown-button {
+  cursor: pointer;
+  background-color: #00A3FF;
+  color: white;
+  width: 180px;
+  height: 30px;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: medium;
+  border: 0px;
+  position: relative;
+  transition: 0.3s;
+}
+.navigation-header .navigation-header-buttons-container .navigation-header-account-dropdown .navigation-header-account-dropdown-button:hover {
+  background-color: #009AFA;
+}
+.navigation-header .navigation-header-buttons-container .navigation-header-account-dropdown .navigation-header-account-dropdown-button .navigation-header-account-dropdown-google-icon {
+  position: absolute;
+  left: 1px;
+  top: 1px;
+}
+
+@media only screen and (min-width: 768px) {
+  .navigation-header {
+    position: absolute;
+    height: 45px;
+  }
+}
+.navigation-searchbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 75%;
+  height: 45px;
+  position: relative;
+  border-radius: 5px;
+}
+.navigation-searchbar .navigation-searchbar-input {
+  font-size: large;
+  width: 100%;
+  height: 100%;
+  padding: 0px 4px;
+  box-sizing: border-box;
+  border: 1px solid gray;
+  border-right: 0px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.navigation-searchbar .navigation-searchbar-input:focus {
+  border-color: rgb(105, 165, 255);
+  outline: 0px;
+}
+.navigation-searchbar .navigation-searchbar-submit {
+  cursor: pointer;
+  border: 0px;
+  background-color: rgb(47, 130, 251);
+  background-image: url("../assets/images/icons/search_icon.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 50px;
+  height: 100%;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+  transition: 0.3s;
+}
+.navigation-searchbar .navigation-searchbar-submit:hover {
+  background-color: rgb(40, 120, 240);
+}
+
+@media only screen and (min-width: 768px) {
+  .navigation-searchbar {
+    width: 580px;
+  }
+}
 .navigation {
   display: flex;
   flex-direction: column;
@@ -11,92 +145,10 @@
   background-color: white;
   border-bottom: 1px solid #E0E0E0;
 }
-.navigation .navigation-header {
-  height: 40px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  box-sizing: border-box;
-  align-items: center;
-  padding: 0px 5px;
-}
-.navigation .navigation-header .navigation-header-buttons-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-}
-.navigation .navigation-header .navigation-header-buttons-container .navigation-header-button {
-  cursor: pointer;
-  background-color: transparent;
-  width: 40px;
-  height: 40px;
-  border: 0px;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  transition: 0.3s;
-}
-.navigation .navigation-header .navigation-header-buttons-container .navigation-header-button:hover {
-  background-color: #F0F0F0;
-}
-.navigation .navigation-header .navigation-header-buttons-container .navigation-header-button .navigation-header-button-icon {
-  width: inherit;
-  height: inherit;
-}
-.navigation .navigation-searchbar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 75%;
-  height: 45px;
-  position: relative;
-  border-radius: 5px;
-}
-.navigation .navigation-searchbar .navigation-searchbar-input {
-  font-size: large;
-  width: 100%;
-  height: 100%;
-  padding: 0px 4px;
-  box-sizing: border-box;
-  border: 1px solid gray;
-  border-right: 0px;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-}
-.navigation .navigation-searchbar .navigation-searchbar-input:focus {
-  border-color: rgb(105, 165, 255);
-  outline: 0px;
-}
-.navigation .navigation-searchbar .navigation-searchbar-submit {
-  cursor: pointer;
-  border: 0px;
-  background-color: rgb(47, 130, 251);
-  background-image: url("../assets/images/icons/search_icon.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 50px;
-  height: 100%;
-  border-bottom-right-radius: 5px;
-  border-top-right-radius: 5px;
-  transition: 0.3s;
-}
-.navigation .navigation-searchbar .navigation-searchbar-submit:hover {
-  background-color: rgb(40, 120, 240);
-}
 
 @media only screen and (min-width: 768px) {
   .navigation {
     padding: 8px 0px;
-  }
-  .navigation .navigation-header {
-    position: absolute;
-    height: 45px;
-  }
-  .navigation .navigation-searchbar {
-    width: 580px;
   }
 }
 :root {
@@ -106,6 +158,13 @@
 body {
   padding: 0;
   margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+a:visited, a:hover, a:active {
+  color: #0000EE;
 }
 
 /*# sourceMappingURL=main.css.map */

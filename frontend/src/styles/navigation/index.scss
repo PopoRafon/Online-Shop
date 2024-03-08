@@ -1,0 +1,24 @@
+$navigation-border-color: #E0E0E0;
+
+@import 'header';
+@import 'searchbar';
+
+.navigation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4px 0px;
+    box-sizing: border-box;
+    width: 100%;
+    gap: 4px;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    border-bottom: 1px solid $navigation-border-color;
+}
+
+@media only screen and (min-width: 768px) {
+    .navigation {
+        padding: 8px 0px;
+    }
+}

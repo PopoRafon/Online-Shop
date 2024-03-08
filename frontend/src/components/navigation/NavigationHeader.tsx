@@ -1,5 +1,5 @@
+import Account from './Account';
 import MenuIcon from '@assets/images/icons/menu_icon.svg';
-import UserIcon from '@assets/images/icons/user_icon.svg';
 import CartIcon from '@assets/images/icons/cart_icon.svg';
 
 export default function NavigationHeader() {
@@ -17,15 +17,7 @@ export default function NavigationHeader() {
                 </button>
             </div>
             <div className="navigation-header-buttons-container">
-                <button
-                    className="navigation-header-button"
-                >
-                    <img
-                        src={UserIcon}
-                        className="navigation-header-button-icon"
-                        alt="Account"
-                    />
-                </button>
+                <Account />
                 <button
                     className="navigation-header-button"
                 >
