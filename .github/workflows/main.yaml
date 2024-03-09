@@ -1,0 +1,51 @@
+name: Django/React CI
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Install Django Dependencies
+      run: |
+        cd backend/
+        pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Setup Django Environment
+      run: |
+        cd backend/
+        echo "SECRET_KEY=$(openssl rand -base64 32)" > ./core/.env
+        python3 manage.py migrate
+
+    - name: Run Django Tests
+      run: |
+        cd backend/
+        python manage.py test
+
+    - name: Install Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: '>=20.x'
+
+    - name: Install React Dependencies
+      run: |
+        cd frontend/
+        npm install
+
+    - name: Run React Tests
+      run: |
+        cd frontend/
+        npm test
