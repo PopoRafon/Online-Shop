@@ -16,7 +16,7 @@ export default function Account() {
                 <img
                     src={AccountIcon}
                     className="navigation-header-button-icon"
-                    alt="Account"
+                    alt="Account icon"
                 />
             </button>
             {showDropdown && (

@@ -2,7 +2,7 @@ import type { ChangeEvent, FormEvent } from 'react';
 import { useState, useRef } from 'react';
 
 export default function SearchBar() {
-    const searchbarRef = useRef<null | HTMLFormElement>(null);
+    const searchBarRef = useRef<null | HTMLFormElement>(null);
     const [searchData, setSearchData] = useState<string>('');
 
     function handleChange(event: ChangeEvent<HTMLInputElement>) {
@@ -16,23 +16,24 @@ export default function SearchBar() {
     }
 
     function highlightSearchBar() {
-        if (searchbarRef.current) {
-            searchbarRef.current.style.outline = '2px solid rgb(105, 165, 255)';
+        if (searchBarRef.current) {
+            searchBarRef.current.style.outline = '2px solid rgb(105, 165, 255)';
         }
     }
 
     function blurSearchBar() {
-        if (searchbarRef.current) {
-            searchbarRef.current.style.outline = '';
+        if (searchBarRef.current) {
+            searchBarRef.current.style.outline = '';
         }
     }
 
     return (
         <form
-            ref={searchbarRef}
+            ref={searchBarRef}
             noValidate
             autoComplete="off"
             className="navigation-searchbar"
+            aria-label="Search form"
             onSubmit={handleSubmit}
         >
             <input
@@ -46,7 +47,6 @@ export default function SearchBar() {
                 onBlur={blurSearchBar}
             />
             <input
-                id="search"
                 type="submit"
                 value=""
                 className="navigation-searchbar-submit"

@@ -12,7 +12,7 @@ export default function NavigationHeader() {
                     <img
                         src={MenuIcon}
                         className="navigation-header-button-icon"
-                        alt="Menu"
+                        alt="Menu icon"
                     />
                 </button>
             </div>
@@ -24,7 +24,7 @@ export default function NavigationHeader() {
                     <img
                         src={CartIcon}
                         className="navigation-header-button-icon"
-                        alt="Cart"
+                        alt="Cart icon"
                     />
                 </button>
             </div>

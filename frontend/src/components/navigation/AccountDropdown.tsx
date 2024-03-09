@@ -12,12 +12,12 @@ export default function AccountDropdown({ accountButtonRef, setShowDropdown }: A
 
     useEffect(() => {
         const mouseDownEventListener = (event: MouseEvent) => {
-            if (dropdownRef.current && accountButtonRef.current && event.button === 0 &&
-                !dropdownRef.current.contains(event.target as Node) &&
-                !accountButtonRef.current.contains(event.target as Node)
-            ) {
-                setShowDropdown(false);
-            }
+            if ((dropdownRef.current && dropdownRef.current.contains(event.target as Node)) ||
+                (accountButtonRef.current && accountButtonRef.current.contains(event.target as Node)) ||
+                event.button !== 0
+            ) return;
+
+            setShowDropdown(false);
         };
 
         document.addEventListener('mousedown', mouseDownEventListener);
@@ -31,6 +31,7 @@ export default function AccountDropdown({ accountButtonRef, setShowDropdown }: A
         <div
             ref={dropdownRef}
             className="navigation-header-account-dropdown"
+            data-testid="account-dropdown"
         >
             <span>Welcome!</span>
             <button
@@ -41,7 +42,7 @@ export default function AccountDropdown({ accountButtonRef, setShowDropdown }: A
                 <img
                     className="navigation-header-account-dropdown-google-icon"
                     src={GoogleIcon}
-                    alt="Google"
+                    alt="Google icon"
                 />
             </button>
             <button
