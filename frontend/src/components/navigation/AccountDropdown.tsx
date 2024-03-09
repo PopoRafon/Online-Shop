@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import GoogleIcon from '@assets/images/icons/google_icon.svg';
 
-interface AccountDropdownProps {
+type AccountDropdownProps = {
     accountButtonRef: React.MutableRefObject<HTMLButtonElement | null>;
     setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -18,14 +18,14 @@ export default function AccountDropdown({ accountButtonRef, setShowDropdown }: A
             ) {
                 setShowDropdown(false);
             }
-        }
+        };
 
         document.addEventListener('mousedown', mouseDownEventListener);
 
         return () => {
             document.removeEventListener('mousedown', mouseDownEventListener);
-        }
-    }, []);
+        };
+    }, [accountButtonRef, setShowDropdown]);
 
     return (
         <div

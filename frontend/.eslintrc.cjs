@@ -6,7 +6,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'vite.config.ts'],
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh'],
   rules: {
@@ -14,5 +14,44 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    '@typescript-eslint/naming-convention': [
+      'error',
+      {
+        selector: ['variable', 'property'],
+        format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
+      },
+      {
+        selector: 'function',
+        format: ['camelCase', 'PascalCase'],
+      },
+      {
+        selector: ['typeLike', 'enumMember'],
+        format: ['PascalCase'],
+      },
+      {
+        selector: ['parameter', 'method'],
+        format: ['camelCase', 'PascalCase'],
+      }
+    ],
+    '@typescript-eslint/consistent-type-definitions': [
+      'error',
+      'type'
+    ],
+    'linebreak-style': [
+      'error',
+      'unix'
+    ],
+    'quotes': [
+      'error',
+      'single'
+    ],
+    'semi': [
+      'error',
+      'always'
+    ],
+    'indent': [
+      'error',
+      4
+    ]
   },
 }
