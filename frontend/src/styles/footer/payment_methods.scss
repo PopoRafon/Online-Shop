@@ -1,0 +1,28 @@
+.footer-payment-methods {
+    text-align: center;
+    padding: 10px 0px;
+
+    .footer-payment-methods-header {
+        margin: 0px;
+        margin-bottom: 10px;
+        font-size: medium;
+    }
+
+    .footer-payment-methods-body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: clamp(2px, 1vw, 10px);
+
+        .footer-payment-methods-body-text {
+            font-size: 14px;
+            color: #E0E0E0;
+        }
+    }
+}
+
+@media only screen and (min-width: 360px) {
+    .footer-payment-methods .footer-payment-methods-body {
+        gap: clamp(2px, 1.5vw, 10px);
+    }
+}

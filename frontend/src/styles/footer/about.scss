@@ -1,0 +1,33 @@
+.footer-about {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0px 8px;
+    box-sizing: border-box;
+    align-items: end;
+
+    a {
+        display: flex;
+        color: white;
+        width: fit-content;
+
+        &:visited {
+            color: white;
+        }
+
+        &:hover {
+            color: #EAEAEA;
+        }
+    }
+
+    .footer-about-information {
+        display: flex;
+        flex-direction: column;
+        font-size: small;
+    }
+
+    .footer-about-socials {
+        display: flex;
+        gap: 5px;
+    }
+}

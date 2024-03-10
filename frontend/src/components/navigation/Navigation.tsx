@@ -4,7 +4,7 @@ import SearchBar from './SearchBar';
 export default function Navigation() {
     return (
         <header>
-            <nav className="navigation">
+            <nav>
                 <NavigationHeader />
                 <SearchBar />
             </nav>

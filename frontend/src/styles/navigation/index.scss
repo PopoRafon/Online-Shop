@@ -3,7 +3,7 @@ $navigation-border-color: #E0E0E0;
 @import 'header';
 @import 'searchbar';
 
-.navigation {
+nav {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,7 +18,7 @@ $navigation-border-color: #E0E0E0;
 }
 
 @media only screen and (min-width: 768px) {
-    .navigation {
+    nav {
         padding: 8px 0px;
     }
 }
