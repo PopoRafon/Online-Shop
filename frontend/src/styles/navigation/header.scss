@@ -47,7 +47,7 @@
             right: 0px;
             width: 220px;
             height: 170px;
-            border: 1px solid $navigation-border-color;
+            border: 1px solid $light-gray-color;
             border-radius: 5px;
             background-color: white;
             box-shadow: 1px 1px 2px 0px rgb(0, 0, 0, 0.2);
@@ -60,7 +60,7 @@
                 right: 14px;
                 border-width: 5px;
                 border-style: solid;
-                border-color: transparent transparent $navigation-border-color transparent;
+                border-color: transparent transparent $light-gray-color transparent;
             }
 
             .navigation-header-account-dropdown-button {

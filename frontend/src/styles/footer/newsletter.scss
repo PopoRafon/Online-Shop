@@ -25,14 +25,14 @@
         .footer-newsletter-form-input {
             border-radius: 5px;
             font-size: medium;
-            border: 1px solid #E0E0E0;
+            border: 1px solid $light-gray-color;
             box-sizing: border-box;
             height: 40px;
             width: 60%;
             max-width: 230px;
 
             &::placeholder {
-                color: #E0E0E0;
+                color: $light-gray-color;
             }
 
             &:focus {

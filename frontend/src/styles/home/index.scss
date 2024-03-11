@@ -1,0 +1,80 @@
+.home-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0px 5rem;
+    gap: 5rem;
+
+    .home-display-cards-container {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    
+        .home-display-cards-container-header {
+            margin: 0px;
+        }
+
+        .home-display-cards-container-note {
+            color: $light-gray-color;
+        }
+
+        .home-display-cards-container-body {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-gap: 10px;
+
+            .display-card {
+                display: flex;
+                width: 95vw;
+                max-width: 350px;
+                height: 200px;
+                border: 1px solid $light-gray-color;
+                border-radius: 5px;
+                overflow: hidden;
+                transition: 0.3s;
+            
+                &:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 3px 3px 8px 1px rgb(0, 0, 0, 0.2);
+                }
+            
+                .display-card-cover {
+                    height: 100%;
+                    width: 150px;
+                }
+            
+                .display-card-description {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    padding: 1rem;
+                    overflow: hidden;
+            
+                    .display-card-name {
+                        font-weight: 600;
+                        word-wrap: break-word;
+                        color: black;
+                    }
+            
+                    .display-card-price {
+                        font-weight: 600;
+                        color: black;
+                    }
+                }
+            }
+        }
+    }  
+}
+
+@media only screen and (min-width: 750px) {
+    .home-page .home-display-cards-container .home-display-cards-container-body {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media only screen and (min-width: 1100px) {
+    .home-page .home-display-cards-container .home-display-cards-container-body {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

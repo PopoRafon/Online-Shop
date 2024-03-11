@@ -9,7 +9,7 @@
     border-radius: $border-radius;
 
     .navigation-searchbar-input {
-        font-size: large;
+        font-size: clamp(14px, 5vw, 18px);
         width: 100%;
         height: 100%;
         padding: 0px 4px;
