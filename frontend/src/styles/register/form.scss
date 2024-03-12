@@ -1,0 +1,101 @@
+.register-container {
+    border: 1px solid $light-gray-color;
+    border-radius: 5px;
+    width: 95%;
+    max-width: 500px;
+    padding: 2.5rem 0px;
+    background-color: white;
+
+    .register-header {
+        margin: 0px;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .register-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+
+        .register-form-label {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            font-weight: 600;
+            width: 90%;
+            max-width: 350px;
+            gap: 8px;
+
+            .register-form-input {
+                border-radius: 5px;
+                font-size: medium;
+                width: 200px;
+                border: 1px solid $light-gray-color;
+                width: 100%;
+                padding: 12px 8px;
+                box-sizing: border-box;
+
+                &:focus {
+                    border-color: rgb(105, 165, 255);
+                    outline: 2px solid rgb(105, 165, 255);
+                }
+            }
+
+            .register-form-input-show-button {
+                cursor: pointer;
+                display: flex;
+                position: absolute;
+                padding: 0px;
+                right: 5px;
+                bottom: 7px;
+                border: 0px;
+                border-radius: 5px;
+                overflow: hidden;
+                background-color: transparent;
+                transition: 0.3s;
+
+                &:hover {
+                    background-color: #EAEAEA;
+                }
+            }
+        }
+
+        .register-form-submit {
+            cursor: pointer;
+            color: white;
+            background-color: rgb(47, 130, 251);
+            border: 0px;
+            border-radius: 5px;
+            font-size: medium;
+            font-weight: 600;
+            width: 90%;
+            max-width: 350px;
+            height: 40px;
+            margin-top: 8px;
+            transition: 0.3s;
+
+            &:hover {
+                background-color: rgb(40, 120, 240);
+            }
+        }
+
+        .register-form-checkbox-label {
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+
+            .register-form-checkbox {
+                border-radius: 5px;
+                width: 20px;
+                height: 20px;
+                accent-color: rgb(47, 130, 251);
+            }
+        }
+    }
+}

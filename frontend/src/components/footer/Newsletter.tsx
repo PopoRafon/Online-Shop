@@ -1,4 +1,5 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import type { ChangeEvent, FormEvent } from 'react';
+import { useState } from 'react';
 
 export default function Newsletter() {
     const [emailData, setEmailData] = useState<string>('');

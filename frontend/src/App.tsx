@@ -1,7 +1,7 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Navigation from './components/navigation/Navigation';
-import Footer from '@components/footer/Footer';
 import Home from './pages/Home';
+import Register from './pages/Register';
 
 function App() {
     return (
@@ -10,9 +10,9 @@ function App() {
             <Routes>
                 <Route path='/'>
                     <Route index element={<Home />} />
+                    <Route path='register' element={<Register />} />
                 </Route>
             </Routes>
-            <Footer />
         </BrowserRouter>
     );
 }

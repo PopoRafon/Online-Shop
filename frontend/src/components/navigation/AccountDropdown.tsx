@@ -12,8 +12,8 @@ export default function AccountDropdown({ accountButtonRef, setShowDropdown }: A
 
     useEffect(() => {
         const mouseDownEventListener = (event: MouseEvent) => {
-            if ((dropdownRef.current && dropdownRef.current.contains(event.target as Node)) ||
-                (accountButtonRef.current && accountButtonRef.current.contains(event.target as Node)) ||
+            if ((dropdownRef.current?.contains(event.target as Node)) ||
+                (accountButtonRef.current?.contains(event.target as Node)) ||
                 event.button !== 0
             ) return;
 
@@ -53,7 +53,8 @@ export default function AccountDropdown({ accountButtonRef, setShowDropdown }: A
             <div style={{ textAlign: 'center' }}>
                 <span>Don't have an account?</span>
                 <Link
-                    to='/'
+                    to='/register'
+                    onClick={() => setShowDropdown(false)}
                 >
                     Register
                 </Link>

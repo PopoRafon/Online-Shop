@@ -37,6 +37,7 @@ module.exports = {
       'error',
       'type'
     ],
+    '@typescript-eslint/consistent-type-imports': 'error',
     'linebreak-style': [
       'error',
       'unix'

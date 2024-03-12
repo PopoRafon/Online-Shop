@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Account from './Account';
 import MenuIcon from '@assets/images/icons/menu_icon.svg';
 import CartIcon from '@assets/images/icons/cart_icon.svg';
@@ -15,6 +16,12 @@ export default function NavigationHeader() {
                         alt="Menu icon"
                     />
                 </button>
+                <Link
+                    to='/'
+                    style={{ color: 'black' }}
+                >
+                    Home
+                </Link>
             </div>
             <div className="navigation-header-buttons-container">
                 <Account />
