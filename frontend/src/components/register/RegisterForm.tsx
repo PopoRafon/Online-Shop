@@ -1,32 +1,28 @@
 import type { ChangeEvent, FormEvent } from 'react';
+import type { RegisterFormData } from './types';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import register from '@utils/register';
 import FormInput from './FormInput';
 import FormPasswordInput from './FormPasswordInput';
 
-type RegisterFormData = {
-    email: string;
-    username: string;
-    password1: string;
-    password2: string;
-    acceptRules: boolean;
-}
-
 export default function RegisterForm() {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState<RegisterFormData>({
         email: '',
         username: '',
         password1: '',
         password2: '',
-        acceptRules: false
+        rules: false
     });
 
     function handleChange(event: ChangeEvent<HTMLInputElement>) {
         const { name, value, checked } = event.target;
 
-        if (name === 'acceptRules') {
+        if (name === 'rules') {
             setFormData({
                 ...formData,
-                acceptRules: checked
+                rules: checked
             });
         } else {
             setFormData({
@@ -38,6 +34,11 @@ export default function RegisterForm() {
 
     function handleSubmit(event: FormEvent) {
         event.preventDefault();
+
+        register({
+            formData: formData,
+            navigate: navigate
+        });
     }
 
     return (
@@ -73,11 +74,11 @@ export default function RegisterForm() {
             />
             <label className="register-form-checkbox-label">
                 <input
-                    name="acceptRules"
+                    name="rules"
                     type="checkbox"
                     className="register-form-checkbox"
                     onChange={handleChange}
-                    checked={formData.acceptRules}
+                    checked={formData.rules}
                 />
                 I agree with Terms of Service
             </label>
