@@ -1,3 +1,4 @@
+from datetime import timedelta
 from pathlib import Path
 from dotenv import load_dotenv
 import os
@@ -22,6 +23,7 @@ CSRF_TRUSTED_ORIGINS = ['http://localhost:3000']
 
 INSTALLED_APPS = [
     'rest_framework',
+    'rest_framework_simplejwt',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -62,6 +64,17 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'core.wsgi.application'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'auth.authenticate.JWTAuthentication',
+    )
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=20),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7)
+}
 
 
 # Database

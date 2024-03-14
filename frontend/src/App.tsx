@@ -1,10 +1,24 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import AccessToken from '@utils/accessToken';
+import obtainCSRFToken from '@utils/csrfToken';
 import Navigation from '@components/navigation/Navigation';
 import Home from './pages/Home';
 import Register from './pages/Register';
 
 function App() {
-    return (
+    const [isLoaded, setIsLoaded] = useState<boolean>(false);
+
+    useEffect(() => {
+        (async () => {
+            await obtainCSRFToken();
+            await AccessToken.refreshToken();
+
+            setIsLoaded(true);
+        })();
+    }, []);
+
+    return isLoaded && (
         <BrowserRouter>
             <Navigation />
             <Routes>

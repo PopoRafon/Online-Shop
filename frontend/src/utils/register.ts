@@ -1,7 +1,6 @@
 import type { NavigateFunction } from 'react-router-dom';
 import type { RegisterFormData } from '@components/register/types';
 import Cookies from 'js-cookie';
-import obtainCSRFToken from './csrfToken';
 
 type RegisterArgs = {
     formData: RegisterFormData;
@@ -13,17 +12,13 @@ type RegisterArgs = {
  * If request succeeds navigates user to home page.
  */
 export default async function register({ formData, navigate }: RegisterArgs): Promise<void> {
-    const csrfToken: string | undefined = Cookies.get('csrftoken');
-
-    if (!csrfToken) {
-        await obtainCSRFToken();
-    }
+    const csrfToken: string = Cookies.get('csrftoken') ?? '';
 
     return await fetch('/api/register', {
         method: 'POST',
         headers: {
             // eslint-disable-next-line @typescript-eslint/naming-convention
-            'X-CSRFToken': csrfToken as string,
+            'X-CSRFToken': csrfToken,
             // eslint-disable-next-line @typescript-eslint/naming-convention
             'Content-Type': 'application/json'
         },

@@ -1,15 +1,48 @@
 from django.middleware.csrf import get_token
 from django.contrib.auth.models import User
+from django.conf import settings
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.exceptions import TokenError
 from .serializers import RegisterSerializer
 
 @api_view(['GET'])
 def csrf_token_view(request):
     token = get_token(request)
     return Response({'success': token})
+
+
+class TokenRefreshView(APIView):
+    def post(self, request):
+        refresh_token = request.COOKIES.get('refresh')
+
+        if refresh_token is not None:
+            try:
+                access = RefreshToken(refresh_token).access_token
+            except TokenError:
+                return Response({
+                    'error': 'Your refresh token is invalid.'
+                }, status=status.HTTP_400_BAD_REQUEST)
+
+            response = Response({
+                'success': 'Your new access token has been successfully issued.'
+            }, status=status.HTTP_200_OK)
+
+            response.set_cookie(
+                'access',
+                access,
+                max_age=settings.SIMPLE_JWT['ACCESS_TOKEN_LIFETIME'],
+                httponly=True
+            )
+
+            return response
+        else:
+            return Response({
+                'error': 'You must provide refresh token inorder to issue new access token.'
+            }, status=status.HTTP_400_BAD_REQUEST)
 
 
 class RegisterView(APIView):
@@ -21,15 +54,34 @@ class RegisterView(APIView):
             username = serializer.validated_data['username']
             password = serializer.validated_data['password1']
 
-            User.objects.create(
+            user = User.objects.create(
                 email=email,
                 username=username,
                 password=password
             )
 
-            return Response({
+            refresh = RefreshToken.for_user(user)
+            access = refresh.access_token
+
+            response = Response({
                 'success': 'Your account has been successfully created.'
             }, status=status.HTTP_201_CREATED)
+
+            response.set_cookie(
+                'refresh',
+                refresh,
+                max_age=settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'],
+                httponly=True
+            )
+
+            response.set_cookie(
+                'access',
+                access,
+                max_age=settings.SIMPLE_JWT['ACCESS_TOKEN_LIFETIME'],
+                httponly=True
+            )
+
+            return response
         else:
             return Response({
                 'error': serializer.errors
