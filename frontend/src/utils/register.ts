@@ -1,18 +1,20 @@
 import type { NavigateFunction } from 'react-router-dom';
 import type { RegisterFormData, RegisterFormErrors } from '@components/register/types';
+import type { AlertData } from '@contexts/AlertContext/AlertContextProvider';
 import Cookies from 'js-cookie';
 
 type RegisterArgs = {
     formData: RegisterFormData;
     setFormErrors: React.Dispatch<React.SetStateAction<RegisterFormErrors>>;
     navigate: NavigateFunction;
+    setAlert: React.Dispatch<React.SetStateAction<AlertData>>;
 }
 
 /**
  * Sends request to server register endpoint.
  * If request succeeds navigates user to home page.
  */
-export default async function register({ formData, setFormErrors, navigate }: RegisterArgs): Promise<void> {
+export default async function register({ formData, setFormErrors, navigate, setAlert }: RegisterArgs): Promise<void> {
     const csrfToken: string = Cookies.get('csrftoken') ?? '';
 
     return await fetch('/api/register', {
@@ -28,6 +30,7 @@ export default async function register({ formData, setFormErrors, navigate }: Re
         .then(response => response.json())
         .then(data => {
             if (data.success) {
+                setAlert({ show: true, text: 'Your account has been successfully created.' });
                 navigate('/');
             } else if (data.error) {
                 setFormErrors({ ...data.error });

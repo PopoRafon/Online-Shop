@@ -447,6 +447,63 @@ footer {
   flex-grow: 1;
 }
 
+.alert {
+  position: fixed;
+  display: flex;
+  gap: 8px;
+  z-index: 999;
+  background-color: rgb(65, 216, 136);
+  bottom: 0px;
+  right: 0px;
+  border-radius: 5px;
+  padding: 1.5rem 1rem 3rem;
+  overflow: hidden;
+}
+.alert .alert-info {
+  width: clamp(240px, 70vw, 350px);
+}
+.alert .alert-info .alert-info-header {
+  margin: 0px;
+  color: white;
+}
+.alert .alert-info .alert-info-body {
+  margin: 0px;
+  color: white;
+  text-wrap: wrap;
+}
+.alert .alert-close-button {
+  cursor: pointer;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: flex;
+  padding: 0px;
+  background-color: transparent;
+  border: 0px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+.alert .alert-close-button:hover {
+  background-color: rgba(80, 80, 80, 0.2);
+}
+.alert .alert-disappearance-timer {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  background-color: rgba(255, 255, 255, 0.4);
+  height: 12px;
+  width: 100%;
+  animation: disappearance-timer-animation 5s ease-out forwards 0s 1;
+}
+@keyframes disappearance-timer-animation {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0%;
+  }
+}
+
 :root {
   font-family: Arial, Helvetica, sans-serif;
 }

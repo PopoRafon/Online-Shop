@@ -3,12 +3,14 @@ import type { RegisterFormData, RegisterFormErrors } from './types';
 import { isRegisterFormValid } from '@helpers/formValidators';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useAlertContext from '@contexts/AlertContext/useAlertContext';
 import register from '@utils/register';
 import FormInput from './FormInput';
 import FormPasswordInput from './FormPasswordInput';
 
 export default function RegisterForm() {
     const navigate = useNavigate();
+    const { setAlert } = useAlertContext();
     const [formErrors, setFormErrors] = useState<RegisterFormErrors>({
         email: '',
         username: '',
@@ -44,7 +46,7 @@ export default function RegisterForm() {
         event.preventDefault();
 
         if (isRegisterFormValid({ formData, setFormErrors })) {
-            register({ formData, navigate, setFormErrors });
+            register({ formData, navigate, setFormErrors, setAlert });
         }
     }
 
