@@ -7,10 +7,11 @@ type FormPasswordInputProps = {
     label: string;
     name: string;
     value: string;
-    handleChange: (event: ChangeEvent<HTMLInputElement>) => void
+    handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
+    error: string;
 }
 
-export default function FormPasswordInput({ label, name, value, handleChange }: FormPasswordInputProps) {
+export default function FormPasswordInput({ label, name, value, handleChange, error }: FormPasswordInputProps) {
     const [showPassword, setShowPassword] = useState<boolean>(false);
 
     return (
@@ -19,12 +20,13 @@ export default function FormPasswordInput({ label, name, value, handleChange }: 
             <input
                 name={name}
                 type={showPassword ? 'text' : 'password'}
-                className="register-form-input"
+                className={`register-form-input ${error && 'register-form-input-error'}`}
                 value={value}
                 onChange={handleChange}
                 autoComplete="off"
                 style={{ paddingRight: '40px' }}
             />
+            <span className="register-form-error-message">{error}</span>
             <button
                 type="button"
                 className="register-form-input-show-button"

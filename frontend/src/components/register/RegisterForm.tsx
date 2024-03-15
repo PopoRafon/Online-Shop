@@ -1,5 +1,6 @@
 import type { ChangeEvent, FormEvent } from 'react';
-import type { RegisterFormData } from './types';
+import type { RegisterFormData, RegisterFormErrors } from './types';
+import { isRegisterFormValid } from '@helpers/formValidators';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import register from '@utils/register';
@@ -8,6 +9,13 @@ import FormPasswordInput from './FormPasswordInput';
 
 export default function RegisterForm() {
     const navigate = useNavigate();
+    const [formErrors, setFormErrors] = useState<RegisterFormErrors>({
+        email: '',
+        username: '',
+        password1: '',
+        password2: '',
+        rules: ''
+    });
     const [formData, setFormData] = useState<RegisterFormData>({
         email: '',
         username: '',
@@ -35,10 +43,9 @@ export default function RegisterForm() {
     function handleSubmit(event: FormEvent) {
         event.preventDefault();
 
-        register({
-            formData: formData,
-            navigate: navigate
-        });
+        if (isRegisterFormValid({ formData, setFormErrors })) {
+            register({ formData, navigate, setFormErrors });
+        }
     }
 
     return (
@@ -52,24 +59,28 @@ export default function RegisterForm() {
                 name="email"
                 type="email"
                 value={formData.email}
+                error={formErrors.email}
                 handleChange={handleChange}
             />
             <FormInput
                 label="Username"
                 name="username"
                 value={formData.username}
+                error={formErrors.username}
                 handleChange={handleChange}
             />
             <FormPasswordInput
                 label="Password"
                 name="password1"
                 value={formData.password1}
+                error={formErrors.password1}
                 handleChange={handleChange}
             />
             <FormPasswordInput
                 label="Confirm Password"
                 name="password2"
                 value={formData.password2}
+                error={formErrors.password2}
                 handleChange={handleChange}
             />
             <label className="register-form-checkbox-label">
@@ -80,7 +91,7 @@ export default function RegisterForm() {
                     onChange={handleChange}
                     checked={formData.rules}
                 />
-                I agree with Terms of Service
+                <span style={{ color: `${formErrors.rules && '#FF5050'}` }}>I agree with Terms of Service</span>
             </label>
             <input
                 type="submit"

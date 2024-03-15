@@ -37,6 +37,12 @@ module.exports = {
       'error',
       'type'
     ],
+    '@typescript-eslint/array-type': [
+      'error',
+      {
+        'default': 'array-simple'
+      }
+    ],
     '@typescript-eslint/consistent-type-imports': 'error',
     'linebreak-style': [
       'error',
@@ -44,7 +50,8 @@ module.exports = {
     ],
     'quotes': [
       'error',
-      'single'
+      'single',
+      { allowTemplateLiterals: true }
     ],
     'semi': [
       'error',
