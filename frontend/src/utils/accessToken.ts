@@ -4,17 +4,17 @@ import Cookies from 'js-cookie';
  * Provides methods for refreshing access tokens.
  */
 export default class AccessToken {
-    static #tokenRefreshInterval: number;
-    static #tokenRefreshTime: number = 19 * 60 * 1e3;
+    private static tokenRefreshInterval: NodeJS.Timeout;
+    private static readonly tokenRefreshTime: number = 19 * 60 * 1e3;
 
     /**
      * Refreshes access token on specified intervals.
      * Removes interval if token refresh doesn't succeed.
      */
     static setPeriodicTokenRefresh(): void {
-        clearInterval(this.#tokenRefreshInterval);
+        clearInterval(this.tokenRefreshInterval);
 
-        this.#tokenRefreshInterval = setInterval(async () => {
+        this.tokenRefreshInterval = setInterval(() => {
             const csrfToken: string = Cookies.get('csrftoken') ?? '';
 
             fetch('/api/token/refresh', {
@@ -27,13 +27,13 @@ export default class AccessToken {
                 .then(response => response.json())
                 .then(data => {
                     if (!data.success) {
-                        clearInterval(this.#tokenRefreshInterval);
+                        clearInterval(this.tokenRefreshInterval);
                     }
                 })
                 .catch(error => {
                     console.log(error);
                 });
-        }, this.#tokenRefreshTime);
+        }, this.tokenRefreshTime);
     }
 
     /**
