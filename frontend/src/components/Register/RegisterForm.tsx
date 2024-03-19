@@ -5,8 +5,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAlertContext from '@contexts/AlertContext/useAlertContext';
 import register from '@utils/register';
-import FormInput from './FormInput';
-import FormPasswordInput from './FormPasswordInput';
+import FormInput from '@components/AuthForm/FormInput';
+import FormPasswordInput from '@components/AuthForm/FormPasswordInput';
 
 export default function RegisterForm() {
     const navigate = useNavigate();
@@ -53,7 +53,7 @@ export default function RegisterForm() {
     return (
         <form
             noValidate
-            className="register-form"
+            className="auth-form"
             onSubmit={handleSubmit}
         >
             <FormInput
@@ -85,11 +85,11 @@ export default function RegisterForm() {
                 error={formErrors.password2}
                 handleChange={handleChange}
             />
-            <label className="register-form-checkbox-label">
+            <label className="auth-form-checkbox-label">
                 <input
                     name="rules"
                     type="checkbox"
-                    className="register-form-checkbox"
+                    className="auth-form-checkbox"
                     onChange={handleChange}
                     checked={formData.rules}
                 />
@@ -98,7 +98,7 @@ export default function RegisterForm() {
             <input
                 type="submit"
                 value="Create Account"
-                className="register-form-submit"
+                className="auth-form-submit"
             />
         </form>
     );

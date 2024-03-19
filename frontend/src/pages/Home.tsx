@@ -1,7 +1,7 @@
-import Footer from '@components/footer/Footer';
-import Recommendations from '@components/home/Recommendations';
-import Bestsellers from '@components/home/Bestsellers';
-import Random from '@components/home/Random';
+import Footer from '@components/Footer/Footer';
+import Recommendations from '@components/Home/Recommendations';
+import Bestsellers from '@components/Home/Bestsellers';
+import Random from '@components/Home/Random';
 
 export default function Home() {
     return (

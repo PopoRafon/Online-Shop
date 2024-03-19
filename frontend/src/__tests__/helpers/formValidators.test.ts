@@ -1,4 +1,4 @@
-import type { RegisterFormData } from '@components/register/types';
+import type { RegisterFormData } from '@components/Register/types';
 import { test, describe, expect, vi } from 'vitest';
 import { isRegisterFormValid } from '@helpers/formValidators';
 

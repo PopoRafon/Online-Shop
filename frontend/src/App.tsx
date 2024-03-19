@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import AlertContextProvider from '@contexts/AlertContext/AlertContextProvider';
 import AccessToken from '@utils/accessToken';
 import obtainCSRFToken from '@utils/csrfToken';
-import Navigation from '@components/navigation/Navigation';
-import Alert from '@components/alert/Alert';
+import Navigation from '@components/Navigation/Navigation';
+import Alert from '@components/Alert/Alert';
 import Home from './pages/Home';
 import Register from './pages/Register';
 

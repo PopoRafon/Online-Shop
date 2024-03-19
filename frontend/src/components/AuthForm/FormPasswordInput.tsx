@@ -15,21 +15,21 @@ export default function FormPasswordInput({ label, name, value, handleChange, er
     const [showPassword, setShowPassword] = useState<boolean>(false);
 
     return (
-        <label className="register-form-label">
+        <label className="auth-form-label">
             {label}
             <input
                 name={name}
                 type={showPassword ? 'text' : 'password'}
-                className={`register-form-input ${error && 'register-form-input-error'}`}
+                className={`auth-form-input ${error && 'auth-form-input-error'}`}
                 value={value}
                 onChange={handleChange}
                 autoComplete="off"
                 style={{ paddingRight: '40px' }}
             />
-            <span className="register-form-error-message">{error}</span>
+            <span className="auth-form-error-message">{error}</span>
             <button
                 type="button"
-                className="register-form-input-show-button"
+                className="auth-form-input-show-button"
                 onClick={() => setShowPassword(prev => !prev)}
             >
                 {showPassword ? (

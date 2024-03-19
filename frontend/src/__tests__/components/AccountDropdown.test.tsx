@@ -1,7 +1,7 @@
 import { test, describe, expect, vi } from 'vitest';
 import { render, getByTestId, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import AccountDropdown from '@components/navigation/AccountDropdown';
+import AccountDropdown from '@components/Navigation/AccountDropdown';
 
 describe('account dropdown component', () => {
     test('account dropdown calls setShowDropdown function after mouse is clicked outside of account dropdown', () => {

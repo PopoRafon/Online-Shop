@@ -1,4 +1,4 @@
-import type { RegisterFormData, RegisterFormErrors } from '@components/register/types';
+import type { RegisterFormData, RegisterFormErrors } from '@components/Register/types';
 import { test, describe, expect, vi, beforeAll, afterAll, afterEach } from 'vitest';
 import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';

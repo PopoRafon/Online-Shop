@@ -1,7 +1,7 @@
 import { test, describe, expect } from 'vitest';
 import { render, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import Account from '@components/navigation/Account';
+import Account from '@components/Navigation/Account';
 
 describe('account component', () => {
     test('correctly renders account component', () => {

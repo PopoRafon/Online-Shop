@@ -1,6 +1,6 @@
 import { test, describe, expect } from 'vitest';
 import { fireEvent, render } from '@testing-library/react';
-import SearchBar from '@components/navigation/SearchBar';
+import SearchBar from '@components/Navigation/SearchBar';
 
 describe('searchbar component', () => {
     test('correctly renders searchbar component', () => {

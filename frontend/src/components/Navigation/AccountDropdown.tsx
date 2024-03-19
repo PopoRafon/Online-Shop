@@ -36,7 +36,7 @@ export default function AccountDropdown({ accountButtonRef, setShowDropdown }: A
             <span>Welcome!</span>
             <button
                 className="navigation-header-account-dropdown-button"
-                style={{ textAlign: 'right' }}
+                style={{ justifyContent: 'right' }}
             >
                 Login with Google
                 <img
@@ -45,11 +45,13 @@ export default function AccountDropdown({ accountButtonRef, setShowDropdown }: A
                     alt="Google icon"
                 />
             </button>
-            <button
+            <Link
+                to='/login'
+                onClick={() => setShowDropdown(false)}
                 className="navigation-header-account-dropdown-button"
             >
                 Login
-            </button>
+            </Link>
             <div style={{ textAlign: 'center' }}>
                 <span>Don't have an account?</span>
                 <Link

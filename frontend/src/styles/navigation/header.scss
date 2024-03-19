@@ -65,6 +65,9 @@
 
             .navigation-header-account-dropdown-button {
                 cursor: pointer;
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 background-color: #00A3FF;
                 color: white;
                 width: 180px;

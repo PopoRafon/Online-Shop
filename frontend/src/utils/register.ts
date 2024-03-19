@@ -1,5 +1,5 @@
 import type { NavigateFunction } from 'react-router-dom';
-import type { RegisterFormData, RegisterFormErrors } from '@components/register/types';
+import type { RegisterFormData, RegisterFormErrors } from '@components/Register/types';
 import type { AlertData } from '@contexts/AlertContext/AlertContextProvider';
 import Cookies from 'js-cookie';
 
