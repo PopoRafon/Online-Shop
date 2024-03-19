@@ -7,6 +7,7 @@ import Navigation from '@components/Navigation/Navigation';
 import Alert from '@components/Alert/Alert';
 import Home from './pages/Home';
 import Register from './pages/Register';
+import Login from './pages/Login';
 
 function App() {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -29,6 +30,7 @@ function App() {
                     <Route path='/'>
                         <Route index element={<Home />} />
                         <Route path='register' element={<Register />} />
+                        <Route path='login' element={<Login />} />
                     </Route>
                 </Routes>
             </AlertContextProvider>
