@@ -1,12 +1,17 @@
 import type { ChangeEvent, FormEvent } from 'react';
 import type { LoginFormData, LoginFormErrors } from './types';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { isLoginFormValid } from '@helpers/formValidators';
+import useAlertContext from '@contexts/AlertContext/useAlertContext';
+import login from '@utils/login';
 import FormInput from '@components/AuthForm/FormInput';
 import FormPasswordInput from '@components/AuthForm/FormPasswordInput';
 
 export default function LoginForm() {
-    const [formErrors] = useState<LoginFormErrors>({
+    const navigate = useNavigate();
+    const { setAlert } = useAlertContext();
+    const [formErrors, setFormErrors] = useState<LoginFormErrors>({
         username: '',
         password: '',
     });
@@ -26,6 +31,10 @@ export default function LoginForm() {
 
     function handleSubmit(event: FormEvent) {
         event.preventDefault();
+
+        if (isLoginFormValid({ formData, setFormErrors })) {
+            login({ formData, setFormErrors, navigate, setAlert });
+        }
     }
 
     return (
