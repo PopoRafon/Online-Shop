@@ -2,6 +2,7 @@ from django.middleware.csrf import get_token
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.conf import settings
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -126,3 +127,17 @@ class LoginView(APIView):
                     'password': 'Password is incorrect.'
                 }
             }, status=status.HTTP_400_BAD_REQUEST)
+
+
+class LogoutView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        response = Response({
+            'success': 'You have been successfully logged out.'
+        }, status=status.HTTP_200_OK)
+
+        response.delete_cookie('refresh')
+        response.delete_cookie('access')
+
+        return response

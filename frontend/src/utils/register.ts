@@ -1,6 +1,8 @@
 import type { NavigateFunction } from 'react-router-dom';
 import type { RegisterFormData, RegisterFormErrors } from '@components/Register/types';
 import type { AlertData } from '@contexts/AlertContext/AlertContextProvider';
+import type { User } from '@contexts/UserContext/UserContextProvider';
+import { getUserData } from './userData';
 import Cookies from 'js-cookie';
 import AccessToken from './accessToken';
 
@@ -9,13 +11,15 @@ type RegisterArgs = {
     setFormErrors: React.Dispatch<React.SetStateAction<RegisterFormErrors>>;
     navigate: NavigateFunction;
     setAlert: React.Dispatch<React.SetStateAction<AlertData>>;
+    setUser: React.Dispatch<React.SetStateAction<User>>;
 }
 
 /**
- * Sends request to server register endpoint.
- * If request succeeds navigates user to home page.
+ * Sends request to server with provided form data.
+ * 
+ * If request succeeds calls `getUserData`, `setAlert`, `setPeriodicTokenRefresh` functions and navigates user to home page.
  */
-export default async function register({ formData, setFormErrors, navigate, setAlert }: RegisterArgs): Promise<void> {
+export default async function register({ formData, setFormErrors, navigate, setAlert, setUser }: RegisterArgs): Promise<void> {
     const csrfToken: string = Cookies.get('csrftoken') ?? '';
 
     return await fetch('/api/register', {
@@ -29,8 +33,9 @@ export default async function register({ formData, setFormErrors, navigate, setA
         body: JSON.stringify(formData)
     })
         .then(response => response.json())
-        .then(data => {
+        .then(async (data) => {
             if (data.success) {
+                await getUserData({ setUser });
                 setAlert({ show: true, text: 'Your account has been successfully created.' });
                 AccessToken.setPeriodicTokenRefresh();
                 navigate('/');

@@ -23,6 +23,7 @@ describe('register util', () => {
         const setFormErrorsMock = vi.fn();
         const navigateMock = vi.fn();
         const setAlertMock = vi.fn();
+        const setUserMock = vi.fn();
         const errors: RegisterFormErrors = {
             email: 'Email address is not unique.',
             username: 'Username is not unique.',
@@ -42,23 +43,32 @@ describe('register util', () => {
             formData: formData,
             setFormErrors: setFormErrorsMock,
             navigate: navigateMock,
-            setAlert: setAlertMock
+            setAlert: setAlertMock,
+            setUser: setUserMock
         });
-        
+
+        expect(setUserMock).not.toBeCalled();
         expect(navigateMock).not.toBeCalled();
         expect(setAlertMock).not.toBeCalled();
-        expect(setFormErrorsMock).toBeCalledTimes(1);
+        expect(setFormErrorsMock).toHaveBeenCalledOnce();
         expect(setFormErrorsMock).toBeCalledWith(errors);
     });
 
     test('makes a POST request and calls navigate function and setAlert function', async () => {
+        const userData = { username: 'testusername' };
         const setFormErrorsMock = vi.fn();
         const navigateMock = vi.fn();
         const setAlertMock = vi.fn();
+        const setUserMock = vi.fn();
         server.use(
             http.post(url, async () => {
                 return HttpResponse.json({
                     success: 'Your account has been successfully created.'
+                });
+            }),
+            http.get('/api/user', async () => {
+                return HttpResponse.json({
+                    success: userData
                 });
             })
         );
@@ -67,12 +77,15 @@ describe('register util', () => {
             formData: formData,
             setFormErrors: setFormErrorsMock,
             navigate: navigateMock,
-            setAlert: setAlertMock
+            setAlert: setAlertMock,
+            setUser: setUserMock
         });
-        
-        expect(navigateMock).toBeCalledTimes(1);
+
+        expect(setUserMock).toHaveBeenCalledOnce();
+        expect(setUserMock).toBeCalledWith({ isLoggedIn: true, ...userData });
+        expect(navigateMock).toHaveBeenCalledOnce();
         expect(navigateMock).toBeCalledWith('/');
-        expect(setAlertMock).toBeCalledTimes(1);
+        expect(setAlertMock).toHaveBeenCalledOnce();
         expect(setAlertMock).toBeCalledWith({ show: true, text: 'Your account has been successfully created.' });
         expect(setFormErrorsMock).not.toBeCalled();
     });

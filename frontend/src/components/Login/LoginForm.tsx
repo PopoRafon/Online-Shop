@@ -3,6 +3,7 @@ import type { LoginFormData, LoginFormErrors } from './types';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { isLoginFormValid } from '@helpers/formValidators';
+import useUserContext from '@contexts/UserContext/useUserContext';
 import useAlertContext from '@contexts/AlertContext/useAlertContext';
 import login from '@utils/login';
 import FormInput from '@components/AuthForm/FormInput';
@@ -10,6 +11,7 @@ import FormPasswordInput from '@components/AuthForm/FormPasswordInput';
 
 export default function LoginForm() {
     const navigate = useNavigate();
+    const { setUser } = useUserContext();
     const { setAlert } = useAlertContext();
     const [formErrors, setFormErrors] = useState<LoginFormErrors>({
         username: '',
@@ -33,7 +35,7 @@ export default function LoginForm() {
         event.preventDefault();
 
         if (isLoginFormValid({ formData, setFormErrors })) {
-            login({ formData, setFormErrors, navigate, setAlert });
+            login({ formData, setFormErrors, navigate, setAlert, setUser });
         }
     }
 

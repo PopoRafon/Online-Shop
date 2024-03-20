@@ -1,5 +1,8 @@
 import { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import useUserContext from '@contexts/UserContext/useUserContext';
+import useAlertContext from '@contexts/AlertContext/useAlertContext';
+import logout from '@utils/logout';
 import GoogleIcon from '@assets/images/icons/google_icon.svg';
 
 type AccountDropdownProps = {
@@ -8,22 +11,27 @@ type AccountDropdownProps = {
 }
 
 export default function AccountDropdown({ accountButtonRef, setShowDropdown }: AccountDropdownProps) {
+    const navigate = useNavigate();
+    const { user, setUser } = useUserContext();
+    const { setAlert } = useAlertContext();
     const dropdownRef = useRef<null | HTMLDivElement>(null);
 
     useEffect(() => {
-        const mouseDownEventListener = (event: MouseEvent) => {
-            if ((dropdownRef.current?.contains(event.target as Node)) ||
-                (accountButtonRef.current?.contains(event.target as Node)) ||
+        const clickEventListener = (event: MouseEvent) => {
+            const target = event.target as HTMLElement;
+
+            if ((dropdownRef.current?.contains(target as Node) && target.tagName !== 'BUTTON' && target.tagName !== 'A') ||
+                (accountButtonRef.current?.contains(target as Node)) ||
                 event.button !== 0
             ) return;
 
             setShowDropdown(false);
         };
 
-        document.addEventListener('mousedown', mouseDownEventListener);
+        document.addEventListener('click', clickEventListener);
 
         return () => {
-            document.removeEventListener('mousedown', mouseDownEventListener);
+            document.removeEventListener('click', clickEventListener);
         };
     }, [accountButtonRef, setShowDropdown]);
 
@@ -33,34 +41,52 @@ export default function AccountDropdown({ accountButtonRef, setShowDropdown }: A
             className="navigation-header-account-dropdown"
             data-testid="account-dropdown"
         >
-            <span>Welcome!</span>
-            <button
-                className="navigation-header-account-dropdown-button"
-                style={{ justifyContent: 'right' }}
-            >
-                Login with Google
-                <img
-                    className="navigation-header-account-dropdown-google-icon"
-                    src={GoogleIcon}
-                    alt="Google icon"
-                />
-            </button>
-            <Link
-                to='/login'
-                onClick={() => setShowDropdown(false)}
-                className="navigation-header-account-dropdown-button"
-            >
-                Login
-            </Link>
-            <div style={{ textAlign: 'center' }}>
-                <span>Don't have an account?</span>
-                <Link
-                    to='/register'
-                    onClick={() => setShowDropdown(false)}
-                >
-                    Register
-                </Link>
-            </div>
+            {user.isLoggedIn ? (
+                <>
+                    <span>{user.username}</span>
+                    <Link
+                        to='/'
+                        className="navigation-header-account-dropdown-button"
+                    >
+                        Settings
+                    </Link>
+                    <button
+                        className="navigation-header-account-dropdown-button"
+                        onClick={() => logout({ setUser, setAlert, navigate })}
+                    >
+                        Logout
+                    </button>
+                </>
+            ):(
+                <>
+                    <span>Welcome!</span>
+                    <button
+                        className="navigation-header-account-dropdown-button"
+                        style={{ justifyContent: 'right' }}
+                    >
+                        Login with Google
+                        <img
+                            className="navigation-header-account-dropdown-google-icon"
+                            src={GoogleIcon}
+                            alt="Google icon"
+                        />
+                    </button>
+                    <Link
+                        to='/login'
+                        className="navigation-header-account-dropdown-button"
+                    >
+                        Login
+                    </Link>
+                    <div style={{ textAlign: 'center' }}>
+                        <span>Don't have an account?</span>
+                        <Link
+                            to='/register'
+                        >
+                            Register
+                        </Link>
+                    </div>
+                </>
+            )}
         </div>
     );
 }

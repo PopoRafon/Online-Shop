@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 
 /**
- * Sends request to server csrftoken endpoint.
+ * Sends request to server inorder to obtain new csrf token.
  * If request succeeds sets received csrf token in cookies. 
  */
 export default async function obtainCSRFToken(): Promise<void> {

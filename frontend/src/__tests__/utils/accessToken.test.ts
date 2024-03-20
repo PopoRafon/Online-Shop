@@ -36,6 +36,6 @@ describe('accessToken util', () => {
         );
         await AccessToken.refreshToken();
 
-        expect(spy).toBeCalledTimes(1);
+        expect(spy).toHaveBeenCalledOnce();
     });
 });
