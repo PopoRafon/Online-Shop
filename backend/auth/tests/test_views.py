@@ -79,3 +79,51 @@ class TestRegisterView(APITestCase):
         self.assertIsNotNone(response.json().get('success'))
         self.assertIsNotNone(response.cookies.get('refresh'))
         self.assertIsNotNone(response.cookies.get('access'))
+
+
+class TestLoginView(APITestCase):
+    def setUp(self):
+        self.url = reverse('login')
+        self.user = User.objects.create_user(username='testusername', password='testpassword')
+
+    def test_login_view_POST_receives_jwt_token(self):
+        data = {'username': 'testusername', 'password': 'testpassword'}
+        response = self.client.post(self.url, data=data)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIsNotNone(response.json().get('success'))
+        self.assertIsNotNone(response.cookies.get('refresh'))
+        self.assertIsNotNone(response.cookies.get('access'))
+
+    def test_login_view_POST_receives_error(self):
+        data = {'username': 'incorrectusername', 'password': 'incorrectpassword'}
+        response = self.client.post(self.url, data=data)
+        response_json = response.json()
+
+        self.assertEqual(response.status_code, 400)
+        self.assertIsNotNone(response_json.get('error'))
+        self.assertEqual(response_json['error'].get('username'), 'Username is incorrect.')
+        self.assertEqual(response_json['error'].get('password'), 'Password is incorrect.')
+
+
+class TestLogoutView(APITestCase):
+    def setUp(self):
+        self.url = reverse('logout')
+
+    def test_logout_view_POST_jwt_token_cookies_gets_deleted(self):
+        user = User.objects.create(username='testusername')
+        refresh_token = RefreshToken.for_user(user)
+        access_token = refresh_token.access_token
+        self.client.cookies = SimpleCookie({'access': access_token, 'refresh': refresh_token})
+        response = self.client.post(self.url)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIsNotNone(response.json().get('success'))
+        self.assertEqual(response.cookies.get('refresh').coded_value, '""')
+        self.assertEqual(response.cookies.get('access').coded_value, '""')
+
+    def test_logout_view_POST_receives_authentication_error(self):
+        response = self.client.post(self.url)
+
+        self.assertEqual(response.status_code, 401)
+        self.assertIsNone(response.json().get('success'))

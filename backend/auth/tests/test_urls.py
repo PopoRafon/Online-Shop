@@ -1,6 +1,6 @@
 from rest_framework.test import APISimpleTestCase
 from django.urls import resolve, reverse
-from auth.views import RegisterView, TokenRefreshView, csrf_token_view
+from auth.views import RegisterView, TokenRefreshView, csrf_token_view, LoginView, LogoutView
 
 
 class TestCsrfTokenUrls(APISimpleTestCase):
@@ -25,3 +25,19 @@ class TestRegisterUrls(APISimpleTestCase):
         resolver = resolve(url)
 
         self.assertEqual(resolver.func.view_class, RegisterView)
+
+
+class TestLoginUrls(APISimpleTestCase):
+    def test_login_url_resolves(self):
+        url = reverse('login')
+        resolver = resolve(url)
+
+        self.assertEqual(resolver.func.view_class, LoginView)
+
+
+class TestLogoutUrls(APISimpleTestCase):
+    def test_logout_url_resolves(self):
+        url = reverse('logout')
+        resolver = resolve(url)
+
+        self.assertEqual(resolver.func.view_class, LogoutView)
