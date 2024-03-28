@@ -25,7 +25,8 @@ export default function NavigationHeader() {
             </div>
             <div className="navigation-header-buttons-container">
                 <Account />
-                <button
+                <Link
+                    to='/cart'
                     className="navigation-header-button"
                 >
                     <img
@@ -33,7 +34,7 @@ export default function NavigationHeader() {
                         className="navigation-header-button-icon"
                         alt="Cart icon"
                     />
-                </button>
+                </Link>
             </div>
         </div>
     );
