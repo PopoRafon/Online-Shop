@@ -1,6 +1,11 @@
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.template.loader import render_to_string
 from django.middleware.csrf import get_token
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
+from django.core.mail import send_mail
 from django.conf import settings
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view
@@ -141,3 +146,36 @@ class LogoutView(APIView):
         response.delete_cookie('access')
 
         return response
+
+
+class PasswordResetView(APIView):
+    def post(self, request):
+        email = request.data.get('email')
+        user = User.objects.filter(email=email).first()
+
+        if user:
+            uidb64 = urlsafe_base64_encode(force_bytes(user.id))
+            token = PasswordResetTokenGenerator().make_token(user)
+
+            message = render_to_string('auth/password_reset_email.html', context={
+                'username': user.username,
+                'uidb64': uidb64,
+                'token': token,
+                'domain': settings.BASE_DOMAIN,
+                'site_name': settings.SITE_NAME
+            })
+
+            send_mail(
+                subject='Password Reset',
+                message=message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[email],
+            )
+
+            return Response({
+                'success': 'Password reset message has been sent to your email.'
+            }, status=status.HTTP_200_OK)
+        else:
+            return Response({
+                'error': {'email': 'Must be valid email address.'}
+            }, status=status.HTTP_400_BAD_REQUEST)
