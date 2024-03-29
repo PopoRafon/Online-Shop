@@ -1,6 +1,7 @@
 import type { RegisterFormData, RegisterFormErrors } from '@components/Register/types';
 import type { LoginFormData, LoginFormErrors } from '@components/Login/types';
 import type { PasswordResetFormData, PasswordResetFormErrors } from '@components/Password/Reset/types';
+import type { PasswordResetConfirmFormData, PasswordResetConfirmFormErrors } from '@components/Password/ResetConfirm/types';
 
 type IsFormValidArgs<Data, Errors> = {
     formData: Data;
@@ -63,7 +64,7 @@ function isLoginFormValid({ formData, setFormErrors }: IsFormValidArgs<LoginForm
  * 
  * @param {Object} args
  * @param {PasswordResetFormData} args.formData Object containing password reset form data to validate.
- * @param {React.Dispatch<React.SetStateAction<LoginFormErrors>>} args.setFormErrors React state setter function for form errors.
+ * @param {React.Dispatch<React.SetStateAction<PasswordResetFormErrors>>} args.setFormErrors React state setter function for form errors.
  * @returns {boolean} Whether form data is valid or not.
  */
 function isPasswordResetFormValid({ formData, setFormErrors }: IsFormValidArgs<PasswordResetFormData, PasswordResetFormErrors>): boolean {
@@ -76,4 +77,24 @@ function isPasswordResetFormValid({ formData, setFormErrors }: IsFormValidArgs<P
     return !Object.values(newFormErrors).some(field => field);
 }
 
-export { isRegisterFormValid, isLoginFormValid, isPasswordResetFormValid };
+/**
+ * Validates provided form data and updates errors by using provided state setter function.
+ * 
+ * @param {Object} args
+ * @param {PasswordResetConfirmFormData} args.formData Object containing register form data to validate.
+ * @param {React.Dispatch<React.SetStateAction<PasswordResetConfirmFormErrors>>} args.setFormErrors React state setter function for form errors.
+ * @returns {boolean} Whether form data is valid or not.
+ */
+function isPasswordResetConfirmFormValid({ formData, setFormErrors }: IsFormValidArgs<PasswordResetConfirmFormData, PasswordResetConfirmFormErrors>): boolean {
+    const newFormErrors: PasswordResetConfirmFormErrors = { newPassword1: '', newPassword2: '' };
+
+    if (formData.newPassword1.length < 8) newFormErrors.newPassword1 = 'Must not be shorter than 8 characters.';
+
+    if (formData.newPassword1 !== formData.newPassword2) newFormErrors.newPassword2 = 'Must be the same as password.';
+
+    setFormErrors({ ...newFormErrors });
+
+    return !Object.values(newFormErrors).some(field => field);
+}
+
+export { isRegisterFormValid, isLoginFormValid, isPasswordResetFormValid, isPasswordResetConfirmFormValid };

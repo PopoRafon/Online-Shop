@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import obtainCSRFToken from '@utils/csrfToken';
-import PasswordResetForm from '@components/Password/Reset/PasswordResetForm';
+import PasswordResetConfirmForm from '@components/Password/ResetConfirm/PasswordResetConfirmForm';
 
-export default function PasswordReset() {
+export default function PasswordResetConfirm() {
     useEffect(() => {
         obtainCSRFToken();
     }, []);
@@ -10,8 +10,8 @@ export default function PasswordReset() {
     return (
         <main className="auth-form-page">
             <section className="auth-form-container">
-                <h2 className="auth-form-header">Password Reset</h2>
-                <PasswordResetForm />
+                <h2 className="auth-form-header">Confirm Password Reset</h2>
+                <PasswordResetConfirmForm />
             </section>
         </main>
     );

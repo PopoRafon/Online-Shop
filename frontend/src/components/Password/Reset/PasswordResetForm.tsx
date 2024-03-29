@@ -2,9 +2,9 @@ import type { FormEvent, ChangeEvent } from 'react';
 import type { PasswordResetFormData, PasswordResetFormErrors } from './types';
 import { useState } from 'react';
 import { isPasswordResetFormValid } from '@helpers/formValidators';
-import FormInput from '@components/AuthForm/FormInput';
 import { passwordReset } from '@utils/password';
 import { useNavigate } from 'react-router-dom';
+import FormInput from '@components/AuthForm/FormInput';
 import useAlertContext from '@contexts/AlertContext/useAlertContext';
 
 export default function PasswordResetForm() {
