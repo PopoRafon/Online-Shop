@@ -4,7 +4,7 @@ from django.middleware.csrf import get_token
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.core.mail import send_mail
 from django.conf import settings
 from rest_framework.permissions import IsAuthenticated
@@ -14,7 +14,7 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.exceptions import TokenError
-from .serializers import RegisterSerializer
+from .serializers import RegisterSerializer, PasswordResetConfirmSerializer
 
 @api_view(['GET'])
 def csrf_token_view(request):
@@ -178,4 +178,41 @@ class PasswordResetView(APIView):
         else:
             return Response({
                 'error': {'email': 'Must be valid email address.'}
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+
+class PasswordResetConfirmView(APIView):
+    def post(self, request, *args, **kwargs):
+        uidb64 = kwargs.get('uidb64', '')
+
+        try:
+            id = urlsafe_base64_decode(uidb64).decode('utf-8')
+            user = User.objects.get(id=id)
+        except (ValueError, User.DoesNotExist):
+            return Response({
+                'error': 'User id you have provided is incorrect.'
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        token = kwargs.get('token')
+        is_token_valid = PasswordResetTokenGenerator().check_token(user, token)
+
+        if is_token_valid:
+            serializer = PasswordResetConfirmSerializer(data=request.data)
+
+            if serializer.is_valid():
+                new_password = serializer.validated_data['newPassword1']
+
+                user.set_password(new_password)
+                user.save()
+
+                return Response({
+                    'success': 'Your password has been successfully changed.'
+                }, status=status.HTTP_200_OK)
+            else:
+                return Response({
+                    'error': serializer.errors
+                }, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({
+                'error': 'Token you provided is incorrect or has expired.'
             }, status=status.HTTP_400_BAD_REQUEST)

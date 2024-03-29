@@ -55,3 +55,32 @@ class RegisterSerializer(serializers.Serializer):
             raise serializers.ValidationError(errors)
 
         return attrs
+
+
+class PasswordResetConfirmSerializer(serializers.Serializer):
+    newPassword1 = serializers.CharField(
+        min_length=8,
+        required=True
+    )
+    newPassword2 = serializers.CharField(
+        min_length=8,
+        required=True
+    )
+
+    def validate(self, attrs):
+        password1 = attrs.get('newPassword1')
+        password2 = attrs.get('newPassword2')
+        errors = {}
+
+        if password1 != password2:
+            errors['password2'] = 'Passwords must be the same.'
+
+        try:
+            validate_password(password1)
+        except ValidationError:
+            errors['password1'] = 'Password is invalid.'
+
+        if errors:
+            raise serializers.ValidationError(errors)
+
+        return attrs
