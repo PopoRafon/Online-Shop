@@ -11,6 +11,7 @@ import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Cart from './pages/Cart';
+import PasswordReset from './pages/PasswordReset';
 
 function App() {
     const { setUser } = useUserContext();
@@ -37,6 +38,7 @@ function App() {
                         <Route path='register' element={<Register />} />
                         <Route path='login' element={<Login />} />
                         <Route path='cart' element={<Cart />} />
+                        <Route path='password/reset' element={<PasswordReset />} />
                     </Route>
                 </Routes>
             </AlertContextProvider>

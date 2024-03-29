@@ -60,7 +60,7 @@ export default function LoginForm() {
                 handleChange={handleChange}
             />
             <Link
-                to='/'
+                to='/password/reset'
             >
                 Forgot password?
             </Link>

@@ -1,5 +1,6 @@
 import type { RegisterFormData, RegisterFormErrors } from '@components/Register/types';
 import type { LoginFormData, LoginFormErrors } from '@components/Login/types';
+import type { PasswordResetFormData, PasswordResetFormErrors } from '@components/Password/Reset/types';
 
 type IsFormValidArgs<Data, Errors> = {
     formData: Data;
@@ -38,7 +39,7 @@ function isRegisterFormValid({ formData, setFormErrors }: IsFormValidArgs<Regist
  * Validates provided form data and updates errors by using provided state setter function.
  * 
  * @param {Object} args
- * @param {RegisterFormData} args.formData Object containing login form data to validate.
+ * @param {LoginFormData} args.formData Object containing login form data to validate.
  * @param {React.Dispatch<React.SetStateAction<LoginFormErrors>>} args.setFormErrors React state setter function for form errors.
  * @returns {boolean} Whether form data is valid or not.
  */
@@ -57,4 +58,22 @@ function isLoginFormValid({ formData, setFormErrors }: IsFormValidArgs<LoginForm
     return !Object.values(newFormErrors).some(field => field);
 }
 
-export { isRegisterFormValid, isLoginFormValid };
+/**
+ * Validates provided form data and updates errors by using provided state setter function.
+ * 
+ * @param {Object} args
+ * @param {PasswordResetFormData} args.formData Object containing password reset form data to validate.
+ * @param {React.Dispatch<React.SetStateAction<LoginFormErrors>>} args.setFormErrors React state setter function for form errors.
+ * @returns {boolean} Whether form data is valid or not.
+ */
+function isPasswordResetFormValid({ formData, setFormErrors }: IsFormValidArgs<PasswordResetFormData, PasswordResetFormErrors>): boolean {
+    const newFormErrors: PasswordResetFormErrors = { email: '' };
+
+    if (!formData.email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)) newFormErrors.email = 'Must be valid email address.';
+
+    setFormErrors({ ...newFormErrors });
+
+    return !Object.values(newFormErrors).some(field => field);
+}
+
+export { isRegisterFormValid, isLoginFormValid, isPasswordResetFormValid };
