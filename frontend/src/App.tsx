@@ -13,6 +13,7 @@ import Login from './pages/Login';
 import Cart from './pages/Cart';
 import PasswordReset from './pages/PasswordReset';
 import PasswordResetConfirm from './pages/PasswordResetConfirm';
+import ErrorPage from './pages/ErrorPage';
 
 function App() {
     const { setUser } = useUserContext();
@@ -44,6 +45,7 @@ function App() {
                             <Route path='reset/confirm/:uidb64/:token' element={<PasswordResetConfirm />} />
                         </Route>
                     </Route>
+                    <Route path='*' element={<ErrorPage />} />
                 </Routes>
             </AlertContextProvider>
         </BrowserRouter>
