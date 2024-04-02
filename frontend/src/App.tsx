@@ -13,7 +13,8 @@ import Login from './pages/Login';
 import Cart from './pages/Cart';
 import PasswordReset from './pages/PasswordReset';
 import PasswordResetConfirm from './pages/PasswordResetConfirm';
-import ErrorPage from './pages/ErrorPage';
+import Error from './pages/Error';
+import MyProducts from './pages/MyProducts';
 
 function App() {
     const { setUser } = useUserContext();
@@ -40,12 +41,13 @@ function App() {
                         <Route path='register' element={<Register />} />
                         <Route path='login' element={<Login />} />
                         <Route path='cart' element={<Cart />} />
+                        <Route path='my-products' element={<MyProducts />} />
                         <Route path='password/'>
                             <Route path='reset' element={<PasswordReset />} />
                             <Route path='reset/confirm/:uidb64/:token' element={<PasswordResetConfirm />} />
                         </Route>
                     </Route>
-                    <Route path='*' element={<ErrorPage />} />
+                    <Route path='*' element={<Error />} />
                 </Routes>
             </AlertContextProvider>
         </BrowserRouter>

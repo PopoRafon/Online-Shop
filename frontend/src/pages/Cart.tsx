@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
+import useUserContext from '@contexts/UserContext/useUserContext';
 import CartImage from '@assets/images/cart.svg';
 
 export default function Cart() {
+    const { user } = useUserContext();
+
     return (
         <main className="cart-page">
             <img
@@ -11,7 +14,9 @@ export default function Cart() {
                 alt="Cart image"
             />
             <h3 className="cart-header">Your cart is empty. Go ahead and add some cool stuff to it!</h3>
-            <span className="cart-info">Or <Link to='/login'>sign in</Link> to check if there's something in it already!</span>
+            {!user.isLoggedIn && (
+                <span className="cart-info">Or <Link to='/login'>sign in</Link> to check if there's something in it already!</span>
+            )}
             <Link
                 to='/'
                 className="cart-browse-button"

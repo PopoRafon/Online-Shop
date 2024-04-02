@@ -540,18 +540,18 @@ footer {
 .error-page {
   flex-grow: 1;
 }
-.error-page .error-page-header {
+.error-page .error-header {
   margin: 0px;
   font-size: 3.5rem;
   font-weight: 800;
 }
-.error-page .error-page-description {
+.error-page .error-description {
   font-size: x-large;
   font-weight: 600;
   text-align: center;
   text-wrap: balance;
 }
-.error-page .error-page-home-button {
+.error-page .error-home-button {
   background-color: rgb(47, 130, 251);
   font-size: large;
   color: white;
@@ -560,8 +560,91 @@ footer {
   margin-top: 1rem;
   transition: 0.3s;
 }
-.error-page .error-page-home-button:hover {
+.error-page .error-home-button:hover {
   background-color: rgb(40, 120, 240);
+}
+
+.my-products-page {
+  flex-grow: 1;
+}
+.my-products-page .my-products-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  max-width: 750px;
+  padding: 0px 5px;
+  box-sizing: border-box;
+}
+.my-products-page .my-products-container .my-products-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.my-products-page .my-products-container .my-products-header .my-products-header-text {
+  font-size: xx-large;
+  margin: 0px;
+}
+.my-products-page .my-products-container .my-products-header .my-products-header-add-button {
+  cursor: pointer;
+  background-color: rgb(47, 130, 251);
+  font-size: medium;
+  font-weight: 600;
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 5px;
+  border: 0px;
+  transition: 0.3s;
+}
+.my-products-page .my-products-container .my-products-header .my-products-header-add-button:hover {
+  background-color: rgb(40, 120, 240);
+}
+.my-products-page .my-products-container .my-products-body {
+  width: 100%;
+  height: 600px;
+  border: 1px solid #E0E0E0;
+  border-radius: 5px;
+  overflow: auto;
+}
+.my-products-page .my-products-container .my-products-body .my-products-body-table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+.my-products-page .my-products-container .my-products-body .my-products-body-table th {
+  padding: 12px 0px;
+}
+.my-products-page .my-products-container .my-products-body .my-products-body-table th .my-products-body-table-head-button {
+  cursor: pointer;
+  background-color: transparent;
+  font-size: large;
+  font-weight: 600;
+  border: 0px;
+  padding: 0px;
+}
+.my-products-page .my-products-container .my-products-body .my-products-body-table tr {
+  border-bottom: 1px solid #E0E0E0;
+  overflow: hidden;
+}
+.my-products-page .my-products-container .my-products-body .my-products-body-table td {
+  font-size: medium;
+  height: 75px;
+  padding: 4px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 1px;
+  position: relative;
+}
+.my-products-page .my-products-container .my-products-body .my-products-body-table .my-products-body-table-offer-image {
+  position: absolute;
+  width: 75px;
+  height: 75px;
+  top: 4px;
+  left: 4px;
 }
 
 :root {

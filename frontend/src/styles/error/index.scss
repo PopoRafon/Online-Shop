@@ -1,20 +1,20 @@
 .error-page {
     flex-grow: 1;
 
-    .error-page-header {
+    .error-header {
         margin: 0px;
         font-size: 3.5rem;
         font-weight: 800;
     }
 
-    .error-page-description {
+    .error-description {
         font-size: x-large;
         font-weight: 600;
         text-align: center;
         text-wrap: balance;
     }
 
-    .error-page-home-button {
+    .error-home-button {
         background-color: rgb(47, 130, 251);
         font-size: large;
         color: white;
