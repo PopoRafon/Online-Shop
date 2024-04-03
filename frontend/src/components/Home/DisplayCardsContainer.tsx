@@ -8,16 +8,18 @@ export type DisplayCardItem = {
 }
 
 type DisplayCardsContainerProps = {
-    header: string;
+    title: string;
     note: string;
     items: DisplayCardItem[];
 }
 
-export default function DisplayCardsContainer({ header, note, items }: DisplayCardsContainerProps) {
+export default function DisplayCardsContainer({ title, note, items }: DisplayCardsContainerProps) {
     return (
         <section className="home-display-cards-container">
-            <h2 className="home-display-cards-container-header">{header}</h2>
-            <span className="home-display-cards-container-note">{note}</span>
+            <div className="home-display-cards-container-header">
+                <h2 className="home-display-cards-container-header-title">{title}</h2>
+                <span className="home-display-cards-container-header-note">{note}</span>
+            </div>
             <div className="home-display-cards-container-body">
                 {items.map((item, index) => (
                     item ? (

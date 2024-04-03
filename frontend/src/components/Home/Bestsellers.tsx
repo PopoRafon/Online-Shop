@@ -11,7 +11,7 @@ export default function Bestsellers() {
 
     return (
         <DisplayCardsContainer
-            header="Bestsellers"
+            title="Bestsellers"
             note="Most sold items in last 7 days"
             items={bestsellers}
         />

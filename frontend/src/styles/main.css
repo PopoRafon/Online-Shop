@@ -83,6 +83,12 @@
   left: 1px;
   top: 1px;
 }
+.navigation-header .navigation-header-buttons-container .navigation-header-account-dropdown .navigation-header-account-dropdown-user-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 
 @media only screen and (min-width: 768px) {
   .navigation-header {
@@ -282,12 +288,17 @@ footer {
 .home-page .home-display-cards-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 8px;
 }
 .home-page .home-display-cards-container .home-display-cards-container-header {
+  width: 100%;
+}
+.home-page .home-display-cards-container .home-display-cards-container-header .home-display-cards-container-header-title {
   margin: 0px;
 }
-.home-page .home-display-cards-container .home-display-cards-container-note {
+.home-page .home-display-cards-container .home-display-cards-container-header .home-display-cards-container-header-note {
   color: #E0E0E0;
 }
 .home-page .home-display-cards-container .home-display-cards-container-body {

@@ -11,7 +11,7 @@ export default function Random() {
 
     return (
         <DisplayCardsContainer
-            header="Random"
+            title="Random"
             note="Random items that may interest you"
             items={random}
         />

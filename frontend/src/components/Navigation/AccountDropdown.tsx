@@ -43,7 +43,16 @@ export default function AccountDropdown({ accountButtonRef, setShowDropdown }: A
         >
             {user.isLoggedIn ? (
                 <>
-                    <span>{user.username}</span>
+                    <div className="navigation-header-account-dropdown-user-info">
+                        <span>Logged in as</span>
+                        <span>{user.username}</span>
+                    </div>
+                    <Link
+                        to='/my-products'
+                        className="navigation-header-account-dropdown-button"
+                    >
+                        My products
+                    </Link>
                     <Link
                         to='/'
                         className="navigation-header-account-dropdown-button"

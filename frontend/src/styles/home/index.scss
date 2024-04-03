@@ -5,14 +5,20 @@
     .home-display-cards-container {
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
         gap: 8px;
-    
-        .home-display-cards-container-header {
-            margin: 0px;
-        }
 
-        .home-display-cards-container-note {
-            color: $light-gray-color;
+        .home-display-cards-container-header {
+            width: 100%;
+
+            .home-display-cards-container-header-title {
+                margin: 0px;
+            }
+
+            .home-display-cards-container-header-note {
+                color: $light-gray-color;
+            }
         }
 
         .home-display-cards-container-body {

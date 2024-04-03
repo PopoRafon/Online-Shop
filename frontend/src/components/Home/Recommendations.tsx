@@ -11,7 +11,7 @@ export default function Recommendations() {
 
     return (
         <DisplayCardsContainer
-            header="Recommendations"
+            title="Recommendations"
             note="Recommended items based on your preferences"
             items={recommendations}
         />
