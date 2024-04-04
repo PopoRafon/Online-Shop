@@ -6,7 +6,7 @@ type MyProductsBodyProps = {
 }
 
 export default function MyProductsBody({ products }: MyProductsBodyProps) {
-    const productsHeadersRef = useRef<string[]>(['Offer', 'Amount', 'Price', 'Sold']);
+    const productsHeadersRef = useRef(['Offer', 'Amount', 'Price', 'Sold'] as const);
 
     return (
         <div className="my-products-body">

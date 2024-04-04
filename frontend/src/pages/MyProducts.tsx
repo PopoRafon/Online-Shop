@@ -1,7 +1,7 @@
-import type { Product } from '@components/MyProducts/types';
+import type { Product } from '@components/MyProducts/Home/types';
 import { useState } from 'react';
-import MyProductsBody from '@components/MyProducts/MyProductsBody';
-import MyProductsHeader from '@components/MyProducts/MyProductsHeader';
+import { Link } from 'react-router-dom';
+import MyProductsBody from '@components/MyProducts/Home/MyProductsBody';
 
 export default function MyProducts() {
     const [products] = useState<Product[]>([]);
@@ -9,7 +9,15 @@ export default function MyProducts() {
     return (
         <main className="my-products-page">
             <section className="my-products-container">
-                <MyProductsHeader />
+                <div className="my-products-header">
+                    <h3 className="my-products-header-text">My products</h3>
+                    <Link
+                        to='/my-products/add/product'
+                        className="my-products-header-add-button"
+                    >
+                        ADD NEW
+                    </Link>
+                </div>
                 <MyProductsBody
                     products={products}
                 />

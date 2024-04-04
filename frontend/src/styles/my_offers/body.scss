@@ -1,0 +1,50 @@
+.my-products-body {
+    width: 100%;
+    height: 600px;
+    border: 1px solid $light-gray-color;
+    border-radius: 5px;
+    overflow: auto;
+
+    .my-products-body-table {
+        width: 100%;
+        text-align: center;
+        border-collapse: collapse;
+
+        & th {
+            padding: 12px 0px;
+
+            .my-products-body-table-head-button {
+                cursor: pointer;
+                background-color: transparent;
+                font-size: large;
+                font-weight: 600;
+                border: 0px;
+                padding: 0px;
+            }
+        }
+
+        & tr {
+            border-bottom: 1px solid $light-gray-color;
+            overflow: hidden;
+        }
+
+        & td {
+            font-size: medium;
+            height: 75px;
+            padding: 4px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            max-width: 1px;
+            position: relative;
+        }
+
+        .my-products-body-table-offer-image {
+            position: absolute;
+            width: 75px;
+            height: 75px;
+            top: 4px;
+            left: 4px;
+        }
+    }
+}

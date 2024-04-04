@@ -15,6 +15,7 @@ import PasswordReset from './pages/PasswordReset';
 import PasswordResetConfirm from './pages/PasswordResetConfirm';
 import Error from './pages/Error';
 import MyProducts from './pages/MyProducts';
+import MyProductsAddProduct from './pages/MyProductsAddProduct';
 
 function App() {
     const { setUser } = useUserContext();
@@ -41,7 +42,10 @@ function App() {
                         <Route path='register' element={<Register />} />
                         <Route path='login' element={<Login />} />
                         <Route path='cart' element={<Cart />} />
-                        <Route path='my-products' element={<MyProducts />} />
+                        <Route path='my-products/'>
+                            <Route index element={<MyProducts />} />
+                            <Route path='add/product' element={<MyProductsAddProduct />} />
+                        </Route>
                         <Route path='password/'>
                             <Route path='reset' element={<PasswordReset />} />
                             <Route path='reset/confirm/:uidb64/:token' element={<PasswordResetConfirm />} />

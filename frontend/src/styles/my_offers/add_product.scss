@@ -1,0 +1,80 @@
+.add-product-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid $light-gray-color;
+    border-radius: 5px;
+    padding: 2rem 0px;
+    gap: 1rem;
+    width: 100%;
+
+    .add-product-form-submit {
+        cursor: pointer;
+        color: white;
+        background-color: rgb(47, 130, 251);
+        border: 0px;
+        border-radius: 5px;
+        font-size: medium;
+        font-weight: 600;
+        width: 90%;
+        max-width: 350px;
+        height: 40px;
+        transition: 0.3s;
+
+        &:hover {
+            background-color: rgb(40, 120, 240);
+        }
+    }
+
+    .add-product-form-label {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        font-weight: 600;
+        font-size: large;
+        width: 90%;
+        max-width: 350px;
+
+        .add-product-form-input {
+            $blue-color: rgb(105, 165, 255);
+            border-radius: 5px;
+            font-size: medium;
+            border: 1px solid $light-gray-color;
+            width: 100%;
+            padding: 12px 8px;
+            box-sizing: border-box;
+            margin-top: 8px;
+
+            &:focus {
+                border-color: $blue-color;
+                outline: 2px solid $blue-color;
+            }
+        }
+    }
+
+    .add-product-form-image-label {
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-size: medium;
+        font-weight: 600;
+        color: rgb(62, 84, 99);
+        width: 90%;
+        max-width: 350px;
+        height: 125px;
+        background-color: rgb(242, 245, 247);
+        border: 2px solid rgb(122, 144, 158);
+        border-style: dashed;
+        box-sizing: border-box;
+        border-radius: 5px;
+
+        .add-product-form-image-input {
+            display: none;
+        }
+    }
+}

@@ -38,13 +38,12 @@
                     $blue-color: rgb(105, 165, 255);
                     border-radius: 5px;
                     font-size: medium;
-                    width: 200px;
                     border: 1px solid $light-gray-color;
                     width: 100%;
                     padding: 12px 8px;
                     box-sizing: border-box;
                     margin-top: 8px;
-    
+
                     &:focus {
                         border-color: $blue-color;
                         outline: 2px solid $blue-color;
@@ -55,7 +54,7 @@
                     border-color: $red-color;
                     color: $red-color;
                     background-color: rgb(255, 240, 240, 0.1);
-    
+
                     &:focus {
                         border-color: $red-color;
                         outline: 2px solid $red-color;
@@ -81,7 +80,7 @@
                     overflow: hidden;
                     background-color: transparent;
                     transition: 0.3s;
-    
+
                     &:hover {
                         background-color: #EAEAEA;
                     }

@@ -445,7 +445,6 @@ footer {
 .auth-form-page .auth-form-container .auth-form .auth-form-label .auth-form-input {
   border-radius: 5px;
   font-size: medium;
-  width: 200px;
   border: 1px solid #E0E0E0;
   width: 100%;
   padding: 12px 8px;
@@ -575,8 +574,127 @@ footer {
   background-color: rgb(40, 120, 240);
 }
 
+.my-products-body {
+  width: 100%;
+  height: 600px;
+  border: 1px solid #E0E0E0;
+  border-radius: 5px;
+  overflow: auto;
+}
+.my-products-body .my-products-body-table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+.my-products-body .my-products-body-table th {
+  padding: 12px 0px;
+}
+.my-products-body .my-products-body-table th .my-products-body-table-head-button {
+  cursor: pointer;
+  background-color: transparent;
+  font-size: large;
+  font-weight: 600;
+  border: 0px;
+  padding: 0px;
+}
+.my-products-body .my-products-body-table tr {
+  border-bottom: 1px solid #E0E0E0;
+  overflow: hidden;
+}
+.my-products-body .my-products-body-table td {
+  font-size: medium;
+  height: 75px;
+  padding: 4px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 1px;
+  position: relative;
+}
+.my-products-body .my-products-body-table .my-products-body-table-offer-image {
+  position: absolute;
+  width: 75px;
+  height: 75px;
+  top: 4px;
+  left: 4px;
+}
+
+.add-product-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid #E0E0E0;
+  border-radius: 5px;
+  padding: 2rem 0px;
+  gap: 1rem;
+  width: 100%;
+}
+.add-product-form .add-product-form-submit {
+  cursor: pointer;
+  color: white;
+  background-color: rgb(47, 130, 251);
+  border: 0px;
+  border-radius: 5px;
+  font-size: medium;
+  font-weight: 600;
+  width: 90%;
+  max-width: 350px;
+  height: 40px;
+  transition: 0.3s;
+}
+.add-product-form .add-product-form-submit:hover {
+  background-color: rgb(40, 120, 240);
+}
+.add-product-form .add-product-form-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  font-weight: 600;
+  font-size: large;
+  width: 90%;
+  max-width: 350px;
+}
+.add-product-form .add-product-form-label .add-product-form-input {
+  border-radius: 5px;
+  font-size: medium;
+  border: 1px solid #E0E0E0;
+  width: 100%;
+  padding: 12px 8px;
+  box-sizing: border-box;
+  margin-top: 8px;
+}
+.add-product-form .add-product-form-label .add-product-form-input:focus {
+  border-color: rgb(105, 165, 255);
+  outline: 2px solid rgb(105, 165, 255);
+}
+.add-product-form .add-product-form-image-label {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: medium;
+  font-weight: 600;
+  color: rgb(62, 84, 99);
+  width: 90%;
+  max-width: 350px;
+  height: 125px;
+  background-color: rgb(242, 245, 247);
+  border: 2px solid rgb(122, 144, 158);
+  border-style: dashed;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+.add-product-form .add-product-form-image-label .add-product-form-image-input {
+  display: none;
+}
+
 .my-products-page {
   flex-grow: 1;
+  position: relative;
 }
 .my-products-page .my-products-container {
   display: flex;
@@ -588,18 +706,18 @@ footer {
   padding: 0px 5px;
   box-sizing: border-box;
 }
-.my-products-page .my-products-container .my-products-header {
+.my-products-page .my-products-header {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
 }
-.my-products-page .my-products-container .my-products-header .my-products-header-text {
+.my-products-page .my-products-header .my-products-header-text {
   font-size: xx-large;
   margin: 0px;
 }
-.my-products-page .my-products-container .my-products-header .my-products-header-add-button {
+.my-products-page .my-products-header .my-products-header-add-button {
   cursor: pointer;
   background-color: rgb(47, 130, 251);
   font-size: medium;
@@ -610,52 +728,21 @@ footer {
   border: 0px;
   transition: 0.3s;
 }
-.my-products-page .my-products-container .my-products-header .my-products-header-add-button:hover {
+.my-products-page .my-products-header .my-products-header-add-button:hover {
   background-color: rgb(40, 120, 240);
 }
-.my-products-page .my-products-container .my-products-body {
-  width: 100%;
-  height: 600px;
-  border: 1px solid #E0E0E0;
-  border-radius: 5px;
-  overflow: auto;
-}
-.my-products-page .my-products-container .my-products-body .my-products-body-table {
-  width: 100%;
-  text-align: center;
-  border-collapse: collapse;
-}
-.my-products-page .my-products-container .my-products-body .my-products-body-table th {
-  padding: 12px 0px;
-}
-.my-products-page .my-products-container .my-products-body .my-products-body-table th .my-products-body-table-head-button {
-  cursor: pointer;
-  background-color: transparent;
-  font-size: large;
+.my-products-page .my-products-header .my-products-header-go-back-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-weight: 600;
-  border: 0px;
-  padding: 0px;
+  gap: 4px;
+  color: black;
+  border-bottom: 2px solid transparent;
+  transition: 0.2s;
 }
-.my-products-page .my-products-container .my-products-body .my-products-body-table tr {
-  border-bottom: 1px solid #E0E0E0;
-  overflow: hidden;
-}
-.my-products-page .my-products-container .my-products-body .my-products-body-table td {
-  font-size: medium;
-  height: 75px;
-  padding: 4px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  max-width: 1px;
-  position: relative;
-}
-.my-products-page .my-products-container .my-products-body .my-products-body-table .my-products-body-table-offer-image {
-  position: absolute;
-  width: 75px;
-  height: 75px;
-  top: 4px;
-  left: 4px;
+.my-products-page .my-products-header .my-products-header-go-back-button:hover {
+  border-color: black;
 }
 
 :root {
@@ -685,6 +772,10 @@ a {
 }
 a:visited, a:hover, a:active {
   color: #0000EE;
+}
+
+textarea {
+  font-family: inherit;
 }
 
 /*# sourceMappingURL=main.css.map */
