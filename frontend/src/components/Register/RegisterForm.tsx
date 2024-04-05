@@ -57,6 +57,7 @@ export default function RegisterForm() {
             noValidate
             className="auth-form"
             onSubmit={handleSubmit}
+            aria-label="Register form"
         >
             <FormInput
                 label="Email Address"

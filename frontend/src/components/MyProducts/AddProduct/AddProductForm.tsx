@@ -23,6 +23,7 @@ export default function AddProductForm() {
         <form
             className="add-product-form"
             onSubmit={handleSubmit}
+            aria-label="Add product form"
         >
             <label className="add-product-form-label">
                 Name

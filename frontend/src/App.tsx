@@ -2,6 +2,7 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getUserData } from '@utils/userData';
 import useUserContext from '@contexts/UserContext/useUserContext';
+import ProtectedRoute from '@components/Routes/ProtectedRoute';
 import AlertContextProvider from '@contexts/AlertContext/AlertContextProvider';
 import AccessToken from '@utils/accessToken';
 import obtainCSRFToken from '@utils/csrfToken';
@@ -43,8 +44,16 @@ function App() {
                         <Route path='login' element={<Login />} />
                         <Route path='cart' element={<Cart />} />
                         <Route path='my-products/'>
-                            <Route index element={<MyProducts />} />
-                            <Route path='add/product' element={<MyProductsAddProduct />} />
+                            <Route index element={
+                                <ProtectedRoute>
+                                    <MyProducts />
+                                </ProtectedRoute>
+                            } />
+                            <Route path='add/product' element={
+                                <ProtectedRoute>
+                                    <MyProductsAddProduct />
+                                </ProtectedRoute>
+                            } />
                         </Route>
                         <Route path='password/'>
                             <Route path='reset' element={<PasswordReset />} />

@@ -44,6 +44,7 @@ export default function LoginForm() {
             noValidate
             className="auth-form"
             onSubmit={handleSubmit}
+            aria-label="Login form"
         >
             <FormInput
                 label="Username"

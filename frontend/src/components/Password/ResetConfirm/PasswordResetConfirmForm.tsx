@@ -41,6 +41,7 @@ export default function PasswordResetConfirmForm() {
             noValidate
             className="auth-form"
             onSubmit={handleSubmit}
+            aria-label="Password reset confirm form"
         >
             <FormPasswordInput
                 label="New Password"

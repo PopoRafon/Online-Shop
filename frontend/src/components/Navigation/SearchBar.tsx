@@ -1,14 +1,22 @@
 import type { ChangeEvent, FormEvent } from 'react';
 import { useState, useRef } from 'react';
+import ClearIcon from '@assets/images/icons/clear_icon.svg';
 
 export default function SearchBar() {
     const searchBarRef = useRef<null | HTMLFormElement>(null);
     const [searchData, setSearchData] = useState<string>('');
+    const [showResetButton, setShowResetButton] = useState<boolean>(false);
 
     function handleChange(event: ChangeEvent<HTMLInputElement>) {
         const { value } = event.target;
 
         setSearchData(value);
+        setShowResetButton(value.length !== 0);
+    }
+
+    function handleReset() {
+        setShowResetButton(false);
+        setSearchData('');
     }
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -46,6 +54,21 @@ export default function SearchBar() {
                 onFocus={highlightSearchBar}
                 onBlur={blurSearchBar}
             />
+            {showResetButton && (
+                <label className="navigation-searchbar-reset-button-label">
+                    <img
+                        src={ClearIcon}
+                        height={22}
+                        alt="Reset search text"
+                    />
+                    <input
+                        type="reset"
+                        onClick={handleReset}
+                        className="navigation-searchbar-reset-button-input"
+                        value=""
+                    />
+                </label>
+            )}
             <input
                 type="submit"
                 value=""

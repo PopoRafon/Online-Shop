@@ -21,6 +21,7 @@ export default function Newsletter() {
                 noValidate
                 className="footer-newsletter-form"
                 onSubmit={handleSubmit}
+                aria-label="Newsletter form"
             >
                 <input
                     type="email"
@@ -29,6 +30,7 @@ export default function Newsletter() {
                     onChange={handleChange}
                     className="footer-newsletter-form-input"
                     placeholder="Enter your email"
+                    autoComplete="off"
                 />
                 <input
                     type="submit"

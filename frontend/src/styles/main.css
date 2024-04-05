@@ -106,10 +106,10 @@
   border-radius: 5px;
 }
 .navigation-searchbar .navigation-searchbar-input {
-  font-size: clamp(14px, 5vw, 18px);
+  font-size: clamp(15px, 4.5vw, 18px);
   width: 100%;
   height: 100%;
-  padding: 0px 4px;
+  padding: 0px clamp(1.75rem, 5vw, 2rem) 0px 4px;
   box-sizing: border-box;
   border: 1px solid gray;
   border-right: 0px;
@@ -119,6 +119,23 @@
 .navigation-searchbar .navigation-searchbar-input:focus {
   border-color: rgb(105, 165, 255);
   outline: 0px;
+}
+.navigation-searchbar .navigation-searchbar-reset-button-label {
+  cursor: pointer;
+  display: flex;
+  position: absolute;
+  right: clamp(45px, 9vw, 55px);
+  background-color: transparent;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+.navigation-searchbar .navigation-searchbar-reset-button-label:hover {
+  filter: brightness(0.9);
+}
+.navigation-searchbar .navigation-searchbar-reset-button-label .navigation-searchbar-reset-button-input {
+  border: 0px;
+  background-color: transparent;
+  padding: 0px;
 }
 .navigation-searchbar .navigation-searchbar-submit {
   cursor: pointer;
