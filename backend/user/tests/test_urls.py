@@ -8,4 +8,5 @@ class TestUserUrls(APISimpleTestCase):
         url = reverse('user')
         resolver = resolve(url)
 
+        self.assertEqual(url, '/api/user')
         self.assertEqual(resolver.func.view_class, UserView)

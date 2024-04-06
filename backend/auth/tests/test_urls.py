@@ -8,6 +8,7 @@ class TestCsrfTokenUrls(APISimpleTestCase):
         url = reverse('csrftoken')
         resolver = resolve(url)
 
+        self.assertEqual(url, '/api/csrftoken')
         self.assertEqual(resolver.func, csrf_token_view)
 
 
@@ -16,6 +17,7 @@ class TestTokenRefreshUrls(APISimpleTestCase):
         url = reverse('token-refresh')
         resolver = resolve(url)
 
+        self.assertEqual(url, '/api/token/refresh')
         self.assertEqual(resolver.func.view_class, TokenRefreshView)
 
 
@@ -24,6 +26,7 @@ class TestRegisterUrls(APISimpleTestCase):
         url = reverse('register')
         resolver = resolve(url)
 
+        self.assertEqual(url, '/api/register')
         self.assertEqual(resolver.func.view_class, RegisterView)
 
 
@@ -32,6 +35,7 @@ class TestLoginUrls(APISimpleTestCase):
         url = reverse('login')
         resolver = resolve(url)
 
+        self.assertEqual(url, '/api/login')
         self.assertEqual(resolver.func.view_class, LoginView)
 
 
@@ -40,4 +44,5 @@ class TestLogoutUrls(APISimpleTestCase):
         url = reverse('logout')
         resolver = resolve(url)
 
+        self.assertEqual(url, '/api/logout')
         self.assertEqual(resolver.func.view_class, LogoutView)
