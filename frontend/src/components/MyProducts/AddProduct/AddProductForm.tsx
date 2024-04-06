@@ -1,10 +1,17 @@
 import type { ChangeEvent, FormEvent } from 'react';
-import type { NewProductFormData } from './types';
+import type { NewProductFormData, NewProductFormErrors } from './types';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { createProduct } from '@utils/product';
+import { isNewProductFormDataValid } from '@helpers/productValidators';
+import useAlertContext from '@contexts/AlertContext/useAlertContext';
 import UploadIcon from '@assets/images/icons/upload_icon.svg';
 
 export default function AddProductForm() {
-    const [formData, setFormData] = useState<NewProductFormData>({ images: [], name: '', description: '', amount: 0, price: 0 });
+    const navigate = useNavigate();
+    const { setAlert } = useAlertContext();
+    const [formData, setFormData] = useState<NewProductFormData>({ images: null, name: '', description: '', amount: '', price: '' });
+    const [formErrors, setFormErrors] = useState<NewProductFormErrors>({ images: '', name: '', description: '', amount: '', price: '' });
 
     function handleChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
         const { name, value } = event.target;
@@ -15,8 +22,23 @@ export default function AddProductForm() {
         });
     }
 
+    function handleImageChange(event: ChangeEvent<HTMLInputElement>) {
+        const { files } = event.target;
+
+        if (files && files[0]) {
+            setFormData({
+                ...formData,
+                images: files[0]
+            });
+        }
+    }
+
     function handleSubmit(event: FormEvent) {
         event.preventDefault();
+
+        if (isNewProductFormDataValid({ formData, setFormErrors })) {
+            createProduct({ formData, navigate, setAlert });
+        }
     }
 
     return (
@@ -30,7 +52,7 @@ export default function AddProductForm() {
                 <input
                     name="name"
                     type="text"
-                    className="add-product-form-input"
+                    className={`add-product-form-input ${formErrors.name && 'add-product-form-input-error'}`}
                     value={formData.name}
                     onChange={handleChange}
                     autoComplete="off"
@@ -41,7 +63,7 @@ export default function AddProductForm() {
                 <input
                     name="price"
                     type="number"
-                    className="add-product-form-input"
+                    className={`add-product-form-input ${formErrors.price && 'add-product-form-input-error'}`}
                     value={formData.price}
                     onChange={handleChange}
                     autoComplete="off"
@@ -52,7 +74,7 @@ export default function AddProductForm() {
                 <input
                     name="amount"
                     type="number"
-                    className="add-product-form-input"
+                    className={`add-product-form-input ${formErrors.amount && 'add-product-form-input-error'}`}
                     value={formData.amount}
                     onChange={handleChange}
                     autoComplete="off"
@@ -62,7 +84,7 @@ export default function AddProductForm() {
                 Description
                 <textarea
                     name="description"
-                    className="add-product-form-input"
+                    className={`add-product-form-input ${formErrors.description && 'add-product-form-input-error'}`}
                     value={formData.description}
                     style={{ resize: 'none' }}
                     onChange={handleChange}
@@ -81,6 +103,7 @@ export default function AddProductForm() {
                     name="images"
                     type="file"
                     className="add-product-form-image-input"
+                    onChange={handleImageChange}
                 />
             </label>
             <input
