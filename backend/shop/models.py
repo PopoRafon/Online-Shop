@@ -25,9 +25,10 @@ class Product(models.Model):
             MinValueValidator(0.01)
         ]
     )
+    sold = models.IntegerField(null=True, blank=True, default=0)
 
     def __str__(self):
-        return f'{self.name} {self.id}'
+        return f'Name: {self.name} Id: {self.id}'
 
 
 class ProductImage(models.Model):

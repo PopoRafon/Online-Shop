@@ -1,7 +1,8 @@
 export type Product = {
+    id: number;
     name: string;
     description: string;
-    image: string;
+    images: Array<{ image: string }>;
     price: number;
     amount: number;
     sold: number;

@@ -1,8 +1,14 @@
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import obtainCSRFToken from '@utils/csrfToken';
 import AddProductForm from '@components/MyProducts/AddProduct/AddProductForm';
 import LeftArrowIcon from '@assets/images/icons/left_arrow_icon.svg';
 
 export default function MyProductsAddProduct() {
+    useEffect(() => {
+        obtainCSRFToken();
+    }, []);
+
     return (
         <main className="my-products-page">
             <section className="my-products-container">

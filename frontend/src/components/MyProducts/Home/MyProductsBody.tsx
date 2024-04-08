@@ -1,12 +1,21 @@
 import type { Product } from './types';
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
-type MyProductsBodyProps = {
-    products: Product[];
-}
-
-export default function MyProductsBody({ products }: MyProductsBodyProps) {
+export default function MyProductsBody() {
     const productsHeadersRef = useRef(['Offer', 'Amount', 'Price', 'Sold'] as const);
+    const [products, setProducts] = useState<Product[]>([]);
+
+    useEffect(() => {
+        fetch('/api/products', {
+            method: 'GET'
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    setProducts(data.success);
+                }
+            });
+    }, []);
 
     return (
         <div className="my-products-body">
@@ -33,7 +42,7 @@ export default function MyProductsBody({ products }: MyProductsBodyProps) {
                         <tr key={index}>
                             <td style={{ padding: '4px 83px' }}>
                                 <img
-                                    src={offer.image}
+                                    src={offer.images[0].image}
                                     className="my-products-body-table-offer-image"
                                     alt="Offer image"
                                 />

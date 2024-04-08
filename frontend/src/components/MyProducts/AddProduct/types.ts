@@ -1,5 +1,5 @@
 export type NewProductFormData = {
-    images: File | null;
+    images: File[] | null;
     name: string;
     description: string;
     amount: string;

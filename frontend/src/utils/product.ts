@@ -1,5 +1,5 @@
 import type { NavigateFunction } from 'react-router-dom';
-import type { NewProductFormData } from '@components/MyProducts/AddProduct/types';
+import type { NewProductFormData, NewProductFormErrors } from '@components/MyProducts/AddProduct/types';
 import type { AlertData } from '@contexts/AlertContext/AlertContextProvider';
 import Cookies from 'js-cookie';
 
@@ -7,14 +7,22 @@ type CreateProductArgs = {
     formData: NewProductFormData;
     navigate: NavigateFunction;
     setAlert: React.Dispatch<React.SetStateAction<AlertData>>;
+    setFormErrors: React.Dispatch<React.SetStateAction<NewProductFormErrors>>;
 }
 
-async function createProduct({ formData, navigate, setAlert }: CreateProductArgs): Promise<void> {
+async function createProduct({ formData, navigate, setAlert, setFormErrors }: CreateProductArgs): Promise<void> {
     const csrfToken: string = Cookies.get('csrftoken') ?? '';
     const newFormData = new FormData();
 
-    for (const key in formData) {
-        newFormData.append(key, formData[key as keyof NewProductFormData] as string | Blob);
+    newFormData.append('name', formData.name);
+    newFormData.append('description', formData.description);
+    newFormData.append('amount', formData.amount);
+    newFormData.append('price', formData.price);
+
+    if (formData.images) {
+        for (const image of formData.images) {
+            newFormData.append('uploaded_images', image);
+        }
     }
 
     return await fetch('/api/products', {
@@ -30,6 +38,8 @@ async function createProduct({ formData, navigate, setAlert }: CreateProductArgs
             if (data.success) {
                 navigate('/my-products');
                 setAlert({ show: true, text: 'Your product has been successfully added.' });
+            } else if (data.error) {
+                setFormErrors(data.error);
             }
         })
         .catch(error => {

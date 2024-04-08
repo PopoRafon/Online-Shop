@@ -26,9 +26,11 @@ export default function AddProductForm() {
         const { files } = event.target;
 
         if (files && files[0]) {
+            const newImages: File[] = formData.images ? [...formData.images] : [];
+
             setFormData({
                 ...formData,
-                images: files[0]
+                images: [...newImages, files[0]]
             });
         }
     }
@@ -37,7 +39,7 @@ export default function AddProductForm() {
         event.preventDefault();
 
         if (isNewProductFormDataValid({ formData, setFormErrors })) {
-            createProduct({ formData, navigate, setAlert });
+            createProduct({ formData, navigate, setAlert, setFormErrors });
         }
     }
 
