@@ -4,6 +4,8 @@
 .my-products-page {
     flex-grow: 1;
     position: relative;
+    padding: 1rem 0px;
+    box-sizing: border-box;
 
     .my-products-container {
         display: flex;

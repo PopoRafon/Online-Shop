@@ -19,10 +19,8 @@ async function createProduct({ formData, navigate, setAlert, setFormErrors }: Cr
     newFormData.append('amount', formData.amount);
     newFormData.append('price', formData.price);
 
-    if (formData.images) {
-        for (const image of formData.images) {
-            newFormData.append('uploaded_images', image);
-        }
+    for (const image of formData.images) {
+        newFormData.append('uploaded_images', image);
     }
 
     return await fetch('/api/products', {
