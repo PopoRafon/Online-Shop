@@ -1,3 +1,4 @@
+import uuid
 from django.core.validators import MaxValueValidator, MinValueValidator, MinLengthValidator
 from django.contrib.auth.models import User
 from django.db import models
@@ -5,6 +6,7 @@ from .utils import create_product_image_name
 
 
 class Product(models.Model):
+    id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='products')
     name = models.CharField(
         max_length=64,

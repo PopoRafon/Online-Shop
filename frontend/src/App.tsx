@@ -17,6 +17,7 @@ import PasswordResetConfirm from './pages/PasswordResetConfirm';
 import Error from './pages/Error';
 import MyProducts from './pages/MyProducts';
 import MyProductsAddProduct from './pages/MyProductsAddProduct';
+import Product from './pages/Product';
 
 function App() {
     const { setUser } = useUserContext();
@@ -43,6 +44,7 @@ function App() {
                         <Route path='register' element={<Register />} />
                         <Route path='login' element={<Login />} />
                         <Route path='cart' element={<Cart />} />
+                        <Route path='product/:id' element={<Product />} />
                         <Route path='my-products/'>
                             <Route index element={
                                 <ProtectedRoute>

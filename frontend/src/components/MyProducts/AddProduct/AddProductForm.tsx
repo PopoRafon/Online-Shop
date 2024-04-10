@@ -117,6 +117,7 @@ export default function AddProductForm() {
                                 type="button"
                                 onClick={() => handleImageRemoval(index)}
                                 className="add-product-form-image-remove-button"
+                                title="Remove image"
                             >
                                 <img
                                     src={CloseIcon}

@@ -618,6 +618,9 @@ footer {
   border-bottom: 1px solid #E0E0E0;
   overflow: hidden;
 }
+.my-products-body .my-products-body-table tr:hover td {
+  background-color: #F0F0F0;
+}
 .my-products-body .my-products-body-table td {
   font-size: medium;
   height: 75px;
@@ -627,13 +630,7 @@ footer {
   overflow: hidden;
   max-width: 1px;
   position: relative;
-}
-.my-products-body .my-products-body-table .my-products-body-table-offer-image {
-  position: absolute;
-  width: 75px;
-  height: 75px;
-  top: 4px;
-  left: 4px;
+  transition: 0.2s background-color;
 }
 
 .add-product-form {

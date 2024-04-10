@@ -36,7 +36,7 @@ class TestProductListCreateView(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertIsNotNone(response_data)
-        self.assertEqual(response_data[0]['id'], product.id)
+        self.assertEqual(response_data[0]['id'], str(product.id))
         self.assertEqual(response_data[0]['name'], product.name)
         self.assertEqual(response_data[0]['description'], product.description)
         self.assertEqual(response_data[0]['amount'], product.amount)

@@ -1,5 +1,5 @@
 from django.contrib import admin
 from .models import Product, ProductImage
 
-admin.register(Product)
-admin.register(ProductImage)
+admin.site.register(Product)
+admin.site.register(ProductImage)

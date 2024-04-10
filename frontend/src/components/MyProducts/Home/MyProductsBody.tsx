@@ -1,12 +1,16 @@
-import type { Product } from './types';
+import type { Product } from '@interfaces/types';
 import { useRef, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import useUserContext from '@contexts/UserContext/useUserContext';
 
 export default function MyProductsBody() {
+    const { user } = useUserContext();
+    const navigate = useNavigate();
     const productsHeadersRef = useRef(['Offer', 'Amount', 'Price', 'Sold'] as const);
     const [products, setProducts] = useState<Product[]>([]);
 
     useEffect(() => {
-        fetch('/api/products', {
+        fetch(`/api/products?username=${user.username}`, {
             method: 'GET'
         })
             .then(response => response.json())
@@ -15,7 +19,7 @@ export default function MyProductsBody() {
                     setProducts(data.success);
                 }
             });
-    }, []);
+    }, [user.username]);
 
     return (
         <div className="my-products-body">
@@ -38,19 +42,16 @@ export default function MyProductsBody() {
                     </tr>
                 </thead>
                 <tbody>
-                    {products.map((offer, index) => (
-                        <tr key={index}>
-                            <td style={{ padding: '4px 83px' }}>
-                                <img
-                                    src={offer.images[0].image}
-                                    className="my-products-body-table-offer-image"
-                                    alt="Offer image"
-                                />
-                                {offer.name}
-                            </td>
-                            <td>{offer.amount}</td>
-                            <td>{offer.price}$</td>
-                            <td>{offer.sold}</td>
+                    {products.map(product => (
+                        <tr
+                            onClick={() => navigate(`/product/${product.id}`)}
+                            style={{ cursor: 'pointer' }}
+                            key={product.id}
+                        >
+                            <td>{product.name}</td>
+                            <td>{product.amount}</td>
+                            <td>{product.price}$</td>
+                            <td>{product.sold}</td>
                         </tr>
                     ))}
                 </tbody>

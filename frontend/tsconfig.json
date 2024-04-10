@@ -18,7 +18,8 @@
       "@components/*": ["./src/components/*"],
       "@helpers/*": ["./src/helpers/*"],
       "@utils/*": ["./src/utils/*"],
-      "@contexts/*": ["./src/contexts/*"]
+      "@contexts/*": ["./src/contexts/*"],
+      "@interfaces/*": ["./src/interfaces/*"]
     },
 
     /* Linting */

@@ -26,6 +26,10 @@
         & tr {
             border-bottom: 1px solid $light-gray-color;
             overflow: hidden;
+
+            &:hover td {
+                background-color: #F0F0F0;
+            }
         }
 
         & td {
@@ -37,14 +41,7 @@
             overflow: hidden;
             max-width: 1px;
             position: relative;
-        }
-
-        .my-products-body-table-offer-image {
-            position: absolute;
-            width: 75px;
-            height: 75px;
-            top: 4px;
-            left: 4px;
+            transition: 0.2s background-color;
         }
     }
 }
