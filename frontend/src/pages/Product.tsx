@@ -1,6 +1,8 @@
 import type { Product } from '@interfaces/types';
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import ProductContainer from '@components/Product/ProductContainer';
+import ProductAside from '@components/Product/ProductAside';
 
 export default function Product() {
     const navigate = useNavigate();
@@ -24,8 +26,13 @@ export default function Product() {
     }, [id, navigate]);
 
     return isLoaded && (
-        <main>
-            <section>{product.name}</section>
+        <main className="product-page">
+            <ProductContainer
+                product={product}
+            />
+            <ProductAside
+                product={product}
+            />
         </main>
     );
 }

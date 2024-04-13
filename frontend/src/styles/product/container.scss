@@ -1,0 +1,95 @@
+.product-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid $light-gray-color;
+    border-radius: 5px;
+    width: clamp(275px, 80vw, 500px);
+    padding: 2rem clamp(1rem, 5vw, 2rem);
+    background-color: white;
+
+    .product-header {
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 1rem;
+        gap: 4px;
+
+        .product-header-name {
+            word-wrap: break-word;
+            margin: 0px;
+            font-weight: 500;
+            width: 100%;
+        }
+
+        .product-header-rating {
+            width: 100%;
+        }
+    }
+
+    .product-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+
+        .product-slideshow-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 100%;
+            height: clamp(275px, 80vw, 500px);
+            margin-bottom: 0.5rem;
+
+            .product-slideshow-image {
+                max-width: 100%;
+                max-height: 100%;
+            }
+
+            .product-slideshow-change-button {
+                cursor: pointer;
+                position: absolute;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 25px;
+                width: 25px;
+                background-color: #101010;
+                border: 0px;
+                border-radius: 25px;
+                transition: 0.3s;
+
+                &:hover {
+                    background-color: #2a2a2a;
+                }
+            }
+        }
+
+        .product-slideshow-all-images-container {
+            display: flex;
+            align-items: center;
+            overflow: auto;
+            max-width: 100%;
+            gap: 4px;
+
+            .product-slideshow-all-images-container-button {
+                cursor: pointer;
+                display: flex;
+                padding: 0px;
+                background-color: transparent;
+                border: 0px;
+                transition: 0.2s;
+
+                &:hover {
+                    filter: brightness(0.9);
+                }
+            }
+        }
+    }
+}

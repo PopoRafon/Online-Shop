@@ -1,0 +1,14 @@
+@import 'container';
+@import 'aside';
+
+.product-page {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding: 2rem 4px;
+    background-color: #FAFAFA;
+}
