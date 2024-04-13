@@ -16,7 +16,7 @@ function isNewProductFormDataValid({ formData, setFormErrors }: IsProductFormVal
     if (formData.description.length > 1024) newFormErrors.description = 'Must not be longer than 1024 characters';
 
     if (formData.images.length === 0) newFormErrors.images = 'Must contain at least one file';
-    else if (formData.images.length > 8) newFormErrors.images = 'Must not contain more than 8 files';
+    else if (formData.images.length > 12) newFormErrors.images = 'Must not contain more than 12 files';
     else {
         for (const image of formData.images) {
             if (!(image instanceof File)) newFormErrors.images = 'Must contain valid files';
@@ -30,6 +30,7 @@ function isNewProductFormDataValid({ formData, setFormErrors }: IsProductFormVal
     else if (priceAsNumber < 0.01) newFormErrors.price = 'Must not be smaller than 0,01';
 
     if (isNaN(amountAsNumber)) newFormErrors.amount = 'Must be a valid number';
+    else if (amountAsNumber % 1 !== 0) newFormErrors.amount = 'Must be an integer';
     else if (amountAsNumber > 1e6) newFormErrors.amount = 'Must not be larger than 1,000,000';
     else if (amountAsNumber < 1) newFormErrors.amount = 'Must not be smaller than 1';
 

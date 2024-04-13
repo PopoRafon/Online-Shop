@@ -17,7 +17,7 @@ async function createProduct({ formData, navigate, setAlert, setFormErrors }: Cr
     newFormData.append('name', formData.name);
     newFormData.append('description', formData.description);
     newFormData.append('amount', formData.amount);
-    newFormData.append('price', formData.price);
+    newFormData.append('price', String(Math.round(+formData.price * 100) / 100));
 
     for (const image of formData.images) {
         newFormData.append('uploaded_images', image);

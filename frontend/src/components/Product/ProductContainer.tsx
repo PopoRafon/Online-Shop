@@ -56,11 +56,23 @@ export default function ProductContainer({ product }: ProductContainerProps) {
                             />
                         </button>
                     )}
-                    <img
-                        src={product.images[currentSlide].image}
-                        className="product-slideshow-image"
-                        alt="Product image"
-                    />
+                    <div
+                        className="product-slideshow-image-buttons-container"
+                        style={{ transform: `translateX(-${currentSlide * (100 / product.images.length)}%)` }}
+                    >
+                        {product.images.map(image => (
+                            <button
+                                className="product-slideshow-image-button"
+                                key={image}
+                            >
+                                <img
+                                    src={image}
+                                    className="product-slideshow-image"
+                                    alt="Product image"
+                                />
+                            </button>
+                        ))}
+                    </div>
                     {showNextButton && (
                         <button
                             onClick={handleSlideChange(currentSlide + 1)}
@@ -81,10 +93,10 @@ export default function ProductContainer({ product }: ProductContainerProps) {
                         <button
                             className="product-slideshow-all-images-container-button"
                             onClick={() => setCurrentSlide(index)}
-                            key={image.image}
+                            key={image}
                         >
                             <img
-                                src={image.image}
+                                src={image}
                                 width={60}
                                 height={60}
                                 alt="Product image"

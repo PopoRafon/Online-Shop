@@ -21,7 +21,9 @@ class Product(models.Model):
             MinValueValidator(1)
         ]
     )
-    price = models.FloatField(
+    price = models.DecimalField(
+        max_digits=11,
+        decimal_places=2,
         validators=[
             MaxValueValidator(1_000_000),
             MinValueValidator(0.01)

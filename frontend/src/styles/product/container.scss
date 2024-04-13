@@ -39,17 +39,33 @@
 
         .product-slideshow-container {
             display: flex;
-            flex-direction: row;
-            justify-content: center;
             align-items: center;
             position: relative;
             width: 100%;
             height: clamp(275px, 80vw, 500px);
+            overflow: hidden;
             margin-bottom: 0.5rem;
 
-            .product-slideshow-image {
-                max-width: 100%;
+            .product-slideshow-image-buttons-container {
+                display: flex;
+                transition: 1s;
                 max-height: 100%;
+
+                .product-slideshow-image-button {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    min-height: 100%;
+                    min-width: clamp(275px, 80vw, 500px);
+                    padding: 0px;
+                    background-color: transparent;
+                    border: 0px;
+
+                    .product-slideshow-image {
+                        max-width: 100%;
+                        max-height: 100%;
+                    }
+                }
             }
 
             .product-slideshow-change-button {
@@ -64,6 +80,7 @@
                 border: 0px;
                 border-radius: 25px;
                 transition: 0.3s;
+                z-index: 10;
 
                 &:hover {
                     background-color: #2a2a2a;

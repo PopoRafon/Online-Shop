@@ -40,7 +40,7 @@ class TestProductListCreateView(TestCase):
         self.assertEqual(response_data[0]['name'], product.name)
         self.assertEqual(response_data[0]['description'], product.description)
         self.assertEqual(response_data[0]['amount'], product.amount)
-        self.assertEqual(response_data[0]['price'], product.price)
+        self.assertEqual(response_data[0]['price'], f'{product.price:.2f}')
         self.assertEqual(response_data[0]['sold'], product.sold)
 
     def test_product_list_create_view_POST_receives_authentication_error(self):

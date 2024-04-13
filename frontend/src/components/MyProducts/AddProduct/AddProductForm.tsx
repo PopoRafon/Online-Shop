@@ -66,6 +66,7 @@ export default function AddProductForm() {
             className="add-product-form"
             onSubmit={handleSubmit}
             aria-label="Add product form"
+            noValidate
         >
             <AddProductInput
                 name="name"

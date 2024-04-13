@@ -3,23 +3,17 @@ from rest_framework import serializers
 from .models import Product, ProductImage
 
 
-class ProductImageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ProductImage
-        fields = ['image']
-
-
 class ProductSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(
         default=serializers.CurrentUserDefault()
     )
-    images = ProductImageSerializer(many=True, read_only=True)
+    images = serializers.SerializerMethodField()
     uploaded_images = serializers.ListField(
         child=serializers.ImageField(allow_empty_file=False, use_url=False),
         write_only=True,
         allow_empty=False,
         min_length=1,
-        max_length=8,
+        max_length=12,
         required=True
     )
 
@@ -27,6 +21,9 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = '__all__'
         extra_kwargs = {'sold': {'read_only': True}}
+
+    def get_images(self, obj):
+        return [image.image.url for image in obj.images.all()]
 
     def validate_uploaded_images(self, images):
         for image in images:

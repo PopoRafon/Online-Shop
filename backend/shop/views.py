@@ -1,4 +1,4 @@
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework import generics
 from .serializers import ProductSerializer
 from .renderers import ExtendedJSONRenderer
@@ -22,7 +22,7 @@ class ProductListCreateView(generics.ListCreateAPIView):
         if count is not None and count.isdecimal():
             queryset = queryset[:int(count)]
 
-        return queryset
+        return queryset.prefetch_related('images')
 
 
 class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):

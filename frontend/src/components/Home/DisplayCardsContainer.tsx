@@ -24,7 +24,7 @@ export default function DisplayCardsContainer({ title, note, products }: Display
                         >
                             <img
                                 className="display-card-cover"
-                                src={product.images[0].image}
+                                src={product.images[0]}
                             />
                             <div className="display-card-description">
                                 <span className="display-card-name">{product.name}</span>
