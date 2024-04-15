@@ -1,6 +1,9 @@
+from django.core.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
-from rest_framework import generics
-from .serializers import ProductSerializer, CartSerializer
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import generics, status
+from .serializers import ProductSerializer
 from .renderers import ExtendedJSONRenderer
 from .models import Product, Cart
 
@@ -33,13 +36,72 @@ class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     renderer_classes = [ExtendedJSONRenderer]
 
 
-class CartDetailView(generics.RetrieveUpdateAPIView):
-    serializer_class = CartSerializer
+class CartDetailView(APIView):
     permission_classes = [IsAuthenticated]
-    renderer_classes = [ExtendedJSONRenderer]
 
-    def get_object(self):
-        user = self.request.user
-        queryset = Cart.objects.get(user=user)
+    def get(self, request):
+        user = request.user
+        cart = Cart.objects.prefetch_related('products').get(user=user)
+        products = cart.products.all()
+        data = []
 
-        return queryset
+        for product in products:
+            data.append({
+                'id': product.id,
+                'name': product.name,
+                'images': [image.image.url for image in product.images.all()],
+                'description': product.description,
+                'amount': product.amount,
+                'price': product.price,
+                'sold': product.sold
+            })
+
+        return Response({
+            'success': data
+        }, status=status.HTTP_200_OK)
+
+    def delete(self, request):
+        product_id = request.data.get('product_id')
+
+        if product_id:
+            user = request.user
+            cart = Cart.objects.get(user=user)
+
+            try:
+                product = cart.products.get(id=product_id)
+                cart.products.remove(product)
+
+                return Response({
+                    'success': 'Product from your cart has been successfully removed.'
+                }, status=status.HTTP_200_OK)
+            except (Product.DoesNotExist, ValidationError):
+                return Response({
+                    'error': 'Your cart doesn\'t contain product with provided id.'
+                }, status=status.HTTP_404_NOT_FOUND)
+        else:
+            return Response({
+                'error': 'You need to provide product id inorder to remove it from your cart.'
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+    def patch(self, request):
+        product_id = request.data.get('product_id')
+
+        if product_id:
+            user = request.user
+            cart = Cart.objects.get(user=user)
+
+            try:
+                product = Product.objects.get(id=product_id)
+                cart.products.add(product)
+
+                return Response({
+                    'success': 'Product has been successfully added to your cart.'
+                }, status=status.HTTP_200_OK)
+            except (Product.DoesNotExist, ValidationError):
+                return Response({
+                    'error': 'Product with provided id doesn\'t exist.'
+                }, status=status.HTTP_404_NOT_FOUND)
+        else:
+            return Response({
+                'error': 'You need to provide product id inorder to add it to your cart.'
+            }, status=status.HTTP_400_BAD_REQUEST)

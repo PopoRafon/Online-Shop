@@ -1,6 +1,6 @@
 from django.conf import settings
 from rest_framework import serializers
-from .models import Product, ProductImage, Cart
+from .models import Product, ProductImage
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -45,9 +45,3 @@ class ProductSerializer(serializers.ModelSerializer):
             ProductImage.objects.create(product=product, image=image)
 
         return product
-
-
-class CartSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Cart
-        fields = ['products']

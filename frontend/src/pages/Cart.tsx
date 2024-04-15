@@ -18,14 +18,29 @@ export default function Cart() {
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
-                            setProducts(data.success.products);
+                            setProducts(data.success);
                         }
                     });
             } else {
                 const cart: string | null = localStorage.getItem('cart');
 
                 if (cart) {
-                    setProducts(JSON.parse(cart));
+                    const cartItems: string[] = JSON.parse(cart);
+                    const newProducts: Product[] = [];
+
+                    for (const item of cartItems) {
+                        await fetch(`/api/products/${item}`, {
+                            method: 'GET'
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    newProducts.push(data.success);
+                                }
+                            });
+                    }
+
+                    setProducts([...newProducts]);
                 }
             }
 
@@ -37,29 +52,30 @@ export default function Cart() {
         <main className="cart-page">
             {products.length > 0 ? (
                 <section>
+                    <h2>Your cart.</h2>
                     {products.map(product => (
-                        <div>{product.name}</div>
+                        <div key={product.id}>{product.name}</div>
                     ))}
                 </section>
             ) : (
-                <>
+                <section className="cart-empty-container">
                     <img
                         src={CartImage}
                         width={125}
                         height={125}
                         alt="Cart image"
                     />
-                    <h3 className="cart-header">Your cart is empty. Go ahead and add some cool stuff to it!</h3>
+                    <h3 className="cart-empty-header">Your cart is empty. Go ahead and add some cool stuff to it!</h3>
                     {!user.isLoggedIn && (
-                        <span className="cart-info">Or <Link to='/login'>sign in</Link> to check if there's something in it already!</span>
+                        <span className="cart-empty-info">Or <Link to='/login'>sign in</Link> to check if there's something in it already!</span>
                     )}
                     <Link
                         to='/'
-                        className="cart-browse-button"
+                        className="cart-empty-browse-button"
                     >
                         Browse store
                     </Link>
-                </>
+                </section>
             )}
         </main>
     );

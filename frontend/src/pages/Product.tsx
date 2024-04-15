@@ -1,6 +1,7 @@
 import type { Product } from '@interfaces/types';
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import obtainCSRFToken from '@utils/csrfToken';
 import ProductContainer from '@components/Product/ProductContainer';
 import ProductAside from '@components/Product/ProductAside';
 
@@ -11,6 +12,8 @@ export default function Product() {
     const [product, setProduct] = useState<Product>({ id: '', images: [], name: '', description: '', amount: 0, price: 0, sold: 0 });
 
     useEffect(() => {
+        obtainCSRFToken();
+
         fetch(`/api/products/${id}`, {
             method: 'GET'
         })
