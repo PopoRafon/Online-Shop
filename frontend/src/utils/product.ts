@@ -26,8 +26,7 @@ async function createProduct({ formData, navigate, setAlert, setFormErrors }: Cr
     return await fetch('/api/products', {
         method: 'POST',
         headers: {
-            // eslint-disable-next-line @typescript-eslint/naming-convention
-            'X-CSRFToken': csrfToken
+            'X-CSRFToken': csrfToken // eslint-disable-line @typescript-eslint/naming-convention
         },
         body: newFormData
     })

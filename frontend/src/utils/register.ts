@@ -25,10 +25,8 @@ export default async function register({ formData, setFormErrors, navigate, setA
     return await fetch('/api/register', {
         method: 'POST',
         headers: {
-            // eslint-disable-next-line @typescript-eslint/naming-convention
-            'X-CSRFToken': csrfToken,
-            // eslint-disable-next-line @typescript-eslint/naming-convention
-            'Content-Type': 'application/json'
+            'X-CSRFToken': csrfToken, // eslint-disable-line @typescript-eslint/naming-convention
+            'Content-Type': 'application/json' // eslint-disable-line @typescript-eslint/naming-convention
         },
         body: JSON.stringify(formData)
     })

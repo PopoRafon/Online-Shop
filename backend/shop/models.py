@@ -38,3 +38,11 @@ class Product(models.Model):
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
     image = models.FileField(upload_to=create_product_image_name)
+
+
+class Cart(models.Model):
+    user = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE, related_name='cart')
+    products = models.ManyToManyField(Product)
+
+    def __str__(self):
+        return self.user.username

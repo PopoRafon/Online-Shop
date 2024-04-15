@@ -1,8 +1,8 @@
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework import generics
-from .serializers import ProductSerializer
+from .serializers import ProductSerializer, CartSerializer
 from .renderers import ExtendedJSONRenderer
-from .models import Product
+from .models import Product, Cart
 
 
 class ProductListCreateView(generics.ListCreateAPIView):
@@ -31,3 +31,15 @@ class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ProductSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     renderer_classes = [ExtendedJSONRenderer]
+
+
+class CartDetailView(generics.RetrieveUpdateAPIView):
+    serializer_class = CartSerializer
+    permission_classes = [IsAuthenticated]
+    renderer_classes = [ExtendedJSONRenderer]
+
+    def get_object(self):
+        user = self.request.user
+        queryset = Cart.objects.get(user=user)
+
+        return queryset

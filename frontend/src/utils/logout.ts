@@ -20,8 +20,7 @@ export default async function logout({ setUser, setAlert, navigate }: LogoutArgs
     return await fetch('/api/logout', {
         method: 'POST',
         headers: {
-            // eslint-disable-next-line @typescript-eslint/naming-convention
-            'X-CSRFToken': csrfToken
+            'X-CSRFToken': csrfToken // eslint-disable-line @typescript-eslint/naming-convention
         }
     })
         .then(response => response.json())

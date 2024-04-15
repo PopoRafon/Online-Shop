@@ -25,10 +25,8 @@ export default async function login({ formData, setFormErrors, navigate, setAler
     return await fetch('/api/login', {
         method: 'POST',
         headers: {
-            // eslint-disable-next-line @typescript-eslint/naming-convention
-            'X-CSRFToken': csrfToken,
-            // eslint-disable-next-line @typescript-eslint/naming-convention
-            'Content-Type': 'application/json'
+            'X-CSRFToken': csrfToken, // eslint-disable-line @typescript-eslint/naming-convention
+            'Content-Type': 'application/json' // eslint-disable-line @typescript-eslint/naming-convention
         },
         body: JSON.stringify(formData)
     })
