@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import MyProductsBody from '@components/MyProducts/Home/MyProductsBody';
+import MyProductsTable from '@components/MyProducts/Home/MyProductsTable';
 
 export default function MyProducts() {
     return (
@@ -14,7 +14,9 @@ export default function MyProducts() {
                         ADD NEW
                     </Link>
                 </div>
-                <MyProductsBody />
+                <div className="primary-border my-products-body">
+                    <MyProductsTable />
+                </div>
             </section>
         </main>
     );

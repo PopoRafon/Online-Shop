@@ -28,7 +28,7 @@ export default function DisplayCardsContainer({ title, note, products }: Display
                             />
                             <div className="display-card-description">
                                 <span className="display-card-name">{product.name}</span>
-                                <span className="display-card-price">{product.price} $</span>
+                                <span className="display-card-price">{product.price.toFixed(2)}$</span>
                             </div>
                         </Link>
                     ) : (

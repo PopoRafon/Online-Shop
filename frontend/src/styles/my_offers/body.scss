@@ -5,15 +5,16 @@
     overflow: auto;
     background-color: white;
 
-    .my-products-body-table {
+    .my-products-table {
         width: 100%;
+        min-width: 600px;
         text-align: center;
         border-collapse: collapse;
 
         & th {
             padding: 12px 0px;
 
-            .my-products-body-table-head-button {
+            .my-products-table-head-button {
                 cursor: pointer;
                 background-color: transparent;
                 font-size: large;
@@ -42,6 +43,19 @@
             max-width: 1px;
             position: relative;
             transition: 0.2s background-color;
+        }
+
+        .my-products-table-offer-cell {
+            padding: 0px 80px;
+            position: relative;
+
+            .my-products-table-offer-image {
+                width: 75px;
+                height: 75px;
+                position: absolute;
+                left: 4px;
+                top: 4px;
+            }
         }
     }
 }

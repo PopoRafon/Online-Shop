@@ -678,15 +678,16 @@ footer {
   overflow: auto;
   background-color: white;
 }
-.my-products-body .my-products-body-table {
+.my-products-body .my-products-table {
   width: 100%;
+  min-width: 600px;
   text-align: center;
   border-collapse: collapse;
 }
-.my-products-body .my-products-body-table th {
+.my-products-body .my-products-table th {
   padding: 12px 0px;
 }
-.my-products-body .my-products-body-table th .my-products-body-table-head-button {
+.my-products-body .my-products-table th .my-products-table-head-button {
   cursor: pointer;
   background-color: transparent;
   font-size: large;
@@ -694,14 +695,14 @@ footer {
   border: 0px;
   padding: 0px;
 }
-.my-products-body .my-products-body-table tr {
+.my-products-body .my-products-table tr {
   border-width: 0px 0px 1px;
   overflow: hidden;
 }
-.my-products-body .my-products-body-table tr:hover td {
+.my-products-body .my-products-table tr:hover td {
   background-color: #F0F0F0;
 }
-.my-products-body .my-products-body-table td {
+.my-products-body .my-products-table td {
   font-size: medium;
   height: 75px;
   padding: 4px;
@@ -711,6 +712,17 @@ footer {
   max-width: 1px;
   position: relative;
   transition: 0.2s background-color;
+}
+.my-products-body .my-products-table .my-products-table-offer-cell {
+  padding: 0px 80px;
+  position: relative;
+}
+.my-products-body .my-products-table .my-products-table-offer-cell .my-products-table-offer-image {
+  width: 75px;
+  height: 75px;
+  position: absolute;
+  left: 4px;
+  top: 4px;
 }
 
 .add-product-form {

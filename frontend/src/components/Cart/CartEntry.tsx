@@ -15,7 +15,7 @@ export default function CartEntry({ product, setTotalPrice }: CartEntryProps) {
         const { value, min, max } = event.target;
         const newValue: number = Math.max(Number(min), Math.min(Number(max), Number(value)));
 
-        setTotalPrice(prev => prev + ((newValue - quantity) * Number(product.price)));
+        setTotalPrice(prev => prev + ((newValue - quantity) * product.price));
         setQuantity(newValue);
     }
 
@@ -45,7 +45,7 @@ export default function CartEntry({ product, setTotalPrice }: CartEntryProps) {
                     max={product.amount}
                 />
                 <span className="cart-entry-price">
-                    {Number(product.price).toFixed(2)}$
+                    {(product.price * quantity).toFixed(2)}$
                 </span>
             </div>
         </div>

@@ -20,7 +20,14 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = '__all__'
-        extra_kwargs = {'sold': {'read_only': True}}
+        extra_kwargs = {
+            'sold': {
+                'read_only': True
+            },
+            'price': {
+                'coerce_to_string': False
+            }
+        }
 
     def get_images(self, obj):
         return [image.image.url for image in obj.images.all()]
