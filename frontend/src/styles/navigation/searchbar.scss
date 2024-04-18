@@ -46,21 +46,13 @@
     }
 
     .navigation-searchbar-submit {
-        cursor: pointer;
-        border: 0px;
-        background-color: rgb(47, 130, 251);
         background-image: url('../assets/images/icons/search_icon.svg');
         background-repeat: no-repeat;
         background-position: center;
         width: 50px;
         height: 100%;
-        border-bottom-right-radius: $border-radius;
-        border-top-right-radius: $border-radius;
-        transition: 0.3s;
-
-        &:hover {
-            background-color: rgb(40, 120, 240);
-        }
+        border-bottom-left-radius: 0px;
+        border-top-left-radius: 0px;
     }
 }
 

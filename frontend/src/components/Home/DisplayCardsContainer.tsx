@@ -19,7 +19,7 @@ export default function DisplayCardsContainer({ title, note, products }: Display
                     product ? (
                         <Link
                             to={`/product/${product.id}`}
-                            className="display-card"
+                            className="primary-border display-card"
                             key={product.id}
                         >
                             <img
@@ -32,7 +32,7 @@ export default function DisplayCardsContainer({ title, note, products }: Display
                             </div>
                         </Link>
                     ) : (
-                        <div className="display-card" key={index}></div>
+                        <div className="primary-border display-card" key={index}></div>
                     )
                 ))}
             </div>

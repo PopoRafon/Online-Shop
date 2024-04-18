@@ -9,7 +9,7 @@ export default function PasswordResetConfirm() {
 
     return (
         <main className="auth-form-page">
-            <section className="auth-form-container">
+            <section className="primary-border auth-form-container">
                 <h2 className="auth-form-header">Confirm Password Reset</h2>
                 <PasswordResetConfirmForm />
             </section>

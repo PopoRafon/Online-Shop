@@ -22,14 +22,14 @@ export default function MyProductsBody() {
     }, [user.username]);
 
     return (
-        <div className="my-products-body">
+        <div className="primary-border my-products-body">
             <table className="my-products-body-table">
                 <colgroup>
                     <col style={{ width: '40%' }} />
                     <col span={3} style={{ width: '20%' }} />
                 </colgroup>
                 <thead>
-                    <tr>
+                    <tr className="primary-border">
                         {productsHeadersRef.current.map(product => (
                             <th key={product}>
                                 <button
@@ -44,6 +44,7 @@ export default function MyProductsBody() {
                 <tbody>
                     {products.map(product => (
                         <tr
+                            className="primary-border"
                             onClick={() => navigate(`/product/${product.id}`)}
                             style={{ cursor: 'pointer' }}
                             key={product.id}

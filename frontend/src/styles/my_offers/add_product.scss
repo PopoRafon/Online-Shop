@@ -3,29 +3,18 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    border: 1px solid $light-gray-color;
     border-radius: 5px;
     padding: 2rem 0px;
     gap: 0.5rem;
     width: 100%;
+    background-color: white;
 
     .add-product-form-submit {
-        cursor: pointer;
-        color: white;
-        background-color: rgb(47, 130, 251);
-        border: 0px;
-        border-radius: 5px;
         font-size: medium;
-        font-weight: 600;
         width: 90%;
         max-width: 350px;
         height: 40px;
-        transition: 0.3s;
         margin-top: 1rem;
-
-        &:hover {
-            background-color: rgb(40, 120, 240);
-        }
     }
 
     .add-product-form-error-message {
@@ -98,7 +87,6 @@
             $blue-color: rgb(105, 165, 255);
             border-radius: 5px;
             font-size: medium;
-            border: 1px solid $light-gray-color;
             width: 100%;
             padding: 12px 8px;
             box-sizing: border-box;

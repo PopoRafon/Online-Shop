@@ -6,6 +6,7 @@
     position: relative;
     padding: 1rem 0px;
     box-sizing: border-box;
+    background-color: #FAFAFA;
 
     .my-products-container {
         display: flex;
@@ -31,19 +32,9 @@
         }
 
         .my-products-header-add-button {
-            cursor: pointer;
-            background-color: rgb(47, 130, 251);
             font-size: medium;
-            font-weight: 600;
             color: white;
             padding: 0.75rem 1rem;
-            border-radius: 5px;
-            border: 0px;
-            transition: 0.3s;
-
-            &:hover {
-                background-color: rgb(40, 120, 240);
-            }
         }
 
         .my-products-header-go-back-button {

@@ -63,7 +63,7 @@ export default function AddProductForm() {
 
     return (
         <form
-            className="add-product-form"
+            className="primary-border add-product-form"
             onSubmit={handleSubmit}
             aria-label="Add product form"
             noValidate
@@ -95,7 +95,7 @@ export default function AddProductForm() {
                 Description
                 <textarea
                     name="description"
-                    className={`add-product-form-input ${formErrors.description && 'add-product-form-input-error'}`}
+                    className={`primary-border add-product-form-input ${formErrors.description && 'add-product-form-input-error'}`}
                     value={formData.description}
                     style={{ resize: 'none' }}
                     onChange={handleChange}
@@ -149,7 +149,7 @@ export default function AddProductForm() {
             <input
                 type="submit"
                 value="Add product"
-                className="add-product-form-submit"
+                className="primary-button add-product-form-submit"
             />
         </form>
     );

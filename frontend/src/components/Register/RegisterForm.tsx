@@ -101,7 +101,7 @@ export default function RegisterForm() {
             <input
                 type="submit"
                 value="Create Account"
-                className="auth-form-submit"
+                className="primary-button auth-form-submit"
             />
         </form>
     );

@@ -28,14 +28,14 @@ export default function Newsletter() {
                     name="email"
                     value={emailData}
                     onChange={handleChange}
-                    className="footer-newsletter-form-input"
+                    className="primary-border footer-newsletter-form-input"
                     placeholder="Enter your email"
                     autoComplete="off"
                 />
                 <input
                     type="submit"
                     value="Subscribe"
-                    className="footer-newsletter-form-submit"
+                    className="primary-button footer-newsletter-form-submit"
                 />
             </form>
         </div>

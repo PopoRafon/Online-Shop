@@ -68,7 +68,7 @@ export default function LoginForm() {
             <input
                 type="submit"
                 value="Sign in"
-                className="auth-form-submit"
+                className="primary-button auth-form-submit"
             />
         </form>
     );

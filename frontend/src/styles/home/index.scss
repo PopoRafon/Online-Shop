@@ -1,6 +1,7 @@
 .home-page {
     padding: 2rem 0px 5rem;
     gap: 5rem;
+    background-color: #FAFAFA;
 
     .home-display-cards-container {
         display: flex;
@@ -17,7 +18,7 @@
             }
 
             .home-display-cards-container-header-note {
-                color: $light-gray-color;
+                color: #B0B0B0;
             }
         }
 
@@ -31,10 +32,10 @@
                 width: 95vw;
                 max-width: 350px;
                 height: 200px;
-                border: 1px solid $light-gray-color;
                 border-radius: 5px;
                 overflow: hidden;
                 transition: 0.3s;
+                background-color: white;
             
                 &:hover {
                     transform: translateY(-5px);

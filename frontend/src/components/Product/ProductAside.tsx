@@ -72,7 +72,7 @@ export default function ProductAside({ product }: ProductAsideProps) {
     }
 
     return (
-        <aside className="product-aside-container">
+        <aside className="primary-border product-aside-container">
             <div className="product-aside-information-container">
                 <span className="product-aside-information-cost">{product.price}$</span>
                 <span>{product.sold} sold</span>
@@ -110,13 +110,13 @@ export default function ProductAside({ product }: ProductAsideProps) {
                 </span>
             </div>
             <button
-                className="product-aside-buy-button"
+                className="primary-button product-aside-buy-button"
                 onClick={addToCart}
             >
                 Add to cart
             </button>
             <button
-                className="product-aside-buy-button"
+                className="primary-button product-aside-buy-button"
             >
                 Buy and pay
             </button>

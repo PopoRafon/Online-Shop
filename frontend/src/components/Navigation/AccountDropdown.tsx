@@ -38,7 +38,7 @@ export default function AccountDropdown({ accountButtonRef, setShowDropdown }: A
     return (
         <div
             ref={dropdownRef}
-            className="navigation-header-account-dropdown"
+            className="primary-border navigation-header-account-dropdown"
             data-testid="account-dropdown"
         >
             {user.isLoggedIn ? (

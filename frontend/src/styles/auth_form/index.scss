@@ -3,7 +3,6 @@
     flex-grow: 1;
 
     .auth-form-container {
-        border: 1px solid $light-gray-color;
         border-radius: 5px;
         width: 95%;
         max-width: 500px;
@@ -38,7 +37,6 @@
                     $blue-color: rgb(105, 165, 255);
                     border-radius: 5px;
                     font-size: medium;
-                    border: 1px solid $light-gray-color;
                     width: 100%;
                     padding: 12px 8px;
                     box-sizing: border-box;
@@ -88,22 +86,10 @@
             }
 
             .auth-form-submit {
-                cursor: pointer;
-                color: white;
-                background-color: rgb(47, 130, 251);
-                border: 0px;
-                border-radius: 5px;
-                font-size: medium;
-                font-weight: 600;
                 width: 90%;
                 max-width: 350px;
                 height: 40px;
                 margin-top: 1rem;
-                transition: 0.3s;
-
-                &:hover {
-                    background-color: rgb(40, 120, 240);
-                }
             }
 
             .auth-form-checkbox-label {

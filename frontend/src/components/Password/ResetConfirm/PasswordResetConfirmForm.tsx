@@ -60,7 +60,7 @@ export default function PasswordResetConfirmForm() {
             <input
                 type="submit"
                 value="Change Password"
-                className="auth-form-submit"
+                className="primary-button auth-form-submit"
             />
         </form>
     );

@@ -27,7 +27,6 @@
             .cart-entry {
                 display: flex;
                 align-items: center;
-                border: 1px solid $light-gray-color;
                 overflow: hidden;
                 flex-wrap: wrap;
                 border-radius: 5px;
@@ -60,7 +59,6 @@
                         font-weight: 600;
                         padding: 0.75rem;
                         width: 90px;
-                        border: 1px solid $light-gray-color;
                         border-radius: 5px;
                         box-sizing: border-box;
                     }
@@ -79,7 +77,6 @@
     }
 
     .cart-checkout {
-        border: 1px solid $light-gray-color;
         background-color: white;
         border-radius: 5px;
         padding: 1rem;
@@ -94,20 +91,8 @@
         }
 
         .cart-payment-button {
-            cursor: pointer;
-            font-size: medium;
-            font-weight: 600;
-            color: white;
             width: clamp(250px, 80vw, 300px);
-            background-color: rgb(47, 130, 251);
-            border: 1px solid rgb(44, 122, 240);
             padding: 0.75rem 0px;
-            border-radius: 5px;
-            transition: 0.3s;
-
-            &:hover {
-                background-color: rgb(40, 120, 240);
-            }
         }
     }
 }

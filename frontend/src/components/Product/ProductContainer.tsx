@@ -31,7 +31,7 @@ export default function ProductContainer({ product }: ProductContainerProps) {
     }
 
     return (
-        <section className="product-container">
+        <section className="primary-border product-container">
             <div className="product-header">
                 <h2 className="product-header-name">{product.name}</h2>
                 <span className="product-header-rating">0 rating and 0 reviews</span>

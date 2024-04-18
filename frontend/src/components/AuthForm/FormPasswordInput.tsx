@@ -20,7 +20,7 @@ export default function FormPasswordInput({ label, name, value, handleChange, er
             <input
                 name={name}
                 type={showPassword ? 'text' : 'password'}
-                className={`auth-form-input ${error && 'auth-form-input-error'}`}
+                className={`primary-border auth-form-input ${error && 'auth-form-input-error'}`}
                 value={value}
                 onChange={handleChange}
                 autoComplete="off"

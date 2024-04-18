@@ -16,7 +16,7 @@ export default function FormInput({ label, name, value, handleChange, error, typ
             <input
                 name={name}
                 type={type}
-                className={`auth-form-input ${error && 'auth-form-input-error'}`}
+                className={`primary-border auth-form-input ${error && 'auth-form-input-error'}`}
                 value={value}
                 onChange={handleChange}
                 autoComplete="off"

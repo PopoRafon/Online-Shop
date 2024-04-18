@@ -7,7 +7,7 @@ type CartContainerProps = {
 }
 
 export default function CartContainer({ products }: CartContainerProps) {
-    const [totalPrice, setTotalPrice] = useState<number>(products.reduce((prev, current) => prev + current.price, 0));
+    const [totalPrice, setTotalPrice] = useState<number>(products.reduce((prev, current) => prev + Number(current.price), 0));
 
     return (
         <div className="cart-container">
@@ -23,13 +23,13 @@ export default function CartContainer({ products }: CartContainerProps) {
                     ))}
                 </div>
             </section>
-            <aside className="cart-checkout">
+            <aside className="primary-border cart-checkout">
                 <div className="cart-products-cost">
                     <span style={{ fontSize: 'small' }}>Total price</span>
-                    <span style={{ fontSize: 'large' }}>{totalPrice.toFixed(2)}$</span>
+                    <span style={{ fontSize: 'large' }}>{Number(totalPrice).toFixed(2)}$</span>
                 </div>
                 <button
-                    className="cart-payment-button"
+                    className="primary-button cart-payment-button"
                 >
                     Continue to payment
                 </button>

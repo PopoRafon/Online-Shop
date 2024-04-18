@@ -3,26 +3,16 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    border: 1px solid $light-gray-color;
     border-radius: 5px;
     padding: 2rem clamp(1rem, 5vw, 2rem);
     background-color: white;
     gap: 0.75rem;
 
     .product-aside-buy-button {
-        cursor: pointer;
         font-size: large;
-        color: white;
+        font-weight: 500;
         width: clamp(275px, 80vw, 350px);
-        background-color: rgb(47, 130, 251);
-        border: 1px solid rgb(44, 122, 240);
         padding: 0.75rem 0px;
-        border-radius: 5px;
-        transition: 0.3s;
-
-        &:hover {
-            background-color: rgb(40, 120, 240);
-        }
     }
 
     .product-aside-quantity-container {

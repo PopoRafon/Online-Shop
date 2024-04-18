@@ -16,7 +16,7 @@ export default function AddProductInput({ label, name, value, handleChange, erro
             <input
                 name={name}
                 type={type}
-                className={`add-product-form-input ${error && 'add-product-form-input-error'}`}
+                className={`primary-border add-product-form-input ${error && 'add-product-form-input-error'}`}
                 value={value}
                 onChange={handleChange}
                 autoComplete="off"

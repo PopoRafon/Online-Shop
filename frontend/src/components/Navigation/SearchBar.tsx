@@ -72,7 +72,7 @@ export default function SearchBar() {
             <input
                 type="submit"
                 value=""
-                className="navigation-searchbar-submit"
+                className="primary-button navigation-searchbar-submit"
             />
         </form>
     );

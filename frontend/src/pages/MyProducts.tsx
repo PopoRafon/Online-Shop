@@ -9,7 +9,7 @@ export default function MyProducts() {
                     <h3 className="my-products-header-text">My products</h3>
                     <Link
                         to='/my-products/add/product'
-                        className="my-products-header-add-button"
+                        className="primary-button my-products-header-add-button"
                     >
                         ADD NEW
                     </Link>

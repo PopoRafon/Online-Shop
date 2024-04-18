@@ -48,7 +48,7 @@ export default function PasswordResetForm() {
             <input
                 type="submit"
                 value="Send"
-                className="auth-form-submit"
+                className="primary-button auth-form-submit"
             />
         </form>
     );

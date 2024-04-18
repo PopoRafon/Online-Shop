@@ -9,7 +9,7 @@ export default function Login() {
 
     return (
         <main className="auth-form-page">
-            <section className="auth-form-container">
+            <section className="primary-border auth-form-container">
                 <h2 className="auth-form-header">Sign in</h2>
                 <LoginForm />
             </section>
