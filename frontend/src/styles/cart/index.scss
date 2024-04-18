@@ -1,5 +1,9 @@
-@import 'empty';
+@import 'container';
+@import 'empty_cart';
 
 .cart-page {
-    padding: 1rem 0px;
+    padding: 2rem 0px;
+    flex-grow: 1;
+    justify-content: start;
+    background-color: #FAFAFA;
 }

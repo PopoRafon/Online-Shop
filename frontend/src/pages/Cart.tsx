@@ -1,8 +1,8 @@
 import type { Product } from '@interfaces/types';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import useUserContext from '@contexts/UserContext/useUserContext';
-import CartImage from '@assets/images/cart.svg';
+import CartContainer from '@components/Cart/CartContainer';
+import EmptyCart from '@components/Cart/EmptyCart';
 
 export default function Cart() {
     const { user } = useUserContext();
@@ -51,31 +51,11 @@ export default function Cart() {
     return isLoaded && (
         <main className="cart-page">
             {products.length > 0 ? (
-                <section>
-                    <h2>Your cart.</h2>
-                    {products.map(product => (
-                        <div key={product.id}>{product.name}</div>
-                    ))}
-                </section>
+                <CartContainer
+                    products={products}
+                />
             ) : (
-                <section className="cart-empty-container">
-                    <img
-                        src={CartImage}
-                        width={125}
-                        height={125}
-                        alt="Cart image"
-                    />
-                    <h3 className="cart-empty-header">Your cart is empty. Go ahead and add some cool stuff to it!</h3>
-                    {!user.isLoggedIn && (
-                        <span className="cart-empty-info">Or <Link to='/login'>sign in</Link> to check if there's something in it already!</span>
-                    )}
-                    <Link
-                        to='/'
-                        className="cart-empty-browse-button"
-                    >
-                        Browse store
-                    </Link>
-                </section>
+                <EmptyCart />
             )}
         </main>
     );
