@@ -549,7 +549,6 @@ footer {
 .cart-container .cart-information .cart-information-body .cart-entry {
   display: flex;
   align-items: center;
-  overflow: hidden;
   flex-wrap: wrap;
   border-radius: 5px;
   padding: 0.5rem;
@@ -573,6 +572,72 @@ footer {
 .cart-container .cart-information .cart-information-body .cart-entry .cart-entry-side-information {
   display: flex;
   flex-grow: 1;
+  align-items: center;
+}
+.cart-container .cart-information .cart-information-body .cart-entry .cart-entry-side-information .cart-entry-side-remove-product-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-left: 8px;
+}
+.cart-container .cart-information .cart-information-body .cart-entry .cart-entry-side-information .cart-entry-side-remove-product-container .cart-entry-side-remove-product-button {
+  cursor: pointer;
+  display: flex;
+  border: 0px;
+  height: fit-content;
+  padding: 0px;
+  background-color: transparent;
+  padding: 4px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+.cart-container .cart-information .cart-information-body .cart-entry .cart-entry-side-information .cart-entry-side-remove-product-container .cart-entry-side-remove-product-button:hover {
+  background-color: #E0E0E0;
+}
+.cart-container .cart-information .cart-information-body .cart-entry .cart-entry-side-information .cart-entry-side-remove-product-container .cart-entry-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  font-size: small;
+  background-color: white;
+  border-radius: 5px;
+  padding: 0.5rem;
+  text-wrap: nowrap;
+  z-index: 10;
+  bottom: calc(100% + 5px);
+  gap: 0.5rem;
+  box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.2);
+  animation: modal-appear-animation 0.5s normal 0s 1;
+}
+@keyframes modal-appear-animation {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.cart-container .cart-information .cart-information-body .cart-entry .cart-entry-side-information .cart-entry-side-remove-product-container .cart-entry-modal::after {
+  content: " ";
+  position: absolute;
+  top: 100%;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #E0E0E0 transparent transparent transparent;
+}
+.cart-container .cart-information .cart-information-body .cart-entry .cart-entry-side-information .cart-entry-side-remove-product-container .cart-entry-modal .cart-entry-modal-buttons-container {
+  display: flex;
+  gap: 4px;
+}
+.cart-container .cart-information .cart-information-body .cart-entry .cart-entry-side-information .cart-entry-side-remove-product-container .cart-entry-modal .cart-entry-modal-buttons-container .cart-entry-button {
+  font-size: small;
+  width: 45px;
+  height: 25px;
+}
+.cart-container .cart-information .cart-information-body .cart-entry .cart-entry-side-information .cart-entry-side-remove-product-container .cart-entry-modal .cart-entry-modal-text {
+  font-weight: 600;
 }
 .cart-container .cart-information .cart-information-body .cart-entry .cart-entry-side-information .cart-entry-quantity-input {
   font-weight: 600;

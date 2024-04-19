@@ -53,6 +53,7 @@ export default function Cart() {
             {products.length > 0 ? (
                 <CartContainer
                     products={products}
+                    setProducts={setProducts}
                 />
             ) : (
                 <EmptyCart />
