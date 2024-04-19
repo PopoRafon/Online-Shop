@@ -49,8 +49,19 @@ export default function ProductAside({ product }: ProductAsideProps) {
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        setAlert({ show: true, text: 'Product has been successfully added to your cart.' });
+                        setAlert({
+                            show: true,
+                            type: 'success',
+                            text: 'Product has been successfully added to your cart.'
+                        });
                     }
+                })
+                .catch(() => {
+                    setAlert({
+                        show: true,
+                        type: 'error',
+                        text: 'Product could not be added to your cart.'
+                    });
                 });
         } else {
             const cart: string | null = localStorage.getItem('cart');
@@ -67,7 +78,11 @@ export default function ProductAside({ product }: ProductAsideProps) {
                 localStorage.setItem('cart', JSON.stringify([product.id]));
             }
 
-            setAlert({ show: true, text: 'Product has been successfully added to your cart.' });
+            setAlert({
+                show: true,
+                type: 'success',
+                text: 'Product has been successfully added to your cart.'
+            });
         }
     }
 

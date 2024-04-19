@@ -35,8 +35,19 @@ export default function CartContainer({ products, setProducts }: CartContainerPr
                         const newProducts: Product[] = products.filter(product => product.id !== productId);
 
                         setProducts([...newProducts]);
-                        setAlert({ show: true, text: 'Product from your cart has been successfully removed.' });
+                        setAlert({
+                            show: true,
+                            type: 'success',
+                            text: 'Product from your cart has been successfully removed.'
+                        });
                     }
+                })
+                .catch(() => {
+                    setAlert({
+                        show: true,
+                        type: 'error',
+                        text: 'Product could not be remove from your cart.'
+                    });
                 });
         } else {
             const cart: string | null = localStorage.getItem('cart');
@@ -47,7 +58,11 @@ export default function CartContainer({ products, setProducts }: CartContainerPr
                 const newProducts: Product[] = products.filter(product => product.id !== productId);
 
                 setProducts([...newProducts]);
-                setAlert({ show: true, text: 'Product from your cart has been successfully removed.' });
+                setAlert({
+                    show: true,
+                    type: 'success',
+                    text: 'Product from your cart has been successfully removed.'
+                });
                 localStorage.setItem('cart', JSON.stringify(newCartItems));
             }
         }

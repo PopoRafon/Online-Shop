@@ -368,12 +368,19 @@ footer {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+.success-alert {
+  background-color: rgb(65, 216, 136);
+}
+
+.error-alert {
+  background-color: rgb(250, 75, 75);
+}
+
 .alert {
   position: fixed;
   display: flex;
   gap: 8px;
   z-index: 999;
-  background-color: rgb(65, 216, 136);
   bottom: 0px;
   right: 0px;
   border-radius: 5px;

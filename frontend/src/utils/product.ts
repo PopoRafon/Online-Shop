@@ -34,13 +34,21 @@ async function createProduct({ formData, navigate, setAlert, setFormErrors }: Cr
         .then(data => {
             if (data.success) {
                 navigate('/my-products');
-                setAlert({ show: true, text: 'Your product has been successfully added.' });
+                setAlert({
+                    show: true,
+                    type:'success',
+                    text: 'Your product has been successfully added.'
+                });
             } else if (data.error) {
                 setFormErrors(data.error);
             }
         })
-        .catch(error => {
-            console.log(error);
+        .catch(() => {
+            setAlert({
+                show: true,
+                type: 'error',
+                text: 'Server could not be reached.'
+            });
         });
 }
 

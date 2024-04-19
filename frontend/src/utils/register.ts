@@ -34,14 +34,22 @@ export default async function register({ formData, setFormErrors, navigate, setA
         .then(async (data) => {
             if (data.success) {
                 await getUserData({ setUser });
-                setAlert({ show: true, text: 'Your account has been successfully created.' });
+                setAlert({
+                    show: true,
+                    type: 'success',
+                    text: 'Your account has been successfully created.'
+                });
                 AccessToken.setPeriodicTokenRefresh();
                 navigate('/');
             } else if (data.error) {
                 setFormErrors({ ...data.error });
             }
         })
-        .catch(error => {
-            console.log(error);
+        .catch(() => {
+            setAlert({
+                show: true,
+                type: 'error',
+                text: 'Server could not be reached.'
+            });
         });
 }

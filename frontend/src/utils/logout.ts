@@ -27,11 +27,19 @@ export default async function logout({ setUser, setAlert, navigate }: LogoutArgs
         .then(data => {
             if (data.success) {
                 setUser({ isLoggedIn: false, username: '' });
-                setAlert({ show: true, text: 'You have been successfully logged out.' });
+                setAlert({
+                    show: true,
+                    type: 'success',
+                    text: 'You have been successfully logged out.'
+                });
                 navigate('/');
             }
         })
-        .catch(error => {
-            console.log(error);
+        .catch(() => {
+            setAlert({
+                show: true,
+                type: 'error',
+                text: 'Server could not be reached.'
+            });
         });
 }

@@ -86,7 +86,7 @@ describe('register util', () => {
         expect(navigateMock).toHaveBeenCalledOnce();
         expect(navigateMock).toBeCalledWith('/');
         expect(setAlertMock).toHaveBeenCalledOnce();
-        expect(setAlertMock).toBeCalledWith({ show: true, text: 'Your account has been successfully created.' });
+        expect(setAlertMock).toBeCalledWith({ show: true, type: 'success', text: 'Your account has been successfully created.' });
         expect(setFormErrorsMock).not.toBeCalled();
     });
 });

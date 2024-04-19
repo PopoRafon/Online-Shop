@@ -34,14 +34,22 @@ export default async function login({ formData, setFormErrors, navigate, setAler
         .then(async (data) => {
             if (data.success) {
                 await getUserData({ setUser });
-                setAlert({ show: true, text: 'You have been successfully logged in.' });
+                setAlert({
+                    show: true,
+                    type: 'success',
+                    text: 'You have been successfully logged in.'
+                });
                 AccessToken.setPeriodicTokenRefresh();
                 navigate('/');
             } else if (data.error) {
                 setFormErrors({ ...data.error });
             }
         })
-        .catch(error => {
-            console.log(error);
+        .catch(() => {
+            setAlert({
+                show: true,
+                type: 'error',
+                text: 'Server could not be reached.'
+            });
         });
 }

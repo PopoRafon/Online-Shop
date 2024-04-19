@@ -2,6 +2,7 @@ import { createContext, useState } from 'react';
 
 export type AlertData = {
     show: boolean;
+    type: 'success' | 'error';
     text: string;
 }
 
@@ -17,7 +18,7 @@ type AlertProviderProps = {
 }
 
 export default function AlertContextProvider({ children }: AlertProviderProps) {
-    const [alert, setAlert] = useState<AlertData>({ show: false, text: '' });
+    const [alert, setAlert] = useState<AlertData>({ show: false, type: 'success', text: '' });
 
     return (
         <AlertContext.Provider value={{ alert, setAlert }}>

@@ -32,14 +32,22 @@ async function passwordReset({ formData, setFormErrors, navigate, setAlert }: Pa
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                setAlert({ show: true, text: 'Password reset message has been sent to your email.' });
+                setAlert({
+                    show: true,
+                    type: 'success',
+                    text: 'Password reset message has been sent to your email.'
+                });
                 navigate('/');
             } else if (data.error) {
                 setFormErrors({ ...data.error });
             }
         })
-        .catch(error => {
-            console.log(error);
+        .catch(() => {
+            setAlert({
+                show: true,
+                type: 'error',
+                text: 'Server could not be reached.'
+            });
         });
 }
 
@@ -72,14 +80,22 @@ async function passwordResetConfirm({ formData, setFormErrors, navigate, setAler
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                setAlert({ show: true, text: 'Your password has been successfully changed. Now you can login to your account.' });
+                setAlert({
+                    show: true,
+                    type: 'success',
+                    text: 'Your password has been successfully changed. Now you can login to your account.'
+                });
                 navigate('/login');
             } else if (data.error) {
                 setFormErrors({ ...data.error });
             }
         })
-        .catch(error => {
-            console.log(error);
+        .catch(() => {
+            setAlert({
+                show: true,
+                type: 'error',
+                text: 'Server could not be reached.'
+            });
         });
 }
 
