@@ -1,8 +1,10 @@
 import type { ChangeEvent, FormEvent } from 'react';
 import { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ClearIcon from '@assets/images/icons/clear_icon.svg';
 
 export default function SearchBar() {
+    const navigate = useNavigate();
     const searchBarRef = useRef<null | HTMLFormElement>(null);
     const [searchData, setSearchData] = useState<string>('');
     const [showResetButton, setShowResetButton] = useState<boolean>(false);
@@ -21,6 +23,8 @@ export default function SearchBar() {
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
+
+        navigate(`/search?name=${searchData}`);
     }
 
     function highlightSearchBar() {

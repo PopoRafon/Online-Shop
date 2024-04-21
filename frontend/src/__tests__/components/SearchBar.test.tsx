@@ -1,10 +1,15 @@
 import { test, describe, expect } from 'vitest';
 import { fireEvent, render } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 import SearchBar from '@components/Navigation/SearchBar';
 
 describe('searchbar component', () => {
     test('correctly renders searchbar component', () => {
-        const { getByPlaceholderText, getByRole } = render(<SearchBar />);
+        const { getByPlaceholderText, getByRole } = render(
+            <BrowserRouter>
+                <SearchBar />
+            </BrowserRouter>
+        );
         const searchBoxInput = getByPlaceholderText('What are you looking for?') as HTMLInputElement;
 
         expect(getByRole('form')).toBeInTheDocument();
@@ -15,7 +20,11 @@ describe('searchbar component', () => {
     });
 
     test('search input adds outline to form when focused and removes it when blured', () => {
-        const { getByPlaceholderText, getByRole } = render(<SearchBar />);
+        const { getByPlaceholderText, getByRole } = render(
+            <BrowserRouter>
+                <SearchBar />
+            </BrowserRouter>
+        );
         const form = getByRole('form') as HTMLFormElement;
         const searchBoxInput = getByPlaceholderText('What are you looking for?') as HTMLInputElement;
 

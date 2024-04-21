@@ -18,12 +18,16 @@ class ProductListCreateView(generics.ListCreateAPIView):
         query_params = self.request.query_params
         username = query_params.get('username')
         count = query_params.get('count')
+        name = query_params.get('name')
 
         if username is not None:
             queryset = queryset.filter(user__username=username)
 
         if count is not None and count.isdecimal():
             queryset = queryset[:int(count)]
+
+        if name is not None:
+            queryset = queryset.filter(name__icontains=name)
 
         return queryset.prefetch_related('images')
 

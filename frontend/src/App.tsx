@@ -18,6 +18,7 @@ import Error from './pages/Error';
 import MyProducts from './pages/MyProducts';
 import MyProductsAddProduct from './pages/MyProductsAddProduct';
 import Product from './pages/Product';
+import Search from './pages/Search';
 
 function App() {
     const { setUser } = useUserContext();
@@ -45,6 +46,7 @@ function App() {
                         <Route path='login' element={<Login />} />
                         <Route path='cart' element={<Cart />} />
                         <Route path='product/:id' element={<Product />} />
+                        <Route path='search' element={<Search />} />
                         <Route path='my-products/'>
                             <Route index element={
                                 <ProtectedRoute>
