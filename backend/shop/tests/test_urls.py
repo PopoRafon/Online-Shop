@@ -1,6 +1,6 @@
 from rest_framework.test import APISimpleTestCase
 from django.urls import resolve, reverse
-from shop.views import ProductListCreateView, ProductDetailView
+from shop.views import ProductListCreateView, ProductDetailView, CartDetailView
 
 
 class TestProductUrls(APISimpleTestCase):
@@ -18,3 +18,12 @@ class TestProductUrls(APISimpleTestCase):
 
         self.assertEqual(url, f'/api/products/{product_id}')
         self.assertEqual(resolver.func.view_class, ProductDetailView)
+
+
+class TestCartUrls(APISimpleTestCase):
+    def test_cart_detail_url_resolves(self):
+        url = reverse('cart-detail')
+        resolver = resolve(url)
+
+        self.assertEqual(url, '/api/cart')
+        self.assertEqual(resolver.func.view_class, CartDetailView)

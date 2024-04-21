@@ -36,7 +36,7 @@ async function createProduct({ formData, navigate, setAlert, setFormErrors }: Cr
                 navigate('/my-products');
                 setAlert({
                     show: true,
-                    type:'success',
+                    type: 'success',
                     text: 'Your product has been successfully added.'
                 });
             } else if (data.error) {
