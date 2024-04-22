@@ -1,31 +1,53 @@
 import type { Product } from '@interfaces/types';
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import SearchResults from '@components/Search/SearchResults';
+import SearchResultsNotFound from '@components/Search/SearchResultsNotFound';
+import SearchPagination from '@components/Search/SearchPagination';
+
+export type SearchResultsPagination = {
+    products: Product[];
+    next: string | null;
+    previous: string | null;
+    count: number;
+}
 
 export default function Search() {
     const { search } = useLocation();
-    const [products, setProducts] = useState<Product[]>([]);
+    const [isLoaded, setIsLoaded] = useState<boolean>(false);
+    const [pagination, setPagination] = useState<SearchResultsPagination>({ products: [], next: null, previous: null, count: 0 });
 
     useEffect(() => {
-        const name = search.split('=')[1];
+        (async () => {
+            const queryString = search.split('?')[1];
 
-        fetch(`/api/products?name=${name}`, {
-            method: 'GET'
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    setProducts(data.success);
-                }
-            });
+            await fetch(`/api/products?${queryString}`, {
+                method: 'GET'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const { results, next, previous, count } = data.success;
+
+                        setPagination({
+                            products: results,
+                            next: next,
+                            previous: previous,
+                            count: count
+                        });
+                    }
+                });
+
+            setIsLoaded(true);
+        })();
     }, [search]);
 
-    return (
+    return isLoaded && (
         <main className="search-page">
             <section>
                 <div className="primary-border search-head">
                     <h2 className="search-header">Product Name</h2>
-                    <span className="search-offer-count">{products.length} offers</span>
+                    <span className="search-offer-count">{pagination.count} offers</span>
                 </div>
                 <div className="search-body">
                     <div>
@@ -37,34 +59,17 @@ export default function Search() {
                             <option>Price: from lowest</option>
                         </select>
                     </div>
-                    {products.length > 0 ? (
-                        <ul className="search-results-container">
-                            {products.map(product => (
-                                <li
-                                    className="primary-border search-result"
-                                    key={product.id}
-                                >
-                                    <Link
-                                        to={`/product/${product.id}`}
-                                        className="search-result-product"
-                                    >
-                                        <img
-                                            src={product.images[0]}
-                                            style={{ minWidth: '100px', minHeight: '100px' }}
-                                            width={100}
-                                            height={100}
-                                            alt="Product image"
-                                        />
-                                        <div className="search-result-product-name">{product.name}</div>                                    
-                                        <div className="search-result-product-price">{product.price.toFixed(2)}$</div>
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
+                    {pagination.products.length > 0 ? (
+                        <>
+                            <SearchResults
+                                products={pagination.products}
+                            />
+                            <SearchPagination
+                                pagination={pagination}
+                            />
+                        </>
                     ) : (
-                        <div className="search-results-not-found">
-                            No results were found matching your search.
-                        </div>
+                        <SearchResultsNotFound />
                     )}
                 </div>
             </section>

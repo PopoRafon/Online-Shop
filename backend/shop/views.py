@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
+from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import generics, status
@@ -12,6 +13,7 @@ class ProductListCreateView(generics.ListCreateAPIView):
     serializer_class = ProductSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     renderer_classes = [ExtendedJSONRenderer]
+    pagination_class = LimitOffsetPagination
 
     def get_queryset(self):
         queryset = Product.objects.all()

@@ -24,7 +24,7 @@ export default function SearchBar() {
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
-        navigate(`/search?name=${searchData}`);
+        navigate(`/search?limit=40&name=${searchData}`);
     }
 
     function highlightSearchBar() {

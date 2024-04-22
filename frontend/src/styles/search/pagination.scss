@@ -1,0 +1,33 @@
+.search-pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: white;
+    border-radius: 5px;
+    padding: 0.5rem;
+    box-sizing: border-box;
+
+    .search-pagination-products-count {
+        font-size: small;
+        color: #B0B0B0;
+    }
+
+    .search-pagination-current-page {
+        margin: 0px 6px;
+    }
+
+    .search-pagination-button {
+        cursor: pointer;
+        color: rgb(15, 15, 255);
+        background-color: transparent;
+        padding: 4px;
+        border: 0px;
+        border-radius: 5px;
+        transition: 0.3s;
+
+        &:hover {
+            background-color: #E0E0E0;;
+        }
+    }
+}
