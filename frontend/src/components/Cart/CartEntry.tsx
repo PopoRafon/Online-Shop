@@ -7,7 +7,7 @@ import TrashIcon from '@assets/images/icons/trash_icon.svg';
 type CartEntryProps = {
     product: Product
     setTotalPrice: React.Dispatch<React.SetStateAction<number>>;
-    handleProductRemoval: (productId: string) => void;
+    handleProductRemoval: (productId: string, price: number) => void;
 }
 
 export default function CartEntry({ product, setTotalPrice, handleProductRemoval }: CartEntryProps) {
@@ -65,7 +65,7 @@ export default function CartEntry({ product, setTotalPrice, handleProductRemoval
                             <div className="cart-entry-modal-buttons-container">
                                 <button
                                     className="primary-button cart-entry-button"
-                                    onClick={() => handleProductRemoval(product.id)}
+                                    onClick={() => handleProductRemoval(product.id, quantity * product.price)}
                                 >
                                     Yes
                                 </button>

@@ -30,9 +30,15 @@ export default function Product() {
 
     return isLoaded && (
         <main className="product-page">
-            <ProductContainer
-                product={product}
-            />
+            <div className="product">
+                <ProductContainer
+                    product={product}
+                />
+                <article className="primary-border product-description-container">
+                    <h3 className="product-description-header">Description</h3>
+                    {product.description}
+                </article>
+            </div>
             <ProductAside
                 product={product}
             />

@@ -15,7 +15,7 @@ export default function CartContainer({ products, setProducts }: CartContainerPr
     const { setAlert } = useAlertContext();
     const [totalPrice, setTotalPrice] = useState<number>(products.reduce((prev, current) => prev + current.price, 0));
 
-    function handleProductRemoval(productId: string) {
+    function handleProductRemoval(productId: string, price: number) {
         if (user.isLoggedIn) {
             const csrfToken: string = Cookies.get('csrftoken') ?? '';
 
@@ -35,6 +35,7 @@ export default function CartContainer({ products, setProducts }: CartContainerPr
                         const newProducts: Product[] = products.filter(product => product.id !== productId);
 
                         setProducts([...newProducts]);
+                        setTotalPrice(totalPrice - price);
                         setAlert({
                             show: true,
                             type: 'success',
@@ -58,6 +59,7 @@ export default function CartContainer({ products, setProducts }: CartContainerPr
                 const newProducts: Product[] = products.filter(product => product.id !== productId);
 
                 setProducts([...newProducts]);
+                setTotalPrice(totalPrice - price);
                 setAlert({
                     show: true,
                     type: 'success',

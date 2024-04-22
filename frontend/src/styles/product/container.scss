@@ -109,3 +109,19 @@
         }
     }
 }
+
+.product-description-container {
+    background-color: white;
+    border-radius: 5px;
+    margin-top: 1.5rem;
+    padding: 2rem clamp(1rem, 5vw, 2rem);
+    width: clamp(275px, 80vw, 500px);
+    word-break: break-all;
+
+    .product-description-header {
+        font-size: large;
+        font-weight: 600;
+        margin: 0px;
+        margin-bottom: 0.5rem;
+    }
+}

@@ -766,6 +766,7 @@ footer {
   font-weight: 600;
   border: 0px;
   padding: 0px;
+  text-transform: capitalize;
 }
 .my-products-body .my-products-table tr {
   border-width: 0px 0px 1px;
@@ -1064,6 +1065,21 @@ footer {
   filter: brightness(0.9);
 }
 
+.product-description-container {
+  background-color: white;
+  border-radius: 5px;
+  margin-top: 1.5rem;
+  padding: 2rem clamp(1rem, 5vw, 2rem);
+  width: clamp(275px, 80vw, 500px);
+  word-break: break-all;
+}
+.product-description-container .product-description-header {
+  font-size: large;
+  font-weight: 600;
+  margin: 0px;
+  margin-bottom: 0.5rem;
+}
+
 .product-aside-container {
   display: flex;
   justify-content: center;
@@ -1135,8 +1151,7 @@ footer {
 .product-page {
   display: flex;
   flex-grow: 1;
-  justify-content: center;
-  align-items: center;
+  align-items: start;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 1.5rem;

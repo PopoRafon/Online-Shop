@@ -6,7 +6,7 @@ import useUserContext from '@contexts/UserContext/useUserContext';
 export default function MyProductsTable() {
     const { user } = useUserContext();
     const navigate = useNavigate();
-    const productsHeadersRef = useRef(['Offer', 'Amount', 'Price', 'Sold'] as const);
+    const productsHeadersRef = useRef(['name', 'amount', 'price', 'sold'] as const);
     const [products, setProducts] = useState<Product[]>([]);
 
     useEffect(() => {
@@ -21,6 +21,18 @@ export default function MyProductsTable() {
             });
     }, [user.username]);
 
+    function handleSort(column: keyof Product) {
+        return () => {
+            const sortedData: Product[] = [...products].sort((a, b) => {
+                if (a[column] < b[column]) return 1;
+                if (a[column] > b[column]) return -1;
+                return 0;
+            });
+
+            setProducts(sortedData);
+        };
+    }
+
     return (
         <table className="my-products-table">
             <colgroup>
@@ -29,12 +41,13 @@ export default function MyProductsTable() {
             </colgroup>
             <thead>
                 <tr className="primary-border">
-                    {productsHeadersRef.current.map(product => (
-                        <th key={product}>
+                    {productsHeadersRef.current.map(column => (
+                        <th key={column}>
                             <button
                                 className="my-products-table-head-button"
+                                onClick={handleSort(column)}
                             >
-                                {product}
+                                {column}
                             </button>
                         </th>
                     ))}
