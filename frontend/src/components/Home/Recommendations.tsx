@@ -1,25 +1,16 @@
 import type { Product } from '@interfaces/types';
 import { useState, useEffect } from 'react';
+import { getProducts } from '@utils/product';
 import DisplayCardsContainer from './DisplayCardsContainer';
 
 export default function Recommendations() {
-    const [recommendations, setRecommendations] = useState<Product[]>([]);
+    const [recommendations, setRecommendations] = useState<Product[]>(new Array(3).fill(null));
 
     useEffect(() => {
-        fetch('/api/products?count=3', {
-            method: 'GET'
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    setRecommendations([
-                        ...data.success,
-                        ...new Array(3 - data.success.length).fill(null)
-                    ]);
-                } else {
-                    setRecommendations(new Array(3).fill(null));
-                }
-            });
+        getProducts({
+            amount: 3,
+            setProducts: setRecommendations
+        });
     }, []);
 
     return (

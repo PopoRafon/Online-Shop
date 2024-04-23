@@ -1,6 +1,7 @@
 import type { NavigateFunction } from 'react-router-dom';
 import type { NewProductFormData, NewProductFormErrors } from '@components/MyProducts/AddProduct/types';
 import type { AlertData } from '@contexts/AlertContext/AlertContextProvider';
+import type { Product } from '@interfaces/types';
 import Cookies from 'js-cookie';
 
 type CreateProductArgs = {
@@ -52,4 +53,24 @@ async function createProduct({ formData, navigate, setAlert, setFormErrors }: Cr
         });
 }
 
-export { createProduct };
+type GetProductsArgs = {
+    amount: number;
+    setProducts: React.Dispatch<React.SetStateAction<Product[]>>;
+}
+
+async function getProducts({ amount, setProducts }: GetProductsArgs): Promise<void> {
+    return await fetch(`/api/products?limit=${amount}`, {
+        method: 'GET'
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                setProducts([
+                    ...data.success.results,
+                    ...new Array(amount - data.success.results.length).fill(null)
+                ]);
+            }
+        });
+}
+
+export { createProduct, getProducts };

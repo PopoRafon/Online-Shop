@@ -32,6 +32,7 @@
         align-items: end;
         flex-direction: column;
         width: clamp(300px, 80vw, 650px);
+        gap: 1rem;
 
         .search-sorting-text {
             font-weight: 600;

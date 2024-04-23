@@ -1,25 +1,16 @@
 import type { Product } from '@interfaces/types';
 import { useState, useEffect } from 'react';
+import { getProducts } from '@utils/product';
 import DisplayCardsContainer from './DisplayCardsContainer';
 
 export default function Random() {
-    const [random, setRandom] = useState<Product[]>([]);
+    const [random, setRandom] = useState<Product[]>(new Array(6).fill(null));
 
     useEffect(() => {
-        fetch('/api/products?count=6', {
-            method: 'GET'
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    setRandom([
-                        ...data.success,
-                        ...new Array(6 - data.success.length).fill(null)
-                    ]);
-                } else {
-                    setRandom(new Array(6).fill(null));
-                }
-            });
+        getProducts({
+            amount: 6,
+            setProducts: setRandom
+        });
     }, []);
 
     return (
