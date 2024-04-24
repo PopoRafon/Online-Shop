@@ -88,7 +88,7 @@ export default function ProductContainer({ product }: ProductContainerProps) {
                         </button>
                     )}
                 </div>
-                <div className="product-slideshow-all-images-container">
+                <div className="custom-scrollbar product-slideshow-all-images-container">
                     {product.images.map((image, index) => (
                         <button
                             className="product-slideshow-all-images-container-button"

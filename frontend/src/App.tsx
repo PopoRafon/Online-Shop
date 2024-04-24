@@ -17,6 +17,7 @@ import PasswordResetConfirm from './pages/PasswordResetConfirm';
 import Error from './pages/Error';
 import MyProducts from './pages/MyProducts';
 import MyProductsAddProduct from './pages/MyProductsAddProduct';
+import MyProductsEditProduct from '@pages/MyProductsEditProduct';
 import Product from './pages/Product';
 import Search from './pages/Search';
 
@@ -56,6 +57,11 @@ function App() {
                             <Route path='add/product' element={
                                 <ProtectedRoute>
                                     <MyProductsAddProduct />
+                                </ProtectedRoute>
+                            } />
+                            <Route path='edit/product/:id' element={
+                                <ProtectedRoute>
+                                    <MyProductsEditProduct />
                                 </ProtectedRoute>
                             } />
                         </Route>

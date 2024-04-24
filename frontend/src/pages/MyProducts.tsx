@@ -14,7 +14,7 @@ export default function MyProducts() {
                         ADD NEW
                     </Link>
                 </div>
-                <div className="primary-border my-products-body">
+                <div className="custom-scrollbar primary-border my-products-body">
                     <MyProductsTable />
                 </div>
             </section>

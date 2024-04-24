@@ -1,7 +1,8 @@
 import type { Product } from '@interfaces/types';
 import { useRef, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useUserContext from '@contexts/UserContext/useUserContext';
+import EditIcon from '@assets/images/icons/edit_icon.svg';
 
 export default function MyProductsTable() {
     const { user } = useUserContext();
@@ -71,7 +72,19 @@ export default function MyProductsTable() {
                         </td>
                         <td>{product.amount}</td>
                         <td>{product.price.toFixed(2)}$</td>
-                        <td>{product.sold}</td>
+                        <td>
+                            {product.sold}
+                            <Link
+                                onClick={event => event.stopPropagation()}
+                                className="my-products-table-offer-edit-button"
+                                to={`/my-products/edit/product/${product.id}`}
+                            >
+                                <img
+                                    src={EditIcon}
+                                    alt="Edit product"
+                                />
+                            </Link>
+                        </td>
                     </tr>
                 ))}
             </tbody>

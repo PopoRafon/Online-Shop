@@ -7,7 +7,7 @@
 
     .my-products-table {
         width: 100%;
-        min-width: 600px;
+        min-width: 700px;
         text-align: center;
         border-collapse: collapse;
 
@@ -56,6 +56,21 @@
                 position: absolute;
                 left: 4px;
                 top: 4px;
+            }
+        }
+
+        .my-products-table-offer-edit-button {
+            display: flex;
+            position: absolute;
+            padding: 4px;
+            right: 6px;
+            border-radius: 5px;
+            transition: 0.3s;
+            top: 50%;
+            transform: translateY(-50%);
+
+            &:hover {
+                background-color: #B0B0B0;
             }
         }
     }

@@ -4,6 +4,7 @@ from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import generics, status
+from .permissions import ProductObjectPermissions
 from .serializers import ProductSerializer
 from .renderers import ExtendedJSONRenderer
 from .models import Product, Cart
@@ -19,14 +20,10 @@ class ProductListCreateView(generics.ListCreateAPIView):
         queryset = Product.objects.all()
         query_params = self.request.query_params
         username = query_params.get('username')
-        count = query_params.get('count')
         name = query_params.get('name')
 
         if username is not None:
             queryset = queryset.filter(user__username=username)
-
-        if count is not None and count.isdecimal():
-            queryset = queryset[:int(count)]
 
         if name is not None:
             queryset = queryset.filter(name__icontains=name)
@@ -38,7 +35,7 @@ class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     lookup_url_kwarg = 'id'
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, ProductObjectPermissions]
     renderer_classes = [ExtendedJSONRenderer]
 
 
