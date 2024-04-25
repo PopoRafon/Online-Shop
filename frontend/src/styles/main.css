@@ -117,10 +117,65 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 75%;
+  width: clamp(290px, 70%, 600px);
   height: 45px;
   position: relative;
   border-radius: 5px;
+}
+.navigation-searchbar:focus-within {
+  outline: 2px solid rgb(105, 165, 255);
+}
+.navigation-searchbar .navigation-searchbar-suggestions {
+  position: absolute;
+  width: 100%;
+  z-index: 50;
+  border-radius: 5px;
+  background-color: white;
+  box-sizing: border-box;
+  padding: 1rem;
+  top: calc(100% + 4px);
+  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.2);
+}
+.navigation-searchbar .navigation-searchbar-suggestions .navigation-searchbar-suggestions-header {
+  margin: 0px;
+  padding: 0px 0.5rem;
+  margin-bottom: 1rem;
+}
+.navigation-searchbar .navigation-searchbar-suggestions .navigation-searchbar-suggestions-list {
+  padding: 0px;
+  margin: 0px;
+  list-style-type: none;
+}
+.navigation-searchbar .navigation-searchbar-suggestions .navigation-searchbar-suggestions-list .navigation-searchbar-suggestions-product {
+  display: flex;
+  flex-wrap: wrap;
+  color: black;
+  font-weight: 600;
+  gap: 4px;
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+.navigation-searchbar .navigation-searchbar-suggestions .navigation-searchbar-suggestions-list .navigation-searchbar-suggestions-product:hover {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+.navigation-searchbar .navigation-searchbar-suggestions .navigation-searchbar-suggestions-list .navigation-searchbar-suggestions-product .navigation-searchbar-suggestions-product-name {
+  display: flex;
+  word-break: break-all;
+  width: 430px;
+  gap: 8px;
+}
+.navigation-searchbar .navigation-searchbar-suggestions .navigation-searchbar-suggestions-list .navigation-searchbar-suggestions-product .navigation-searchbar-suggestions-product-name .navigation-searchbar-suggestions-product-image {
+  width: 75px;
+  height: 75px;
+  min-width: 75px;
+  min-height: 75px;
+}
+.navigation-searchbar .navigation-searchbar-suggestions .navigation-searchbar-suggestions-list .navigation-searchbar-suggestions-product .navigation-searchbar-suggestions-product-price {
+  display: flex;
+  flex-grow: 1;
+  width: 115px;
+  justify-content: right;
+  align-items: center;
 }
 .navigation-searchbar .navigation-searchbar-input {
   font-size: clamp(15px, 4.5vw, 18px);
@@ -164,11 +219,6 @@
   border-top-left-radius: 0px;
 }
 
-@media only screen and (min-width: 768px) {
-  .navigation-searchbar {
-    width: 580px;
-  }
-}
 .navigation {
   display: flex;
   flex-direction: column;
@@ -964,6 +1014,15 @@ footer {
   border-radius: 5px;
   padding: 1rem;
   box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.2);
+  animation: scale-animation 0.5s normal 0s 1;
+}
+@keyframes scale-animation {
+  0% {
+    scale: 0;
+  }
+  100% {
+    scale: 1;
+  }
 }
 .edit-product-modal .edit-product-modal-container .edit-product-modal-caution {
   font-size: small;
