@@ -1,4 +1,5 @@
 @import 'helpers';
+@import 'animations';
 @import 'navigation';
 @import 'footer';
 @import 'home';
@@ -64,4 +65,14 @@ textarea {
 
 .custom-scrollbar::-webkit-scrollbar-track {
     box-shadow: inset 0px 0px 4px 2px rgb(0, 0, 0, 0.35);
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid rgb(0, 0, 0, 0.2);
+    border-bottom-color: rgb(0, 0, 0, 0.4);
+    border-radius: 50%;
+    box-sizing: border-box;
+    animation: rotation 0.8s linear infinite;
 }

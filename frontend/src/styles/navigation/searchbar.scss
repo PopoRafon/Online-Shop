@@ -23,6 +23,20 @@
         top: calc(100% + 4px);
         box-shadow: 2px 2px 4px 0px rgb(0, 0, 0, 0.2);
 
+        .navigation-searchbar-suggestions-no-products-found {
+            width: 100%;
+            font-weight: 600;
+            text-align: center;
+            font-size: large;
+            padding: 0.5rem 0px;
+        }
+
+        .navigation-searchbar-suggestions-loader-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
         .navigation-searchbar-suggestions-header {
             margin: 0px;
             padding: 0px 0.5rem;
@@ -72,20 +86,29 @@
         }
     }
 
-    .navigation-searchbar-input {
-        font-size: clamp(15px, 4.5vw, 18px);
-        width: 100%;
+    .navigation-searchbar-input-label {
+        display: flex;
+        flex-grow: 1;
+        justify-content: center;
+        align-items: center;
+        position: relative;
         height: 100%;
-        padding: 0px clamp(1.75rem, 5vw, 2rem) 0px 4px;
-        box-sizing: border-box;
-        border: 1px solid gray;
-        border-right: 0px;
-        border-top-left-radius: $border-radius;
-        border-bottom-left-radius: $border-radius;
 
-        &:focus {
-            border-color: rgb(105, 165, 255);
-            outline: 0px;
+        .navigation-searchbar-input {
+            font-size: 18px;
+            width: 100%;
+            height: 100%;
+            padding: 0px 2rem 0px 4px;
+            box-sizing: border-box;
+            border: 1px solid gray;
+            border-right: 0px;
+            border-top-left-radius: $border-radius;
+            border-bottom-left-radius: $border-radius;
+    
+            &:focus {
+                border-color: rgb(105, 165, 255);
+                outline: 0px;
+            }
         }
     }
 
@@ -93,10 +116,10 @@
         cursor: pointer;
         display: flex;
         position: absolute;
-        right: clamp(45px, 9vw, 55px);
         background-color: transparent;
         border-radius: 50%;
         transition: 0.3s;
+        right: 5px;
 
         &:hover {
             filter: brightness(0.9);

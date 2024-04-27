@@ -56,15 +56,6 @@
         background-color: rgb(255, 255, 255, 0.4);
         height: 12px;
         width: 100%;
-        animation: disappearance-timer-animation 5s ease-out forwards 0s 1;
-
-        @keyframes disappearance-timer-animation {
-            0% {
-                width: 100%;
-            }
-            100% {
-                width: 0%;
-            }
-        }
+        animation: shortening 5s ease-out forwards 0s 1;
     }
 }

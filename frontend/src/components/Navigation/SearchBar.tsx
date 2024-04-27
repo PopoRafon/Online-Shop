@@ -32,10 +32,14 @@ export default function SearchBar() {
                     name: searchData
                 });
             }
-        }, 300);
+        }, 500);
+
+        if (products.length !== 0) {
+            setProducts([]);
+        }
 
         return () => clearTimeout(productsFetchTimeout);
-    }, [searchData]);
+    }, [searchData]); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         const clickListener = (event: MouseEvent) => {
@@ -79,34 +83,44 @@ export default function SearchBar() {
             onSubmit={handleSubmit}
             ref={searchbarRef}
         >
-            <input
-                type="text"
-                name="search"
-                className="navigation-searchbar-input"
-                placeholder="What are you looking for?"
-                value={searchData}
-                onChange={handleChange}
-                onFocus={() => setShowSuggestions(true)}
-            />
-            {showSuggestions && (
-                <SearchBarSuggestions
-                    products={searchData.length >= 2 ? products : bestsellers}
+            <label className="navigation-searchbar-input-label">
+                <input
+                    type="text"
+                    name="search"
+                    className="navigation-searchbar-input"
+                    placeholder="What are you looking for?"
+                    value={searchData}
+                    onChange={handleChange}
+                    onFocus={() => setShowSuggestions(true)}
                 />
-            )}
-            {showResetButton && (
-                <label className="navigation-searchbar-reset-button-label">
-                    <img
-                        src={ClearIcon}
-                        height={22}
-                        alt="Reset search text"
+                {showResetButton && (
+                    <label className="navigation-searchbar-reset-button-label">
+                        <img
+                            src={ClearIcon}
+                            height={22}
+                            alt="Reset search text"
+                        />
+                        <input
+                            type="reset"
+                            onClick={handleReset}
+                            className="navigation-searchbar-reset-button-input"
+                            value=""
+                        />
+                    </label>
+                )}
+            </label>
+            {showSuggestions && (
+                searchData.length >= 2 ? (
+                    <SearchBarSuggestions
+                        headerText="Found products"
+                        products={products}
                     />
-                    <input
-                        type="reset"
-                        onClick={handleReset}
-                        className="navigation-searchbar-reset-button-input"
-                        value=""
+                ) : (
+                    <SearchBarSuggestions
+                        headerText="Bestsellers"
+                        products={bestsellers}
                     />
-                </label>
+                )
             )}
             <input
                 type="submit"

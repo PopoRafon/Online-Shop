@@ -17,6 +17,30 @@
   border-color: #E0E0E0;
 }
 
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes scaling {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes shortening {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0%;
+  }
+}
 .navigation-header {
   height: 40px;
   width: 100%;
@@ -136,6 +160,18 @@
   top: calc(100% + 4px);
   box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.2);
 }
+.navigation-searchbar .navigation-searchbar-suggestions .navigation-searchbar-suggestions-no-products-found {
+  width: 100%;
+  font-weight: 600;
+  text-align: center;
+  font-size: large;
+  padding: 0.5rem 0px;
+}
+.navigation-searchbar .navigation-searchbar-suggestions .navigation-searchbar-suggestions-loader-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
 .navigation-searchbar .navigation-searchbar-suggestions .navigation-searchbar-suggestions-header {
   margin: 0px;
   padding: 0px 0.5rem;
@@ -177,18 +213,26 @@
   justify-content: right;
   align-items: center;
 }
-.navigation-searchbar .navigation-searchbar-input {
-  font-size: clamp(15px, 4.5vw, 18px);
+.navigation-searchbar .navigation-searchbar-input-label {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100%;
+}
+.navigation-searchbar .navigation-searchbar-input-label .navigation-searchbar-input {
+  font-size: 18px;
   width: 100%;
   height: 100%;
-  padding: 0px clamp(1.75rem, 5vw, 2rem) 0px 4px;
+  padding: 0px 2rem 0px 4px;
   box-sizing: border-box;
   border: 1px solid gray;
   border-right: 0px;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
 }
-.navigation-searchbar .navigation-searchbar-input:focus {
+.navigation-searchbar .navigation-searchbar-input-label .navigation-searchbar-input:focus {
   border-color: rgb(105, 165, 255);
   outline: 0px;
 }
@@ -196,10 +240,10 @@
   cursor: pointer;
   display: flex;
   position: absolute;
-  right: clamp(45px, 9vw, 55px);
   background-color: transparent;
   border-radius: 50%;
   transition: 0.3s;
+  right: 5px;
 }
 .navigation-searchbar .navigation-searchbar-reset-button-label:hover {
   filter: brightness(0.9);
@@ -471,15 +515,7 @@ footer {
   background-color: rgba(255, 255, 255, 0.4);
   height: 12px;
   width: 100%;
-  animation: disappearance-timer-animation 5s ease-out forwards 0s 1;
-}
-@keyframes disappearance-timer-animation {
-  0% {
-    width: 100%;
-  }
-  100% {
-    width: 0%;
-  }
+  animation: shortening 5s ease-out forwards 0s 1;
 }
 
 .auth-form-page {
@@ -666,15 +702,7 @@ footer {
   bottom: calc(100% + 5px);
   gap: 0.5rem;
   box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.2);
-  animation: modal-appear-animation 0.5s normal 0s 1;
-}
-@keyframes modal-appear-animation {
-  0% {
-    transform: scale(0);
-  }
-  100% {
-    transform: scale(1);
-  }
+  animation: scaling 0.5s normal 0s 1;
 }
 .cart-container .cart-information .cart-information-body .cart-entry .cart-entry-side-information .cart-entry-side-remove-product-container .cart-entry-modal::after {
   content: " ";
@@ -1014,15 +1042,7 @@ footer {
   border-radius: 5px;
   padding: 1rem;
   box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.2);
-  animation: scale-animation 0.5s normal 0s 1;
-}
-@keyframes scale-animation {
-  0% {
-    scale: 0;
-  }
-  100% {
-    scale: 1;
-  }
+  animation: scaling 0.5s normal 0s 1;
 }
 .edit-product-modal .edit-product-modal-container .edit-product-modal-caution {
   font-size: small;
@@ -1479,6 +1499,16 @@ textarea {
 
 .custom-scrollbar::-webkit-scrollbar-track {
   box-shadow: inset 0px 0px 4px 2px rgba(0, 0, 0, 0.35);
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid rgba(0, 0, 0, 0.2);
+  border-bottom-color: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  box-sizing: border-box;
+  animation: rotation 0.8s linear infinite;
 }
 
 /*# sourceMappingURL=main.css.map */
