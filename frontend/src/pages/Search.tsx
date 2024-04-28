@@ -1,6 +1,7 @@
 import type { Product } from '@interfaces/types';
+import type { ChangeEvent } from 'react';
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import SearchResults from '@components/Search/SearchResults';
 import SearchResultsNotFound from '@components/Search/SearchResultsNotFound';
 import SearchPagination from '@components/Search/SearchPagination';
@@ -13,6 +14,7 @@ export type SearchResultsPagination = {
 }
 
 export default function Search() {
+    const navigate = useNavigate();
     const { search } = useLocation();
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [pagination, setPagination] = useState<SearchResultsPagination>({ products: [], next: null, previous: null, count: 0 });
@@ -42,6 +44,13 @@ export default function Search() {
         })();
     }, [search]);
 
+    function handleSorting(event: ChangeEvent<HTMLSelectElement>) {
+        const { value } = event.target;
+        const name: string[] | null = search.match(/name=([^&]*)/);
+
+        navigate(`/search?limit=40&name=${name ? name[1] : ''}&sort=${value}`);
+    }
+
     return isLoaded && (
         <main className="search-page">
             <section>
@@ -52,11 +61,14 @@ export default function Search() {
                 <div className="search-body">
                     <div>
                         <span className="search-sorting-text">Sorting</span>
-                        <select className="primary-border search-sorting-selection">
-                            <option>Accurate</option>
-                            <option>Date</option>
-                            <option>Price: from highest</option>
-                            <option>Price: from lowest</option>
+                        <select
+                            onChange={handleSorting}
+                            className="primary-border search-sorting-selection"
+                        >
+                            <option value="">Accurate</option>
+                            <option value="newest-first">Date</option>
+                            <option value="price-highest-first">Price: from highest</option>
+                            <option value="price-lowest-first">Price: from lowest</option>
                         </select>
                     </div>
                     {pagination.products.length > 0 ? (

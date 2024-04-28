@@ -30,6 +30,7 @@ class Product(models.Model):
         ]
     )
     sold = models.IntegerField(null=True, blank=True, default=0)
+    created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'Name: {self.name} Id: {self.id}'
