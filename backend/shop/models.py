@@ -47,3 +47,31 @@ class Cart(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+class Review(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
+    text = models.TextField(
+        max_length=512,
+        validators=[
+            MinLengthValidator(4)
+        ]
+    )
+
+    def __str__(self):
+        return f'User: {self.user.username} Product: {self.product.name}'
+
+
+class Rating(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='ratings')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ratings')
+    rating = models.IntegerField(
+        validators=[
+            MaxValueValidator(5),
+            MinValueValidator(1)
+        ]
+    )
+
+    def __str__(self):
+        return f'User: {self.user.username} Product: {self.product.name}'

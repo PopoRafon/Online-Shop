@@ -6,4 +6,6 @@ export type Product = {
     price: number;
     amount: number;
     sold: number;
+    reviews: number;
+    ratings: number[];
 }

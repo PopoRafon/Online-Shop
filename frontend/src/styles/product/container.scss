@@ -25,7 +25,25 @@
         }
 
         .product-header-rating {
+            display: flex;
+            align-items: end;
             width: 100%;
+            gap: 4px;
+
+            .product-header-stars {
+                background-size: 21px 21px;
+                background-repeat: repeat-x;
+                width: 105px;
+                height: 20px;
+            }
+
+            .product-header-yellow-stars {
+                background-image: url('/yellow_star.svg');
+            }
+
+            .product-header-gray-stars {
+                background-image: url('/gray_star.svg');
+            }
         }
     }
 

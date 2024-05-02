@@ -8,6 +8,8 @@ class ProductSerializer(serializers.ModelSerializer):
         default=serializers.CurrentUserDefault()
     )
     images = serializers.SerializerMethodField()
+    ratings = serializers.SerializerMethodField()
+    reviews = serializers.ReadOnlyField(source='reviews.count')
     uploaded_images = serializers.ListField(
         child=serializers.ImageField(allow_empty_file=False, use_url=False),
         write_only=True,
@@ -31,6 +33,9 @@ class ProductSerializer(serializers.ModelSerializer):
 
     def get_images(self, obj):
         return [image.image.url for image in obj.images.all()]
+
+    def get_ratings(self, obj):
+        return [rating.rating for rating in obj.ratings.all()]
 
     def validate_uploaded_images(self, images):
         for image in images:

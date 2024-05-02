@@ -1,5 +1,6 @@
 import type { Product } from '@interfaces/types';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import LeftArrowHeadIcon from '@assets/images/icons/left_arrowhead_icon.svg';
 import RightArrowHeadIcon from '@assets/images/icons/right_arrowhead_icon.svg';
 
@@ -8,6 +9,7 @@ type ProductContainerProps = {
 }
 
 export default function ProductContainer({ product }: ProductContainerProps) {
+    const starsRef = useRef<number>(product.ratings.reduce((previous, current) => previous + current, 0) / (product.ratings.length * 5) * 5);
     const [currentSlide, setCurrentSlide] = useState<number>(0);
     const [showBackButton, setShowBackButton] = useState<boolean>(false);
     const [showNextButton, setShowNextButton] = useState<boolean>(false);
@@ -34,7 +36,20 @@ export default function ProductContainer({ product }: ProductContainerProps) {
         <section className="primary-border product-container">
             <div className="product-header">
                 <h2 className="product-header-name">{product.name}</h2>
-                <span className="product-header-rating">0 rating and 0 reviews</span>
+                <div className="product-header-rating">
+                    <span>{starsRef.current.toFixed(2)}</span>
+                    <div className="product-header-stars product-header-gray-stars">
+                        <div
+                            className="product-header-stars product-header-yellow-stars"
+                            style={{ width: `${21 * starsRef.current}px` }}
+                        ></div>
+                    </div>
+                    <Link
+                        to='/'
+                    >
+                        {product.ratings.length} ratings and {product.reviews} reviews
+                    </Link>
+                </div>
             </div>
             <div className="product-body">
                 <div
