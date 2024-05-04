@@ -5,9 +5,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import generics, status
 from .permissions import ProductObjectPermissions
-from .serializers import ProductSerializer
+from .serializers import ProductSerializer, ReviewSerializer
 from .renderers import ExtendedJSONRenderer
-from .models import Product, Cart
+from .models import Product, Cart, Review
 
 
 class ProductListCreateView(generics.ListCreateAPIView):
@@ -46,6 +46,16 @@ class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ProductSerializer
     permission_classes = [IsAuthenticatedOrReadOnly, ProductObjectPermissions]
     renderer_classes = [ExtendedJSONRenderer]
+
+
+class ReviewListView(generics.ListAPIView):
+    serializer_class = ReviewSerializer
+    renderer_classes = [ExtendedJSONRenderer]
+
+    def get_queryset(self):
+        product_id = self.kwargs.get('id')
+
+        return Review.objects.filter(product__id=product_id)
 
 
 class CartDetailView(APIView):

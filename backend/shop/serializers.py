@@ -1,6 +1,6 @@
 from django.conf import settings
 from rest_framework import serializers
-from .models import Product, ProductImage
+from .models import Product, ProductImage, Review
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -57,3 +57,11 @@ class ProductSerializer(serializers.ModelSerializer):
             ProductImage.objects.create(product=product, image=image)
 
         return product
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+    user = serializers.CharField(source='user.username')
+
+    class Meta:
+        model = Review
+        fields = ['text', 'user']

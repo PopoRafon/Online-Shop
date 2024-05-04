@@ -45,7 +45,7 @@ export default function ProductContainer({ product }: ProductContainerProps) {
                         ></div>
                     </div>
                     <Link
-                        to='/'
+                        to={`/product/${product.id}/reviews`}
                     >
                         {product.ratings.length} ratings and {product.reviews} reviews
                     </Link>

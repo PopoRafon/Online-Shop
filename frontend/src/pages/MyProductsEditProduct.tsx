@@ -8,7 +8,7 @@ export default function MyProductsEditProduct() {
     const navigate = useNavigate();
     const { id } = useParams();
     const [showModal, setShowModal] = useState<boolean>(false);
-    const [product, setProduct] = useState<Product>({ id: '', name: '', description: '', images: [], amount: 0, price: 0, sold: 0 });
+    const [product, setProduct] = useState<Product>();
 
     useEffect(() => {
         obtainCSRFToken();
@@ -26,7 +26,7 @@ export default function MyProductsEditProduct() {
             });
     }, [id, navigate]);
 
-    return (
+    return product && (
         <main className="my-products-page">
             {showModal && (
                 <EditProductModal
