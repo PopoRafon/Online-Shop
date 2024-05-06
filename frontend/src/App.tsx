@@ -19,7 +19,7 @@ import MyProducts from './pages/MyProducts';
 import MyProductsAddProduct from './pages/MyProductsAddProduct';
 import MyProductsEditProduct from '@pages/MyProductsEditProduct';
 import Product from './pages/Product';
-import ProductReviews from './pages/ProductReviews';
+import Reviews from './pages/Reviews';
 import Search from './pages/Search';
 
 function App() {
@@ -49,7 +49,7 @@ function App() {
                         <Route path='cart' element={<Cart />} />
                         <Route path='product/:id/'>
                             <Route index element={<Product />} />
-                            <Route path='reviews' element={<ProductReviews />} />
+                            <Route path='reviews' element={<Reviews />} />
                         </Route>
                         <Route path='search' element={<Search />} />
                         <Route path='my-products/'>

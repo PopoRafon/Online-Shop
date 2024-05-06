@@ -73,7 +73,8 @@ WSGI_APPLICATION = 'core.wsgi.application'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'auth.authenticate.JWTAuthentication',
-    )
+    ),
+    'DATETIME_FORMAT': '%Y-%m-%d %H:%M'
 }
 
 SIMPLE_JWT = {

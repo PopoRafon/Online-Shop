@@ -1,0 +1,16 @@
+@import 'body';
+@import 'form';
+
+.reviews-page {
+    display: flex;
+    flex-grow: 1;
+    background-color: #FAFAFA;
+
+    .reviews-container {
+        background-color: white;
+        border-radius: 5px;
+        padding: 1rem;
+        box-sizing: border-box;
+        width: clamp(310px, 80vw, 700px);
+    }
+}

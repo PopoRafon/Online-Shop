@@ -1463,6 +1463,84 @@ footer {
   border-radius: 5px;
 }
 
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 0px 0.5rem 0px 0px;
+  box-sizing: border-box;
+  height: 550px;
+  overflow: auto;
+}
+.reviews-list .reviews-list-item {
+  padding: 1rem 0px;
+  border-width: 0px 0px 1px;
+}
+.reviews-list .reviews-list-item .reviews-list-item-header {
+  display: flex;
+  font-size: small;
+  color: #B0B0B0;
+}
+.reviews-list .reviews-list-item .reviews-list-item-header .reviews-list-item-header-date {
+  text-wrap: nowrap;
+}
+.reviews-list .reviews-list-item .reviews-list-item-header .reviews-list-item-header-username {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.reviews-list .reviews-list-item .reviews-list-item-header .reviews-list-item-header-username::before {
+  content: "|";
+  margin: 0px 4px;
+}
+.reviews-list .reviews-list-item .reviews-list-item-body {
+  word-wrap: break-word;
+}
+
+.reviews-product-header {
+  margin: 0px 0px 4px;
+}
+
+.reviews-product-name {
+  word-break: break-all;
+  font-weight: 600;
+}
+
+.reviews-form {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.reviews-form .reviews-form-input {
+  resize: none;
+  font-size: medium;
+  padding: 10px 8px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  width: 100%;
+}
+.reviews-form .reviews-form-input:focus {
+  border-color: rgb(105, 165, 255);
+  outline: 2px solid rgb(105, 165, 255);
+}
+.reviews-form .reviews-form-submit {
+  padding: 0 1rem;
+}
+
+.reviews-page {
+  display: flex;
+  flex-grow: 1;
+  background-color: #FAFAFA;
+}
+.reviews-page .reviews-container {
+  background-color: white;
+  border-radius: 5px;
+  padding: 1rem;
+  box-sizing: border-box;
+  width: clamp(310px, 80vw, 700px);
+}
+
 :root {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -1514,6 +1592,7 @@ textarea {
 
 .custom-scrollbar::-webkit-scrollbar-track {
   box-shadow: inset 0px 0px 4px 2px rgba(0, 0, 0, 0.35);
+  border-radius: 25px;
 }
 
 .loader {

@@ -1,0 +1,49 @@
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0px 0.5rem 0px 0px;
+    box-sizing: border-box;
+    height: 550px;
+    overflow: auto;
+
+    .reviews-list-item {
+        padding: 1rem 0px;
+        border-width: 0px 0px 1px;
+
+        .reviews-list-item-header {
+            display: flex;
+            font-size: small;
+            color: #B0B0B0;
+
+            .reviews-list-item-header-date {
+                text-wrap: nowrap;
+            }
+
+            .reviews-list-item-header-username {
+                width: 100%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+
+                &::before {
+                    content: "|";
+                    margin: 0px 4px;
+                }
+            }
+        }
+
+        .reviews-list-item-body {
+            word-wrap: break-word;
+        }
+    }
+}
+
+.reviews-product-header {
+    margin: 0px 0px 4px;
+}
+
+.reviews-product-name {
+    word-break: break-all;
+    font-weight: 600;
+}

@@ -1,0 +1,23 @@
+.reviews-form {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+
+    .reviews-form-input {
+        resize: none;
+        font-size: medium;
+        padding: 10px 8px;
+        box-sizing: border-box;
+        border-radius: 5px;
+        width: 100%;
+
+        &:focus {
+            border-color: rgb(105, 165, 255);
+            outline: 2px solid rgb(105, 165, 255);
+        }
+    }
+
+    .reviews-form-submit {
+        padding: 0 1rem;
+    }
+}

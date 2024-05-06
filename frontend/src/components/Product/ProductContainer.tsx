@@ -37,7 +37,7 @@ export default function ProductContainer({ product }: ProductContainerProps) {
             <div className="product-header">
                 <h2 className="product-header-name">{product.name}</h2>
                 <div className="product-header-rating">
-                    <span>{starsRef.current.toFixed(2)}</span>
+                    <span>{starsRef.current ? starsRef.current.toFixed(2) : 0}</span>
                     <div className="product-header-stars product-header-gray-stars">
                         <div
                             className="product-header-stars product-header-yellow-stars"

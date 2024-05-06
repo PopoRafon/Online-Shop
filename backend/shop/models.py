@@ -58,6 +58,7 @@ class Review(models.Model):
             MinLengthValidator(4)
         ]
     )
+    created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'User: {self.user.username} Product: {self.product.name}'
