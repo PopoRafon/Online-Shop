@@ -2,7 +2,7 @@ import type { NewProductFormData, NewProductFormErrors } from '@components/MyPro
 import { describe, test, expect, vi, beforeAll, afterAll, afterEach } from 'vitest';
 import { setupServer } from 'msw/node';
 import { http, HttpResponse } from 'msw';
-import { createProduct } from '@utils/product';
+import { createProduct, getProducts } from '@utils/product';
 
 describe('createProduct util', () => {
     const url: string = '/api/products';
@@ -77,5 +77,56 @@ describe('createProduct util', () => {
         expect(navigateMock).toBeCalledWith('/my-products');
         expect(setAlertMock).toBeCalledTimes(1);
         expect(setAlertMock).toBeCalledWith({ show: true, type: 'success', text: 'Your product has been successfully added.' });
+    });
+});
+
+describe('getProducts util', () => {
+    const url: string = `/api/products`;
+    const server = setupServer();
+
+    beforeAll(() => server.listen());
+    afterEach(() => server.resetHandlers());
+    afterAll(() => server.close());
+
+    test('makes GET request and does nothing', async () => {
+        const setProductsMock = vi.fn();
+
+        server.use(
+            http.get(url, () => {
+                return HttpResponse.json({
+                    error: 'Error occurred while trying to retrieve products.'
+                });
+            })
+        );
+
+        await getProducts({
+            amount: 3,
+            setProducts: setProductsMock
+        });
+
+        expect(setProductsMock).not.toHaveBeenCalled();
+    });
+
+    test('makes GET request and calls setProducts function with received data', async () => {
+        const setProductsMock = vi.fn();
+        const data: string[] = ['some', 'test', 'data'];
+
+        server.use(
+            http.get(url, () => {
+                return HttpResponse.json({
+                    success: {
+                        results: data
+                    }
+                });
+            })
+        );
+
+        await getProducts({
+            amount: 3,
+            setProducts: setProductsMock
+        });
+
+        expect(setProductsMock).toHaveBeenCalledOnce();
+        expect(setProductsMock).toHaveBeenCalledWith(data);
     });
 });

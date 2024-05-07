@@ -35,7 +35,7 @@ type CreateReviewArgs = {
 async function createReview({ productId, text, setText, setAlert, setReviews, setTextError }: CreateReviewArgs): Promise<void> {
     const csrfToken: string = Cookies.get('csrftoken') ?? '';
 
-    fetch(`/api/products/${productId}/reviews`, {
+    return await fetch(`/api/products/${productId}/reviews`, {
         method: 'POST',
         headers: {
             'X-CSRFToken': csrfToken, // eslint-disable-line @typescript-eslint/naming-convention
