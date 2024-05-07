@@ -1524,6 +1524,15 @@ footer {
   border-color: rgb(105, 165, 255);
   outline: 2px solid rgb(105, 165, 255);
 }
+.reviews-form .reviews-form-input-error {
+  border-color: #FF5050;
+  color: #FF5050;
+  background-color: rgba(255, 240, 240, 0.1);
+}
+.reviews-form .reviews-form-input-error:focus {
+  border-color: #FF5050;
+  outline: 2px solid #FF5050;
+}
 .reviews-form .reviews-form-submit {
   padding: 0 1rem;
 }

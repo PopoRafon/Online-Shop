@@ -21,7 +21,7 @@ export default function ReviewsBody({ product, reviews }: ReviewsBodyProps) {
                     >
                         <div className="reviews-list-item-header">
                             <span className="reviews-list-item-header-date">{review.created}</span>
-                            <span className="reviews-list-item-header-username">bought by {review.user}</span>
+                            <span className="reviews-list-item-header-username">bought by {review.username}</span>
                         </div>
                         <div className="reviews-list-item-body">{review.text}</div>
                     </li>

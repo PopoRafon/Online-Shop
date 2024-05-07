@@ -1,5 +1,5 @@
 export type Review = {
-    user: string;
+    username: string;
     text: string;
     created: string;
 }

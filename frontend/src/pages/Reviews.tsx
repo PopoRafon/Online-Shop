@@ -2,30 +2,27 @@ import type { Product } from '@interfaces/types';
 import type { Review } from '@components/Reviews/types';
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { getReviews } from '@utils/reviews';
 import obtainCSRFToken from '@utils/csrfToken';
+import useUserContext from '@contexts/UserContext/useUserContext';
 import ReviewsForm from '@components/Reviews/ReviewsForm';
 import ReviewsBody from '@components/Reviews/ReviewsBody';
 
 export default function Reviews() {
     const navigate = useNavigate();
+    const { user } = useUserContext();
     const { id } = useParams();
     const [product, setProduct] = useState<Product>();
-    const [reviews, setReviews] = useState<Review[]>();
+    const [reviews, setReviews] = useState<Review[]>([]);
 
     useEffect(() => {
         obtainCSRFToken();
 
-        fetch(`/api/products/${id}/reviews`, {
-            method: 'GET'
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    setReviews(data.success);
-                } else {
-                    navigate('/');
-                }
-            });
+        getReviews({
+            productId: id ?? '',
+            navigate: navigate,
+            setReviews: setReviews
+        });
 
         fetch(`/api/products/${id}`, {
             method: 'GET'
@@ -47,7 +44,12 @@ export default function Reviews() {
                     product={product}
                     reviews={reviews}
                 />
-                <ReviewsForm />
+                {user.isLoggedIn && (
+                    <ReviewsForm
+                        productId={product.id}
+                        setReviews={setReviews}
+                    />
+                )}
             </section>
         </main>
     );

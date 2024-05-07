@@ -17,6 +17,18 @@
         }
     }
 
+    .reviews-form-input-error {
+        $red-color: #FF5050;
+        border-color: $red-color;
+        color: $red-color;
+        background-color: rgb(255, 240, 240, 0.1);
+
+        &:focus {
+            border-color: $red-color;
+            outline: 2px solid $red-color;
+        }
+    }
+
     .reviews-form-submit {
         padding: 0 1rem;
     }

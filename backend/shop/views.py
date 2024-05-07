@@ -48,9 +48,10 @@ class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     renderer_classes = [ExtendedJSONRenderer]
 
 
-class ReviewListView(generics.ListAPIView):
+class ReviewListCreateView(generics.ListCreateAPIView):
     serializer_class = ReviewSerializer
     renderer_classes = [ExtendedJSONRenderer]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
         product_id = self.kwargs.get('id')

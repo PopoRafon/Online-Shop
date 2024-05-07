@@ -81,7 +81,7 @@ function isPasswordResetFormValid({ formData, setFormErrors }: IsFormValidArgs<P
  * Validates provided form data and updates errors by using provided state setter function.
  * 
  * @param {Object} args
- * @param {PasswordResetConfirmFormData} args.formData Object containing register form data to validate.
+ * @param {PasswordResetConfirmFormData} args.formData Object containing password reset confirm form data to validate.
  * @param {React.Dispatch<React.SetStateAction<PasswordResetConfirmFormErrors>>} args.setFormErrors React state setter function for form errors.
  * @returns {boolean} Whether form data is valid or not.
  */
@@ -97,4 +97,23 @@ function isPasswordResetConfirmFormValid({ formData, setFormErrors }: IsFormVali
     return !Object.values(newFormErrors).some(field => field);
 }
 
-export { isRegisterFormValid, isLoginFormValid, isPasswordResetFormValid, isPasswordResetConfirmFormValid };
+/**
+ * Validates provided form data and updates errors by using provided state setter function.
+ * 
+ * @param {Object} args
+ * @param {string} args.formData Object containing reviews form data to validate.
+ * @param {React.Dispatch<React.SetStateAction<string>>} args.setFormErrors React state setter function for form errors.
+ * @returns {boolean} Whether form data is valid or not.
+ */
+function isReviewsFormValid({ formData, setFormErrors }: IsFormValidArgs<string, string>): boolean {
+    let newFormData: string = '';
+
+    if (formData.length < 4) newFormData = 'Must not be shorter than 4 characters.';
+    else if (formData.length > 512) newFormData = 'Must not be longer than 512 characters.';
+
+    setFormErrors(newFormData);
+
+    return !newFormData;
+}
+
+export { isRegisterFormValid, isLoginFormValid, isPasswordResetFormValid, isPasswordResetConfirmFormValid, isReviewsFormValid };

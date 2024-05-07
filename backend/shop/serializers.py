@@ -60,8 +60,20 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class ReviewSerializer(serializers.ModelSerializer):
-    user = serializers.CharField(source='user.username')
+    user = serializers.HiddenField(
+        default=serializers.CurrentUserDefault(),
+        write_only=True
+    )
+    username = serializers.CharField(
+        source='user.username',
+        read_only=True
+    )
 
     class Meta:
         model = Review
-        fields = ['text', 'user', 'created']
+        exclude = ['id']
+        extra_kwargs = {
+            'product': {
+                'write_only': True
+            }
+        }
