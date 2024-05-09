@@ -6,7 +6,7 @@ type IsProductFormValidArgs = {
 }
 
 function isNewProductFormDataValid({ formData, setFormErrors }: IsProductFormValidArgs): boolean {
-    const newFormErrors: NewProductFormErrors = { images: '', name: '', description: '', price: '', amount: '' };
+    const newFormErrors: NewProductFormErrors = { images: '', name: '', description: '', category: '', price: '', amount: '' };
     const priceAsNumber: number = +formData.price;
     const amountAsNumber: number = +formData.amount;
 
@@ -24,6 +24,8 @@ function isNewProductFormDataValid({ formData, setFormErrors }: IsProductFormVal
             else if (!image.type.match(/^image\/(jpg|png|jpeg)$/)) newFormErrors.images = 'Files must be formatted as ".jpg", ".jpeg" or ".png"';
         }
     }
+
+    if (!formData.category) newFormErrors.category = 'Must be a valid category';
 
     if (isNaN(priceAsNumber)) newFormErrors.price = 'Must be a valid number';
     else if (priceAsNumber > 1e6) newFormErrors.price = 'Must not be larger than 1,000,000';

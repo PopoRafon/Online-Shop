@@ -13,6 +13,7 @@ export default function SearchBar() {
     const [bestsellers, setBestsellers] = useState<Product[]>([]);
     const [products, setProducts] = useState<Product[]>([]);
     const [searchData, setSearchData] = useState<string>('');
+    const [category, setCategory] = useState<string>('');
     const [showResetButton, setShowResetButton] = useState<boolean>(false);
     const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
 
@@ -29,6 +30,7 @@ export default function SearchBar() {
             if (searchData.length >= 2) {
                 getProducts({
                     amount: 3,
+                    category: category,
                     setProducts: setProducts,
                     name: searchData
                 });
@@ -40,28 +42,34 @@ export default function SearchBar() {
         }
 
         return () => clearTimeout(productsFetchTimeout);
-    }, [searchData]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [searchData, category]); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
-        const clickListener = (event: MouseEvent) => {
+        const clickEventListener = (event: MouseEvent) => {
             if (searchbarRef.current && !searchbarRef.current.contains(event.target as Node)) {
                 setShowSuggestions(false);
             }
         };
 
-        document.addEventListener('click', clickListener);
+        document.addEventListener('click', clickEventListener);
 
         return () => {
             setShowSuggestions(false);
-            document.removeEventListener('click', clickListener);
+            document.removeEventListener('click', clickEventListener);
         };
     }, [pathname]);
 
-    function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    function handleSearchDataChange(event: ChangeEvent<HTMLInputElement>) {
         const { value } = event.target;
 
         setSearchData(value);
         setShowResetButton(value.length !== 0);
+    }
+
+    function handleCategoryChange(event: ChangeEvent<HTMLSelectElement>) {
+        const { value } = event.target;
+
+        setCategory(value);
     }
 
     function handleReset() {
@@ -71,8 +79,13 @@ export default function SearchBar() {
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
+        let url: string = `/search?limit=40&name=${searchData}`;
 
-        navigate(`/search?limit=40&name=${searchData}`);
+        if (category) {
+            url += `&category=${category}`;
+        }
+
+        navigate(url);
     }
 
     return (
@@ -91,7 +104,7 @@ export default function SearchBar() {
                     className="navigation-searchbar-input"
                     placeholder="What are you looking for?"
                     value={searchData}
-                    onChange={handleChange}
+                    onChange={handleSearchDataChange}
                     onFocus={() => setShowSuggestions(true)}
                 />
                 {showResetButton && (
@@ -110,6 +123,19 @@ export default function SearchBar() {
                     </label>
                 )}
             </label>
+            <select
+                name="category"
+                className="navigation-searchbar-categories"
+                onChange={handleCategoryChange}
+            >
+                <option value="">All categories</option>
+                <option value="electronics">Electronics</option>
+                <option value="children">Children</option>
+                <option value="art">Art</option>
+                <option value="health">Health</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="automotive">Automotive</option>
+            </select>
             {showSuggestions && (
                 searchData.length >= 2 ? (
                     <SearchBarSuggestions

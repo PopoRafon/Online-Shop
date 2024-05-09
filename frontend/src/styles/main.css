@@ -149,6 +149,14 @@
 .navigation-searchbar:focus-within {
   outline: 2px solid rgb(105, 165, 255);
 }
+.navigation-searchbar .navigation-searchbar-categories {
+  cursor: pointer;
+  display: none;
+  height: 100%;
+  border-color: gray;
+  color: #707070;
+  outline: 0;
+}
 .navigation-searchbar .navigation-searchbar-suggestions {
   position: absolute;
   width: 100%;
@@ -229,12 +237,12 @@
   box-sizing: border-box;
   border: 1px solid gray;
   border-right: 0px;
+  outline: 0px;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
 }
 .navigation-searchbar .navigation-searchbar-input-label .navigation-searchbar-input:focus {
   border-color: rgb(105, 165, 255);
-  outline: 0px;
 }
 .navigation-searchbar .navigation-searchbar-reset-button-label {
   cursor: pointer;
@@ -263,6 +271,11 @@
   border-top-left-radius: 0px;
 }
 
+@media only screen and (min-width: 768px) {
+  .navigation-searchbar .navigation-searchbar-categories {
+    display: flex;
+  }
+}
 .navigation {
   display: flex;
   flex-direction: column;

@@ -12,6 +12,15 @@
         outline: 2px solid rgb(105, 165, 255);
     }
 
+    .navigation-searchbar-categories {
+        cursor: pointer;
+        display: none;
+        height: 100%;
+        border-color: gray;
+        color: #707070;
+        outline: 0;
+    }
+
     .navigation-searchbar-suggestions {
         position: absolute;
         width: 100%;
@@ -102,12 +111,12 @@
             box-sizing: border-box;
             border: 1px solid gray;
             border-right: 0px;
+            outline: 0px;
             border-top-left-radius: $border-radius;
             border-bottom-left-radius: $border-radius;
     
             &:focus {
                 border-color: rgb(105, 165, 255);
-                outline: 0px;
             }
         }
     }
@@ -140,5 +149,11 @@
         height: 100%;
         border-bottom-left-radius: 0px;
         border-top-left-radius: 0px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .navigation-searchbar .navigation-searchbar-categories {
+        display: flex;
     }
 }

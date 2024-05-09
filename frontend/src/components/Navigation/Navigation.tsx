@@ -1,5 +1,5 @@
 import NavigationHeader from './NavigationHeader';
-import SearchBar from './SearchBar';
+import SearchBar from './SearchBar/SearchBar';
 
 export default function Navigation() {
     return (

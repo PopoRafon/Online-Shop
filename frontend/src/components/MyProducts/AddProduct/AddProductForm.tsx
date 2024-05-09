@@ -12,11 +12,11 @@ import CloseIcon from '@assets/images/icons/close_icon.svg';
 export default function AddProductForm() {
     const navigate = useNavigate();
     const { setAlert } = useAlertContext();
-    const [formData, setFormData] = useState<NewProductFormData>({ images: [], name: '', description: '', amount: '', price: '' });
-    const [formErrors, setFormErrors] = useState<NewProductFormErrors>({ images: '', name: '', description: '', amount: '', price: '' });
+    const [formData, setFormData] = useState<NewProductFormData>({ images: [], name: '', description: '', category: '', amount: '', price: '' });
+    const [formErrors, setFormErrors] = useState<NewProductFormErrors>({ images: '', name: '', description: '', category: '', amount: '', price: '' });
     const [imagesUrls, setImagesUrls] = useState<string[]>([]);
 
-    function handleChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    function handleChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
         const { name, value } = event.target;
 
         setFormData({
@@ -148,6 +148,24 @@ export default function AddProductForm() {
                     className="add-product-form-image-input"
                     onChange={handleImageAddition}
                 />
+            </label>
+            <label className="add-product-form-label">
+                <select
+                    name="category"
+                    value={formData.category}
+                    className={`primary-border add-product-form-input ${formErrors.category && 'add-product-form-input-error'}`}
+                    style={{ width: 'fit-content', fontSize: 'small' }}
+                    onChange={handleChange}
+                >
+                    <option value="" hidden>Category</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="children">Children</option>
+                    <option value="art">Art</option>
+                    <option value="health">Health</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="automotive">Automotive</option>
+                </select>
+                <span className="add-product-form-error-message">{formErrors.category}</span>
             </label>
             <input
                 type="submit"

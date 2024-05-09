@@ -3,6 +3,7 @@ export type NewProductFormData = {
     name: string;
     description: string;
     amount: string;
+    category: string;
     price: string;
 }
 
@@ -11,5 +12,6 @@ export type NewProductFormErrors = {
     name: string;
     description: string;
     amount: string;
+    category: string;
     price: string;
 }

@@ -18,6 +18,7 @@ async function createProduct({ formData, navigate, setAlert, setFormErrors }: Cr
     newFormData.append('name', formData.name);
     newFormData.append('description', formData.description);
     newFormData.append('amount', formData.amount);
+    newFormData.append('category', formData.category);
     newFormData.append('price', String(Math.round(+formData.price * 100) / 100));
 
     for (const image of formData.images) {
@@ -57,11 +58,20 @@ type GetProductsArgs = {
     amount: number;
     name?: string;
     sort?: string;
+    category?: string;
     setProducts: React.Dispatch<React.SetStateAction<Product[]>>;
 }
 
-async function getProducts({ amount, name='', sort='', setProducts }: GetProductsArgs): Promise<void> {
-    return await fetch(`/api/products?limit=${amount}&name=${name}&sort=${sort}`, {
+async function getProducts({ amount, name='', sort='', category='', setProducts }: GetProductsArgs): Promise<void> {
+    let url: string = `/api/products?limit=${amount}`;
+
+    if (name) url += `&name=${name}`;
+
+    if (sort) url += `&sort=${sort}`;
+
+    if (category) url += `&category=${category}`;
+
+    return await fetch(url, {
         method: 'GET'
     })
         .then(response => response.json())
