@@ -19,6 +19,7 @@ export default function SearchBar() {
     useEffect(() => {
         getProducts({
             amount: 3,
+            sort: 'sold-highest-first',
             setProducts: setBestsellers
         });
     }, []);

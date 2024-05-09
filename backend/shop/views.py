@@ -21,6 +21,7 @@ class ProductListCreateView(generics.ListCreateAPIView):
         query_params = self.request.query_params
         username = query_params.get('username')
         name = query_params.get('name')
+        category = query_params.get('category')
         sort = query_params.get('sort')
 
         if username is not None:
@@ -29,13 +30,21 @@ class ProductListCreateView(generics.ListCreateAPIView):
         if name is not None:
             queryset = queryset.filter(name__icontains=name)
 
+        if category is not None:
+            queryset = queryset.filter(category__icontains=category)
+
         if sort is not None:
-            if sort == 'newest-first':
-                queryset = queryset.order_by('-created')
-            elif sort == 'price-lowest-first':
-                queryset = queryset.order_by('price')
-            elif sort == 'price-highest-first':
-                queryset = queryset.order_by('-price')
+            match (sort):
+                case 'newest-first':
+                    queryset = queryset.order_by('-created')
+                case 'price-lowest-first':
+                    queryset = queryset.order_by('price')
+                case 'price-highest-first':
+                    queryset = queryset.order_by('-price')
+                case 'sold-lowest-first':
+                    queryset = queryset.order_by('sold')
+                case 'sold-highest-first':
+                    queryset = queryset.order_by('-sold')
 
         return queryset.prefetch_related('images')
 

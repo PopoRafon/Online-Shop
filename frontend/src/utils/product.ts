@@ -56,11 +56,12 @@ async function createProduct({ formData, navigate, setAlert, setFormErrors }: Cr
 type GetProductsArgs = {
     amount: number;
     name?: string;
+    sort?: string;
     setProducts: React.Dispatch<React.SetStateAction<Product[]>>;
 }
 
-async function getProducts({ amount, name='', setProducts }: GetProductsArgs): Promise<void> {
-    return await fetch(`/api/products?limit=${amount}&name=${name}`, {
+async function getProducts({ amount, name='', sort='', setProducts }: GetProductsArgs): Promise<void> {
+    return await fetch(`/api/products?limit=${amount}&name=${name}&sort=${sort}`, {
         method: 'GET'
     })
         .then(response => response.json())

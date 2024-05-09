@@ -28,7 +28,7 @@ export default function AddProductForm() {
     function handleImageAddition(event: ChangeEvent<HTMLInputElement>) {
         const { files } = event.target;
 
-        if (files && files[0]) {
+        if (files && files[0] && !(files[0].size >= 25e5)) {
             setFormData({
                 ...formData,
                 images: [...formData.images, files[0]]
@@ -132,7 +132,10 @@ export default function AddProductForm() {
                 </div>
                 <span className="add-product-form-error-message">{formErrors.images}</span>
             </div>
-            <label className="add-product-form-image-label">
+            <label
+                className="add-product-form-image-label"
+                title="Files cannot be larger than 2,5MB"
+            >
                 <img
                     src={UploadIcon}
                     width={40}

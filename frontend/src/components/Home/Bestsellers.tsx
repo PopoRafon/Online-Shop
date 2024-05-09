@@ -9,6 +9,7 @@ export default function Bestsellers() {
     useEffect(() => {
         getProducts({
             amount: 6,
+            sort: 'sold-highest-first',
             setProducts: setBestsellers
         });
     }, []);
