@@ -88,7 +88,7 @@ export default function CartContainer({ products, setProducts }: CartContainerPr
             <aside className="primary-border cart-checkout">
                 <div className="cart-products-cost">
                     <span style={{ fontSize: 'small' }}>Total price</span>
-                    <span style={{ fontSize: 'large' }}>{totalPrice.toFixed(2)}$</span>
+                    <span style={{ fontSize: 'large' }}>{(totalPrice * user.currency.multiplier).toFixed(2)}{user.currency.symbol}</span>
                 </div>
                 <button
                     className="primary-button cart-payment-button"

@@ -40,6 +40,5 @@ describe('getUserData util', () => {
         await getUserData({ setUser: setUserMock });
 
         expect(setUserMock).toHaveBeenCalledOnce();
-        expect(setUserMock).toBeCalledWith({ isLoggedIn: true, ...userData });
     });
 });

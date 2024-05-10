@@ -145,7 +145,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: clamp(290px, 70%, 600px);
+  width: clamp(300px, 58%, 600px);
   height: 45px;
   position: relative;
   border-radius: 5px;

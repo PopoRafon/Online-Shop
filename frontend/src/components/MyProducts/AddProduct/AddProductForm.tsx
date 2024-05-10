@@ -81,7 +81,7 @@ export default function AddProductForm() {
                 error={formErrors.price}
                 value={formData.price}
                 handleChange={handleChange}
-                type='number'
+                type="number"
             />
             <AddProductInput
                 name="amount"
@@ -89,7 +89,7 @@ export default function AddProductForm() {
                 error={formErrors.amount}
                 value={formData.amount}
                 handleChange={handleChange}
-                type='number'
+                type="number"
             />
             <label className="add-product-form-label">
                 Description

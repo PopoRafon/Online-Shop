@@ -26,7 +26,7 @@ export default async function logout({ setUser, setAlert, navigate }: LogoutArgs
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                setUser({ isLoggedIn: false, username: '' });
+                setUser(prev => ({ ...prev, isLoggedIn: false }));
                 setAlert({
                     show: true,
                     type: 'success',

@@ -2,6 +2,7 @@ import type { ChangeEvent } from 'react';
 import type { Product } from '@interfaces/types';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import useUserContext from '@contexts/UserContext/useUserContext';
 import TrashIcon from '@assets/images/icons/trash_icon.svg';
 
 type CartEntryProps = {
@@ -11,6 +12,7 @@ type CartEntryProps = {
 }
 
 export default function CartEntry({ product, setTotalPrice, handleProductRemoval }: CartEntryProps) {
+    const { user } = useUserContext();
     const [quantity, setQuantity] = useState<number>(1);
     const [showModal, setShowModal] = useState<boolean>(false);
 
@@ -80,7 +82,7 @@ export default function CartEntry({ product, setTotalPrice, handleProductRemoval
                     )}
                 </div>
                 <span className="cart-entry-price">
-                    {(product.price * quantity).toFixed(2)}$
+                    {(product.price * user.currency.multiplier * quantity).toFixed(2)}{user.currency.symbol}
                 </span>
             </div>
         </div>

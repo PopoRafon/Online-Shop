@@ -29,7 +29,7 @@ function App() {
 
     useEffect(() => {
         (async () => {
-            Currency.initCurrency();
+            Currency.initCurrency(setUser);
             await obtainCSRFToken();
             await AccessToken.refreshToken();
             await getUserData({ setUser });

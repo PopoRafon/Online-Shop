@@ -1,8 +1,10 @@
-import React, { useState, createContext } from 'react';
+import type { CurrencyType } from '@helpers/currency';
+import { useState, createContext } from 'react';
 
 export type User = {
     isLoggedIn: boolean;
     username: string;
+    currency: CurrencyType;
 }
 
 type UserContextData = {
@@ -17,7 +19,14 @@ type UserContextProiderProps = {
 }
 
 export default function UserContextProvider({ children }: UserContextProiderProps) {
-    const [user, setUser] = useState<User>({ isLoggedIn: false, username: '' });
+    const [user, setUser] = useState<User>({
+        isLoggedIn: false,
+        username: '',
+        currency: {
+            symbol: '',
+            multiplier: 0
+        }
+    });
 
     return (
         <UserContext.Provider value={{ user, setUser }}>

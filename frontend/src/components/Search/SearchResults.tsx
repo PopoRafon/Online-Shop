@@ -1,11 +1,14 @@
 import type { Product } from '@interfaces/types';
 import { Link } from 'react-router-dom';
+import useUserContext from '@contexts/UserContext/useUserContext';
 
 type SearchResultsProps = {
     products: Product[];
 }
 
 export default function SearchResults({ products }: SearchResultsProps) {
+    const { user } = useUserContext();
+
     return (
         <ul className="search-results-container">
             {products.map(product => (
@@ -25,7 +28,9 @@ export default function SearchResults({ products }: SearchResultsProps) {
                             alt="Product image"
                         />
                         <div className="search-result-product-name">{product.name}</div>                                    
-                        <div className="search-result-product-price">{product.price.toFixed(2)}$</div>
+                        <div className="search-result-product-price">
+                            {(product.price * user.currency.multiplier).toFixed(2)}{user.currency.symbol}
+                        </div>
                     </Link>
                 </li>
             ))}

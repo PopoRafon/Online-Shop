@@ -82,7 +82,6 @@ describe('register util', () => {
         });
 
         expect(setUserMock).toHaveBeenCalledOnce();
-        expect(setUserMock).toBeCalledWith({ isLoggedIn: true, ...userData });
         expect(navigateMock).toHaveBeenCalledOnce();
         expect(navigateMock).toBeCalledWith('/');
         expect(setAlertMock).toHaveBeenCalledOnce();

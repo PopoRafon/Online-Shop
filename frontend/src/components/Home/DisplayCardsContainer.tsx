@@ -1,5 +1,6 @@
 import type { Product } from '@interfaces/types';
 import { Link } from 'react-router-dom';
+import useUserContext from '@contexts/UserContext/useUserContext';
 
 type DisplayCardsContainerProps = {
     title: string;
@@ -8,6 +9,8 @@ type DisplayCardsContainerProps = {
 }
 
 export default function DisplayCardsContainer({ title, note, products }: DisplayCardsContainerProps) {
+    const { user } = useUserContext();
+
     return (
         <section className="home-display-cards-container">
             <div className="home-display-cards-container-header">
@@ -29,7 +32,9 @@ export default function DisplayCardsContainer({ title, note, products }: Display
                             />
                             <div className="display-card-description">
                                 <span className="display-card-name">{product.name}</span>
-                                <span className="display-card-price">{product.price.toFixed(2)}$</span>
+                                <span className="display-card-price">
+                                    {(product.price * user.currency.multiplier).toFixed(2)}{user.currency.symbol}
+                                </span>
                             </div>
                         </Link>
                     ) : (

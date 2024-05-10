@@ -16,7 +16,11 @@ async function getUserData({ setUser }: GetUserDataArgs): Promise<void> {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                setUser({ isLoggedIn: true, ...data.success });
+                setUser(prev => ({
+                    ...prev,
+                    isLoggedIn: true,
+                    ...data.success
+                }));
             }
         })
         .catch(error => {

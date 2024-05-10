@@ -89,7 +89,7 @@ export default function ProductAside({ product }: ProductAsideProps) {
     return (
         <aside className="primary-border product-aside-container">
             <div className="product-aside-information-container">
-                <span className="product-aside-information-cost">{product.price.toFixed(2)}$</span>
+                <span className="product-aside-information-cost">{(product.price * user.currency.multiplier).toFixed(2)}{user.currency.symbol}</span>
                 <span>{product.sold} sold</span>
             </div>
             <div className="product-aside-quantity-container">

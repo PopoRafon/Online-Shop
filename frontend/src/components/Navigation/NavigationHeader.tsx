@@ -1,17 +1,21 @@
 import type { ChangeEvent } from 'react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Currency from '@helpers/currency';
 import Account from './Account';
 import CartIcon from '@assets/images/icons/cart_icon.svg';
+import useUserContext from '@contexts/UserContext/useUserContext';
 
 export default function NavigationHeader() {
+    const { setUser } = useUserContext();
     const [currency, setCurrency] = useState<string>(localStorage.getItem('currency') as string);
+    const currencyTypesRef = useRef<string[]>(Currency.getCurrencyTypes());
 
     function handleChange(event: ChangeEvent<HTMLSelectElement>) {
         const { value } = event.target;
 
         setCurrency(value);
+        Currency.changeCurrency(setUser, value);
         localStorage.setItem('currency', value);
     }
 
@@ -34,7 +38,7 @@ export default function NavigationHeader() {
                     onChange={handleChange}
                     className="primary-border navigation-header-currency-changer"
                 >
-                    {Object.keys(Currency.currencyTypes).map(currencyType => (
+                    {currencyTypesRef.current.map(currencyType => (
                         <option
                             value={currencyType}
                             key={currencyType}

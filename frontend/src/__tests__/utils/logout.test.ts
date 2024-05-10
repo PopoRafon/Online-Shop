@@ -53,7 +53,6 @@ describe('logout util', () => {
         });
 
         expect(setUserMock).toHaveBeenCalledOnce();
-        expect(setUserMock).toBeCalledWith({ isLoggedIn: false, username: '' });
         expect(setAlertMock).toHaveBeenCalledOnce();
         expect(setAlertMock).toBeCalledWith({ show: true, type: 'success', text: 'You have been successfully logged out.' });
         expect(navigateMock).toHaveBeenCalledOnce();

@@ -71,7 +71,7 @@ export default function MyProductsTable() {
                             {product.name}
                         </td>
                         <td>{product.amount}</td>
-                        <td>{product.price.toFixed(2)}$</td>
+                        <td>{(product.price * user.currency.multiplier).toFixed(2)}{user.currency.symbol}</td>
                         <td>
                             {product.sold}
                             <Link

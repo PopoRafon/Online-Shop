@@ -1,4 +1,6 @@
-type CurrencyType = {
+import type { User } from '@contexts/UserContext/UserContextProvider';
+
+export type CurrencyType = {
     readonly symbol: string;
     readonly multiplier: number;
 }
@@ -9,32 +11,42 @@ type CurrencyTypes = {
 
 export default class Currency {
     private static initialCurrencyType: string = 'USD';
-    public static readonly currencyTypes: CurrencyTypes = {
+    private static readonly currencyTypes: CurrencyTypes = {
         USD: {
             symbol: '$',
             multiplier: 1
         },
         EUR: {
             symbol: '€',
-            multiplier: 1.2
+            multiplier: 1.08
         },
         GBP: {
             symbol: '£',
-            multiplier: 1.2
+            multiplier: 1.25
         }
     };
 
-    static convertCurrency(price: number): number {
-        const currency: string = localStorage.getItem('currency') ?? this.initialCurrencyType;
+    static changeCurrency(setUser: React.Dispatch<React.SetStateAction<User>>, currencyType: string): void {
+        const newCurrency: CurrencyType = this.currencyTypes[currencyType];
 
-        return price * this.currencyTypes[currency].multiplier;
+        setUser(prev => ({ ...prev, currency: newCurrency }));
     }
 
-    static initCurrency(): void {
-        const currency: string | null = localStorage.getItem('currency');
+    static getCurrencyTypes(): string[] {
+        return Object.keys(Currency.currencyTypes);
+    }
+
+    static initCurrency(setUser: React.Dispatch<React.SetStateAction<User>>): void {
+        let currency: string | null = localStorage.getItem('currency');
 
         if (!currency || !(currency in this.currencyTypes)) {
             localStorage.setItem('currency', this.initialCurrencyType);
+            currency = this.initialCurrencyType;
         }
+
+        setUser(prev => ({
+            ...prev,
+            currency: this.currencyTypes[currency as string]
+        }));
     }
 }

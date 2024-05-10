@@ -1,6 +1,7 @@
 import type { Product } from '@interfaces/types';
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
+import useUserContext from '@contexts/UserContext/useUserContext';
 
 type SearchBarSuggestionsProps = {
     headerText: string;
@@ -8,6 +9,8 @@ type SearchBarSuggestionsProps = {
 }
 
 const SearchBarSuggestions = memo(({ headerText, products }: SearchBarSuggestionsProps) => {
+    const { user } = useUserContext();
+
     return (
         <div className="primary-border navigation-searchbar-suggestions">
             {products.length === 0 ? (
@@ -37,7 +40,7 @@ const SearchBarSuggestions = memo(({ headerText, products }: SearchBarSuggestion
                                                 {product.name}
                                             </div>
                                             <div className="navigation-searchbar-suggestions-product-price">
-                                                {product.price.toFixed(2)}$
+                                                {(product.price * user.currency.multiplier).toFixed(2)}{user.currency.symbol}
                                             </div>
                                         </Link>
                                     </li>

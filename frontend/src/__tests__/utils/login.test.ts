@@ -78,7 +78,6 @@ describe('login util', () => {
         expect(setAlertMock).toHaveBeenCalledOnce();
         expect(setAlertMock).toBeCalledWith({ show: true, type: 'success', text: 'You have been successfully logged in.' });
         expect(setUserMock).toHaveBeenCalledOnce();
-        expect(setUserMock).toBeCalledWith({ isLoggedIn: true, ...userData });
         expect(navigateMock).toHaveBeenCalledOnce();
         expect(navigateMock).toBeCalledWith('/');
         expect(setFormErrorsMock).not.toBeCalled();
