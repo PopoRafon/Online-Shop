@@ -56,6 +56,10 @@
   align-items: center;
   gap: 5px;
 }
+.navigation-header .navigation-header-buttons-container .navigation-header-currency-changer {
+  border-radius: 5px;
+  padding: 4px;
+}
 .navigation-header .navigation-header-buttons-container .navigation-header-button {
   cursor: pointer;
   background-color: transparent;

@@ -6,14 +6,14 @@ from .utils import create_product_image_name
 
 
 class Product(models.Model):
-    CATEGORY_CHOICES = {
-        'electronics': 'Electronics',
-        'children': 'Children',
-        'art': 'Art',
-        'health': 'Health',
-        'entertainment': 'Entertainment',
-        'automotive': 'Automotive'
-    }
+    CATEGORY_CHOICES = (
+        ('electronics', 'Electronics'),
+        ('children', 'Children'),
+        ('art', 'Art'),
+        ('health', 'Health'),
+        ('entertainment', 'Entertainment'),
+        ('automotive', 'Automotive')
+    )
     id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='products')
     name = models.CharField(

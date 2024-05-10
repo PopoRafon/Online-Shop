@@ -20,7 +20,8 @@ class TestProductListCreateView(APITestCase):
             'name': 'test name',
             'amount': 5,
             'price': 5,
-            'uploaded_images': [self.tmp_file]
+            'uploaded_images': [self.tmp_file],
+            'category': 'electronics'
         }
 
     def test_product_list_create_view_GET_receives_products_list(self):

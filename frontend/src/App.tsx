@@ -1,6 +1,7 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getUserData } from '@utils/userData';
+import Currency from '@helpers/currency';
 import useUserContext from '@contexts/UserContext/useUserContext';
 import ProtectedRoute from '@components/Routes/ProtectedRoute';
 import AlertContextProvider from '@contexts/AlertContext/AlertContextProvider';
@@ -28,6 +29,7 @@ function App() {
 
     useEffect(() => {
         (async () => {
+            Currency.initCurrency();
             await obtainCSRFToken();
             await AccessToken.refreshToken();
             await getUserData({ setUser });
