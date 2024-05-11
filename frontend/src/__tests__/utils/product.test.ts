@@ -12,6 +12,7 @@ describe('createProduct util', () => {
         description: 'test description',
         amount: '5',
         price: '10.5',
+        category: '',
         images: ['test_image' as unknown as File]
     };
 
@@ -28,7 +29,8 @@ describe('createProduct util', () => {
             description: 'Description is too short.',
             amount: 'Amount is too small.',
             price: 'Price is too small.',
-            images: 'Image is in incorrect format.'
+            images: 'Image is in incorrect format.',
+            category: 'Category cannot be null.'
         };
 
         server.use(
@@ -43,7 +45,8 @@ describe('createProduct util', () => {
             formData: formData,
             navigate: navigateMock,
             setAlert: setAlertMock,
-            setFormErrors: setFormErrorsMock
+            setFormErrors: setFormErrorsMock,
+            currency: { multiplier: 1, symbol: '' }
         });
 
         expect(setFormErrorsMock).toBeCalledTimes(1);
@@ -69,7 +72,8 @@ describe('createProduct util', () => {
             formData: formData,
             navigate: navigateMock,
             setAlert: setAlertMock,
-            setFormErrors: setFormErrorsMock
+            setFormErrors: setFormErrorsMock,
+            currency: { multiplier: 1, symbol: '' }
         });
 
         expect(setFormErrorsMock).not.toBeCalled();

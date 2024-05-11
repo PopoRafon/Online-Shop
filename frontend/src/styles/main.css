@@ -1275,6 +1275,14 @@ footer {
   width: clamp(275px, 80vw, 350px);
   padding: 0.75rem 0px;
 }
+.product-aside-container .product-aside-user-other-products-container {
+  margin-top: 0.5rem;
+  text-align: center;
+  color: #2878F0;
+  width: 100%;
+  border-width: 1px 0px 0px 0px;
+  padding-top: 1rem;
+}
 .product-aside-container .product-aside-quantity-container {
   display: flex;
   justify-content: left;

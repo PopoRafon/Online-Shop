@@ -8,6 +8,7 @@ from .permissions import ProductObjectPermissions
 from .serializers import ProductSerializer, ReviewSerializer
 from .renderers import ExtendedJSONRenderer
 from .models import Product, Cart, Review
+from .utils import filter_products
 
 
 class ProductListCreateView(generics.ListCreateAPIView):
@@ -18,33 +19,7 @@ class ProductListCreateView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         queryset = Product.objects.all()
-        query_params = self.request.query_params
-        username = query_params.get('username')
-        name = query_params.get('name')
-        category = query_params.get('category')
-        sort = query_params.get('sort')
-
-        if username is not None:
-            queryset = queryset.filter(user__username=username)
-
-        if name is not None:
-            queryset = queryset.filter(name__icontains=name)
-
-        if category is not None:
-            queryset = queryset.filter(category__icontains=category)
-
-        if sort is not None:
-            match (sort):
-                case 'newest-first':
-                    queryset = queryset.order_by('-created')
-                case 'price-lowest-first':
-                    queryset = queryset.order_by('price')
-                case 'price-highest-first':
-                    queryset = queryset.order_by('-price')
-                case 'sold-lowest-first':
-                    queryset = queryset.order_by('sold')
-                case 'sold-highest-first':
-                    queryset = queryset.order_by('-sold')
+        queryset = filter_products(queryset, self.request.query_params)
 
         return queryset.prefetch_related('images')
 

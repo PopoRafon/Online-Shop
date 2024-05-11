@@ -7,6 +7,7 @@ class ProductSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(
         default=serializers.CurrentUserDefault()
     )
+    username = serializers.ReadOnlyField(source='user.username')
     images = serializers.SerializerMethodField()
     ratings = serializers.SerializerMethodField()
     reviews = serializers.ReadOnlyField(source='reviews.count')

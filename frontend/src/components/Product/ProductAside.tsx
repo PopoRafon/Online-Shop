@@ -1,5 +1,6 @@
 import type { Product } from '@interfaces/types';
 import { useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import useUserContext from '@contexts/UserContext/useUserContext';
 import useAlertContext from '@contexts/AlertContext/useAlertContext';
@@ -135,6 +136,13 @@ export default function ProductAside({ product }: ProductAsideProps) {
             >
                 Buy and pay
             </button>
+            <div className="primary-border product-aside-user-other-products-container">
+                <Link
+                    to={`/search?limit=40&user=${product.username}`}
+                >
+                    All seller's products
+                </Link>
+            </div>
         </aside>
     );
 }

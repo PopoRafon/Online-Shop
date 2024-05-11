@@ -4,12 +4,14 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createProduct } from '@utils/product';
 import { isNewProductFormDataValid } from '@helpers/productValidators';
+import useUserContext from '@contexts/UserContext/useUserContext';
 import useAlertContext from '@contexts/AlertContext/useAlertContext';
 import AddProductInput from './AddProductInput';
 import UploadIcon from '@assets/images/icons/upload_icon.svg';
 import CloseIcon from '@assets/images/icons/close_icon.svg';
 
 export default function AddProductForm() {
+    const { user } = useUserContext();
     const navigate = useNavigate();
     const { setAlert } = useAlertContext();
     const [formData, setFormData] = useState<NewProductFormData>({ images: [], name: '', description: '', category: '', amount: '', price: '' });
@@ -57,7 +59,7 @@ export default function AddProductForm() {
         event.preventDefault();
 
         if (isNewProductFormDataValid({ formData, setFormErrors })) {
-            createProduct({ formData, navigate, setAlert, setFormErrors });
+            createProduct({ formData, currency: user.currency, navigate, setAlert, setFormErrors });
         }
     }
 

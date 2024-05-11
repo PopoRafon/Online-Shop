@@ -2,16 +2,18 @@ import type { NavigateFunction } from 'react-router-dom';
 import type { NewProductFormData, NewProductFormErrors } from '@components/MyProducts/AddProduct/types';
 import type { AlertData } from '@contexts/AlertContext/AlertContextProvider';
 import type { Product } from '@interfaces/types';
+import type { CurrencyType } from '@helpers/currency';
 import Cookies from 'js-cookie';
 
 type CreateProductArgs = {
     formData: NewProductFormData;
+    currency: CurrencyType;
     navigate: NavigateFunction;
     setAlert: React.Dispatch<React.SetStateAction<AlertData>>;
     setFormErrors: React.Dispatch<React.SetStateAction<NewProductFormErrors>>;
 }
 
-async function createProduct({ formData, navigate, setAlert, setFormErrors }: CreateProductArgs): Promise<void> {
+async function createProduct({ formData, currency, navigate, setAlert, setFormErrors }: CreateProductArgs): Promise<void> {
     const csrfToken: string = Cookies.get('csrftoken') ?? '';
     const newFormData = new FormData();
 
@@ -19,7 +21,7 @@ async function createProduct({ formData, navigate, setAlert, setFormErrors }: Cr
     newFormData.append('description', formData.description);
     newFormData.append('amount', formData.amount);
     newFormData.append('category', formData.category);
-    newFormData.append('price', String(Math.round(+formData.price * 100) / 100));
+    newFormData.append('price', String(Math.round(+formData.price * 100 / currency.multiplier) / 100));
 
     for (const image of formData.images) {
         newFormData.append('uploaded_images', image);
