@@ -83,6 +83,11 @@ SIMPLE_JWT = {
 }
 
 
+# Celery configuration options
+
+CELERY_BROKER_URL = 'redis://localhost:6379'
+
+
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
