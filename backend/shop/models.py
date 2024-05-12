@@ -88,3 +88,18 @@ class Rating(models.Model):
 
     def __str__(self):
         return f'User: {self.user.username} Product: {self.product.name}'
+
+
+class NewsLetter(models.Model):
+    email = models.EmailField(unique=True, max_length=255)
+
+
+class Discount(models.Model):
+    code = models.CharField(max_length=64, primary_key=True)
+    percentage_value = models.IntegerField(
+        validators=[
+            MaxValueValidator(100),
+            MinValueValidator(1)
+        ]
+    )
+    quantity = models.IntegerField()

@@ -40,6 +40,17 @@
             }
         }
 
+        .footer-newsletter-form-input-error {
+            $red-color: #FF5050;
+            border-color: $red-color;
+            color: $red-color;
+
+            &:focus {
+                border-color: $red-color;
+                outline: 2px solid $red-color;
+            }
+        }
+
         .footer-newsletter-form-submit {
             font-size: medium;
             width: 100px;

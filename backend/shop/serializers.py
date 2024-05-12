@@ -1,6 +1,6 @@
 from django.conf import settings
 from rest_framework import serializers
-from .models import Product, ProductImage, Review
+from .models import Product, ProductImage, Review, NewsLetter
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -78,3 +78,9 @@ class ReviewSerializer(serializers.ModelSerializer):
                 'write_only': True
             }
         }
+
+
+class NewsLetterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NewsLetter
+        fields = ['email']

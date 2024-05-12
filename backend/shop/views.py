@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import generics, status
 from .permissions import ProductObjectPermissions
-from .serializers import ProductSerializer, ReviewSerializer
+from .serializers import ProductSerializer, ReviewSerializer, NewsLetterSerializer
 from .renderers import ExtendedJSONRenderer
 from .models import Product, Cart, Review
 from .utils import filter_products
@@ -112,3 +112,8 @@ class CartDetailView(APIView):
             return Response({
                 'error': 'You need to provide product id inorder to add it to your cart.'
             }, status=status.HTTP_400_BAD_REQUEST)
+
+
+class NewsLetterCreateView(generics.CreateAPIView):
+    serializer_class = NewsLetterSerializer
+    renderer_classes = [ExtendedJSONRenderer]
