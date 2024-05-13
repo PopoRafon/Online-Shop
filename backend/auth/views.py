@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.core.mail import send_mail
 from django.conf import settings
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view
@@ -15,6 +14,7 @@ from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.exceptions import TokenError
 from .serializers import RegisterSerializer, PasswordResetConfirmSerializer
+from .tasks import send_email
 
 @api_view(['GET'])
 def csrf_token_view(request):
@@ -165,11 +165,10 @@ class PasswordResetView(APIView):
                 'site_name': settings.SITE_NAME
             })
 
-            send_mail(
+            send_email.delay(
                 subject='Password Reset',
                 message=message,
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[email],
+                email=email
             )
 
             return Response({

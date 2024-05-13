@@ -60,6 +60,10 @@ class TestProductListCreateView(APITestCase):
         self.assertIsNotNone(response.json().get('success'))
         self.assertEqual(Product.objects.count(), 1)
 
+        product = Product.objects.first()
+        product_image = product.images.first()
+        product_image.image.delete()
+
 
 class TestCartDetailView(APITestCase):
     def setUp(self):
