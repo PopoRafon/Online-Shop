@@ -27,6 +27,7 @@
         .product-header-rating {
             display: flex;
             align-items: end;
+            flex-wrap: wrap;
             width: 100%;
             gap: 4px;
 
@@ -38,11 +39,11 @@
             }
 
             .product-header-yellow-stars {
-                background-image: url('/yellow_star.svg');
+                background-image: url('/images/yellow_star.svg');
             }
 
             .product-header-gray-stars {
-                background-image: url('/gray_star.svg');
+                background-image: url('/images/gray_star.svg');
             }
         }
     }

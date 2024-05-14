@@ -199,9 +199,10 @@
   gap: 4px;
   padding: 0px;
   border: 0px;
-  max-width: 130px;
+  max-width: 135px;
 }
 .navigation-account-button .navigation-account-text {
+  font-weight: 500;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -225,12 +226,17 @@
   z-index: 50;
 }
 .navigation-account-dropdown::after {
-  content: " ";
+  content: "";
   position: absolute;
   bottom: 100%;
   border-width: 5px;
   border-style: solid;
   border-color: transparent transparent #E0E0E0 transparent;
+}
+.navigation-account-dropdown .navigation-account-dropdown-header {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 4px 0px;
 }
 .navigation-account-dropdown .navigation-account-dropdown-button {
   cursor: pointer;
@@ -240,20 +246,29 @@
   background-color: #00A3FF;
   color: white;
   width: 180px;
-  height: 30px;
+  height: 34px;
+  font-size: 14px;
   border-radius: 5px;
   font-weight: 600;
-  font-size: medium;
   border: 0px;
   position: relative;
+  transition: 0.25s;
 }
 .navigation-account-dropdown .navigation-account-dropdown-button:hover {
   background-color: #009AF0;
 }
 .navigation-account-dropdown .navigation-account-dropdown-button .navigation-account-dropdown-google-icon {
   position: absolute;
+  width: 32px;
+  height: 32px;
   left: 1px;
   top: 1px;
+}
+.navigation-account-dropdown .navigation-account-dropdown-footer {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .navigation {
@@ -1169,6 +1184,7 @@ footer {
 .product-container .product-header .product-header-rating {
   display: flex;
   align-items: end;
+  flex-wrap: wrap;
   width: 100%;
   gap: 4px;
 }
@@ -1179,10 +1195,10 @@ footer {
   height: 20px;
 }
 .product-container .product-header .product-header-rating .product-header-yellow-stars {
-  background-image: url("/yellow_star.svg");
+  background-image: url("/images/yellow_star.svg");
 }
 .product-container .product-header .product-header-rating .product-header-gray-stars {
-  background-image: url("/gray_star.svg");
+  background-image: url("/images/gray_star.svg");
 }
 .product-container .product-body {
   display: flex;
@@ -1586,8 +1602,8 @@ footer {
   width: clamp(310px, 80vw, 700px);
 }
 
-:root {
-  font-family: Arial, Helvetica, sans-serif;
+* {
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
 }
 
 body {

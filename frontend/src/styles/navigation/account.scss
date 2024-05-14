@@ -7,9 +7,10 @@
     gap: 4px;
     padding: 0px;
     border: 0px;
-    max-width: 130px;
+    max-width: 135px;
 
     .navigation-account-text {
+        font-weight: 500;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -34,12 +35,18 @@
     z-index: 50;
 
     &::after {
-        content: " ";
+        content: "";
         position: absolute;
         bottom: 100%;
         border-width: 5px;
         border-style: solid;
         border-color: transparent transparent #E0E0E0 transparent;
+    }
+
+    .navigation-account-dropdown-header {
+        font-size: 14px;
+        font-weight: 600;
+        margin: 4px 0px;
     }
 
     .navigation-account-dropdown-button {
@@ -50,12 +57,13 @@
         background-color: #00A3FF;
         color: white;
         width: 180px;
-        height: 30px;
+        height: 34px;
+        font-size: 14px;
         border-radius: 5px;
         font-weight: 600;
-        font-size: medium;
         border: 0px;
         position: relative;
+        transition: 0.25s;
 
         &:hover {
             background-color: #009AF0;
@@ -63,8 +71,17 @@
 
         .navigation-account-dropdown-google-icon {
             position: absolute;
+            width: 32px;
+            height: 32px;
             left: 1px;
             top: 1px;
         }
+    }
+
+    .navigation-account-dropdown-footer {
+        display: flex;
+        flex-direction: column;
+        font-size: 14px;
+        font-weight: 500;
     }
 }

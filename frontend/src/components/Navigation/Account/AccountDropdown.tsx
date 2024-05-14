@@ -41,7 +41,7 @@ export default function AccountDropdown({ accountButtonRef, setShowDropdown }: A
             className="primary-border navigation-account-dropdown"
             data-testid="account-dropdown"
         >
-            <span>Welcome!</span>
+            <h4 className="navigation-account-dropdown-header">Welcome!</h4>
             {user.isLoggedIn ? (
                 <>
                     <Link
@@ -65,11 +65,8 @@ export default function AccountDropdown({ accountButtonRef, setShowDropdown }: A
                 </>
             ):(
                 <>
-                    <button
-                        className="navigation-account-dropdown-button"
-                        style={{ justifyContent: 'right' }}
-                    >
-                        Login with Google
+                    <button className="navigation-account-dropdown-button">
+                        <span style={{ marginLeft: '0.75rem' }}>Login with Google</span>
                         <img
                             className="navigation-account-dropdown-google-icon"
                             src={GoogleIcon}
@@ -82,7 +79,7 @@ export default function AccountDropdown({ accountButtonRef, setShowDropdown }: A
                     >
                         Login
                     </Link>
-                    <div style={{ textAlign: 'center' }}>
+                    <div className="navigation-account-dropdown-footer" style={{ textAlign: 'center' }}>
                         <span>Don't have an account?</span>
                         <Link
                             to='/register'
