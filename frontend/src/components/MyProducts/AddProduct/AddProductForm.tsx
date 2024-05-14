@@ -159,7 +159,7 @@ export default function AddProductForm() {
                     style={{ width: 'fit-content', fontSize: 'small' }}
                     onChange={handleChange}
                 >
-                    <option value="" hidden>Category</option>
+                    <option value="" hidden>Choose category</option>
                     <option value="electronics">Electronics</option>
                     <option value="children">Children</option>
                     <option value="art">Art</option>

@@ -15,6 +15,7 @@
         gap: 5px;
 
         .navigation-header-currency-changer {
+            cursor: pointer;
             border-radius: 5px;
             padding: 4px;
         }
@@ -92,13 +93,6 @@
                     left: 1px;
                     top: 1px;
                 }
-            }
-
-            .navigation-header-account-dropdown-user-info {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
             }
         }
     }

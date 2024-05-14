@@ -20,7 +20,7 @@
     .add-product-form-error-message {
         font-size: small;
         font-weight: 600;
-        color: #FF5050;
+        color: $primary-input-error-color;
         height: 1rem;
     }
 
@@ -69,7 +69,7 @@
     }
 
     .add-product-form-image-error {
-        border-color: #FF5050;
+        border-color: $primary-input-error-color;
     }
 
     .add-product-form-label {
@@ -84,7 +84,6 @@
         max-width: 350px;
 
         .add-product-form-input {
-            $blue-color: rgb(105, 165, 255);
             border-radius: 5px;
             font-size: medium;
             width: 100%;
@@ -94,20 +93,19 @@
             margin-bottom: 2px;
 
             &:focus {
-                border-color: $blue-color;
-                outline: 2px solid $blue-color;
+                border-color: $primary-input-color;
+                outline: 2px solid $primary-input-color;
             }
         }
 
         .add-product-form-input-error {
-            $red-color: #FF5050;
-            border-color: $red-color;
-            color: $red-color;
+            border-color: $primary-input-error-color;
+            color: $primary-input-error-color;
             background-color: rgb(255, 240, 240, 0.1);
 
             &:focus {
-                border-color: $red-color;
-                outline: 2px solid $red-color;
+                border-color: $primary-input-error-color;
+                outline: 2px solid $primary-input-error-color;
             }
         }
     }

@@ -57,6 +57,7 @@
   gap: 5px;
 }
 .navigation-header .navigation-header-buttons-container .navigation-header-currency-changer {
+  cursor: pointer;
   border-radius: 5px;
   padding: 4px;
 }
@@ -128,12 +129,6 @@
   left: 1px;
   top: 1px;
 }
-.navigation-header .navigation-header-buttons-container .navigation-header-account-dropdown .navigation-header-account-dropdown-user-info {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
 
 @media only screen and (min-width: 768px) {
   .navigation-header {
@@ -150,8 +145,15 @@
   position: relative;
   border-radius: 5px;
 }
-.navigation-searchbar:focus-within {
-  outline: 2px solid rgb(105, 165, 255);
+.navigation-searchbar:focus-within::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  outline: 3px solid rgb(105, 165, 255);
+  outline-offset: -1px;
+  border-radius: 5px;
+  pointer-events: none;
 }
 .navigation-searchbar .navigation-searchbar-categories {
   cursor: pointer;
@@ -160,6 +162,7 @@
   border-color: gray;
   color: #707070;
   outline: 0;
+  border-right: 0px;
 }
 .navigation-searchbar .navigation-searchbar-suggestions {
   position: absolute;
@@ -244,9 +247,6 @@
   outline: 0px;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
-}
-.navigation-searchbar .navigation-searchbar-input-label .navigation-searchbar-input:focus {
-  border-color: rgb(105, 165, 255);
 }
 .navigation-searchbar .navigation-searchbar-reset-button-label {
   cursor: pointer;
@@ -341,6 +341,7 @@
 .footer-newsletter .footer-newsletter-form .footer-newsletter-form-input-error {
   border-color: #FF5050;
   color: #FF5050;
+  background-color: rgb(255, 248, 248);
 }
 .footer-newsletter .footer-newsletter-form .footer-newsletter-form-input-error:focus {
   border-color: #FF5050;

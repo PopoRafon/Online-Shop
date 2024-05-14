@@ -23,7 +23,6 @@
             gap: 4px;
 
             .auth-form-label {
-                $red-color: #FF5050;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -34,7 +33,6 @@
                 max-width: 350px;
 
                 .auth-form-input {
-                    $blue-color: rgb(105, 165, 255);
                     border-radius: 5px;
                     font-size: medium;
                     width: 100%;
@@ -43,24 +41,24 @@
                     margin-top: 8px;
 
                     &:focus {
-                        border-color: $blue-color;
-                        outline: 2px solid $blue-color;
+                        border-color: $primary-input-color;
+                        outline: 2px solid $primary-input-color;
                     }
                 }
 
                 .auth-form-input-error {
-                    border-color: $red-color;
-                    color: $red-color;
+                    border-color: $primary-input-error-color;
+                    color: $primary-input-error-color;
                     background-color: rgb(255, 240, 240, 0.1);
 
                     &:focus {
-                        border-color: $red-color;
-                        outline: 2px solid $red-color;
+                        border-color: $primary-input-error-color;
+                        outline: 2px solid $primary-input-error-color;
                     }
                 }
 
                 .auth-form-error-message {
-                    color: $red-color;
+                    color: $primary-input-error-color;
                     font-size: small;
                     height: 20px;
                     margin-top: 4px;

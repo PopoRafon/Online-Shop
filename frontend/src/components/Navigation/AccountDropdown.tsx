@@ -41,12 +41,9 @@ export default function AccountDropdown({ accountButtonRef, setShowDropdown }: A
             className="primary-border navigation-header-account-dropdown"
             data-testid="account-dropdown"
         >
+            <span>Welcome!</span>
             {user.isLoggedIn ? (
                 <>
-                    <div className="navigation-header-account-dropdown-user-info">
-                        <span>Logged in as</span>
-                        <span>{user.username}</span>
-                    </div>
                     <Link
                         to='/my-products'
                         className="navigation-header-account-dropdown-button"
@@ -68,7 +65,6 @@ export default function AccountDropdown({ accountButtonRef, setShowDropdown }: A
                 </>
             ):(
                 <>
-                    <span>Welcome!</span>
                     <button
                         className="navigation-header-account-dropdown-button"
                         style={{ justifyContent: 'right' }}

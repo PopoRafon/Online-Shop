@@ -35,19 +35,19 @@
             }
 
             &:focus {
-                border-color: rgb(105, 165, 255);
-                outline: 2px solid rgb(105, 165, 255);
+                border-color: $primary-input-color;
+                outline: 2px solid $primary-input-color;
             }
         }
 
         .footer-newsletter-form-input-error {
-            $red-color: #FF5050;
-            border-color: $red-color;
-            color: $red-color;
+            border-color: $primary-input-error-color;
+            color: $primary-input-error-color;
+            background-color: rgb(255, 248, 248);
 
             &:focus {
-                border-color: $red-color;
-                outline: 2px solid $red-color;
+                border-color: $primary-input-error-color;
+                outline: 2px solid $primary-input-error-color;
             }
         }
 
