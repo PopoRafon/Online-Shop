@@ -1,13 +1,17 @@
 import { test, describe, expect } from 'vitest';
 import { render, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import Account from '@components/Navigation/Account';
+import Account from '@components/Navigation/Account/Account';
 import UserContextProvider from '@contexts/UserContext/UserContextProvider';
 import AlertContextProvider from '@contexts/AlertContext/AlertContextProvider';
 
 describe('account component', () => {
     test('correctly renders account component', () => {
-        const { getByAltText, getByRole, queryByTestId } = render(<Account />);
+        const { getByAltText, getByRole, queryByTestId } = render(
+            <UserContextProvider>
+                <Account />
+            </UserContextProvider>
+        );
 
         expect(getByRole('button')).toBeInTheDocument();
         expect(getByAltText('Account icon')).toBeInTheDocument();

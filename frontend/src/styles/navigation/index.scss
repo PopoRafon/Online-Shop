@@ -1,23 +1,55 @@
-@import 'header';
 @import 'searchbar';
+@import 'account';
 
 .navigation {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 4px 0px;
-    box-sizing: border-box;
-    width: 100%;
-    gap: 4px;
-    position: sticky;
-    top: 0;
-    background-color: white;
+    $gap: 0.5rem;
+    padding: 8px 0px;
     border-width: 0px 0px 1px;
-    z-index: 50;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    align-items: center;
+    gap: $gap;
+
+    .navigation-buttons-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: $gap;
+
+        .navigation-currency-changer {
+            cursor: pointer;
+            border-radius: 5px;
+            padding: 4px;
+        }
+
+        .navigation-icon-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            min-width: 40px;
+            height: 40px;
+            transition: 0.3s;
+            background-color: #EAEAEA;
+
+            &:hover {
+                background-color: #E0E0E0;
+            }
+
+            .navigation-icon {
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }    
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (max-width: 710px) {
     .navigation {
-        padding: 8px 0px;
+        justify-content: space-between;
+        padding: 8px 0.75rem;
     }
 }

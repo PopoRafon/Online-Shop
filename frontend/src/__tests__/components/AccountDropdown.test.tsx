@@ -1,7 +1,7 @@
 import { test, describe, expect, vi } from 'vitest';
 import { render, getByTestId, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import AccountDropdown from '@components/Navigation/AccountDropdown';
+import AccountDropdown from '@components/Navigation/Account/AccountDropdown';
 import UserContextProvider from '@contexts/UserContext/UserContextProvider';
 import AlertContextProvider from '@contexts/AlertContext/AlertContextProvider';
 

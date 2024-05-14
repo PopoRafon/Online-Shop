@@ -38,7 +38,7 @@ export default function AccountDropdown({ accountButtonRef, setShowDropdown }: A
     return (
         <div
             ref={dropdownRef}
-            className="primary-border navigation-header-account-dropdown"
+            className="primary-border navigation-account-dropdown"
             data-testid="account-dropdown"
         >
             <span>Welcome!</span>
@@ -46,18 +46,18 @@ export default function AccountDropdown({ accountButtonRef, setShowDropdown }: A
                 <>
                     <Link
                         to='/my-products'
-                        className="navigation-header-account-dropdown-button"
+                        className="navigation-account-dropdown-button"
                     >
                         My products
                     </Link>
                     <Link
                         to='/'
-                        className="navigation-header-account-dropdown-button"
+                        className="navigation-account-dropdown-button"
                     >
                         Settings
                     </Link>
                     <button
-                        className="navigation-header-account-dropdown-button"
+                        className="navigation-account-dropdown-button"
                         onClick={() => logout({ setUser, setAlert, navigate })}
                     >
                         Logout
@@ -66,19 +66,19 @@ export default function AccountDropdown({ accountButtonRef, setShowDropdown }: A
             ):(
                 <>
                     <button
-                        className="navigation-header-account-dropdown-button"
+                        className="navigation-account-dropdown-button"
                         style={{ justifyContent: 'right' }}
                     >
                         Login with Google
                         <img
-                            className="navigation-header-account-dropdown-google-icon"
+                            className="navigation-account-dropdown-google-icon"
                             src={GoogleIcon}
                             alt="Google icon"
                         />
                     </button>
                     <Link
                         to='/login'
-                        className="navigation-header-account-dropdown-button"
+                        className="navigation-account-dropdown-button"
                     >
                         Login
                     </Link>

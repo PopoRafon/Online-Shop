@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: clamp(300px, 58%, 600px);
+    width: clamp(300px, 57%, 600px);
     height: 45px;
     position: relative;
     border-radius: $border-radius;
@@ -21,7 +21,7 @@
 
     .navigation-searchbar-categories {
         cursor: pointer;
-        display: none;
+        display: flex;
         height: 100%;
         border-color: gray;
         color: #707070;
@@ -156,8 +156,14 @@
     }
 }
 
-@media only screen and (min-width: 768px) {
-    .navigation-searchbar .navigation-searchbar-categories {
-        display: flex;
+@media only screen and (max-width: 710px) {
+    .navigation-searchbar {
+        margin: auto;
+        width: clamp(300px, 80%, 600px);
+        order: 1;
+
+        .navigation-searchbar-categories {
+            display: none;
+        }
     }
 }

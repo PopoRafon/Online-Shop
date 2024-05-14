@@ -1,0 +1,70 @@
+.navigation-account-button {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    gap: 4px;
+    padding: 0px;
+    border: 0px;
+    max-width: 130px;
+
+    .navigation-account-text {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}
+
+.navigation-account-dropdown {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    top: 44px;
+    right: 50%;
+    transform: translateX(50%);
+    width: 220px;
+    padding: 10px 0px;
+    gap: 10px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 1px 1px 2px 0px rgb(0, 0, 0, 0.2);
+    z-index: 50;
+
+    &::after {
+        content: " ";
+        position: absolute;
+        bottom: 100%;
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent transparent #E0E0E0 transparent;
+    }
+
+    .navigation-account-dropdown-button {
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #00A3FF;
+        color: white;
+        width: 180px;
+        height: 30px;
+        border-radius: 5px;
+        font-weight: 600;
+        font-size: medium;
+        border: 0px;
+        position: relative;
+
+        &:hover {
+            background-color: #009AF0;
+        }
+
+        .navigation-account-dropdown-google-icon {
+            position: absolute;
+            left: 1px;
+            top: 1px;
+        }
+    }
+}
