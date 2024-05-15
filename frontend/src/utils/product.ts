@@ -1,16 +1,16 @@
 import type { NavigateFunction } from 'react-router-dom';
-import type { NewProductFormData, NewProductFormErrors } from '@components/MyProducts/AddProduct/types';
+import type { ProductFormData, ProductFormErrors } from '@components/MyProducts/types';
 import type { AlertData } from '@contexts/AlertContext/AlertContextProvider';
 import type { Product } from '@interfaces/types';
 import type { CurrencyType } from '@helpers/currency';
 import Cookies from 'js-cookie';
 
 type CreateProductArgs = {
-    formData: NewProductFormData;
+    formData: ProductFormData;
     currency: CurrencyType;
     navigate: NavigateFunction;
     setAlert: React.Dispatch<React.SetStateAction<AlertData>>;
-    setFormErrors: React.Dispatch<React.SetStateAction<NewProductFormErrors>>;
+    setFormErrors: React.Dispatch<React.SetStateAction<ProductFormErrors>>;
 }
 
 async function createProduct({ formData, currency, navigate, setAlert, setFormErrors }: CreateProductArgs): Promise<void> {

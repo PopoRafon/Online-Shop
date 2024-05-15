@@ -1,4 +1,4 @@
-export type NewProductFormData = {
+export type ProductFormData = {
     images: File[];
     name: string;
     description: string;
@@ -7,7 +7,7 @@ export type NewProductFormData = {
     price: string;
 }
 
-export type NewProductFormErrors = {
+export type ProductFormErrors = {
     images: string;
     name: string;
     description: string;

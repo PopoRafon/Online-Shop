@@ -1086,7 +1086,7 @@ footer {
   background-color: rgb(250, 250, 250);
 }
 
-.add-product-form {
+.my-products-form {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1097,20 +1097,20 @@ footer {
   width: 100%;
   background-color: white;
 }
-.add-product-form .add-product-form-submit {
+.my-products-form .my-products-form-submit {
   font-size: medium;
   width: 90%;
   max-width: 350px;
-  height: 40px;
-  margin-top: 1rem;
+  height: 44px;
+  margin-top: 0.5rem;
 }
-.add-product-form .add-product-form-error-message {
+.my-products-form .my-products-form-error-message {
   font-size: small;
   font-weight: 600;
   color: #FF5050;
   height: 1rem;
 }
-.add-product-form .add-product-form-images-container {
+.my-products-form .my-products-form-images-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1122,7 +1122,7 @@ footer {
   padding: 4px 0px;
   border-radius: 5px;
 }
-.add-product-form .add-product-form-images-container .add-product-form-images-container-body {
+.my-products-form .my-products-form-images-container .my-products-form-images-container-body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -1130,11 +1130,11 @@ footer {
   gap: 4px;
   margin-bottom: 2px;
 }
-.add-product-form .add-product-form-images-container .add-product-form-images-container-body .add-product-form-image {
+.my-products-form .my-products-form-images-container .my-products-form-images-container-body .my-products-form-image {
   display: flex;
   position: relative;
 }
-.add-product-form .add-product-form-images-container .add-product-form-images-container-body .add-product-form-image .add-product-form-image-remove-button {
+.my-products-form .my-products-form-images-container .my-products-form-images-container-body .my-products-form-image .my-products-form-image-remove-button {
   cursor: pointer;
   display: flex;
   position: absolute;
@@ -1142,17 +1142,14 @@ footer {
   right: 0px;
   border: 0px;
   padding: 0px;
-  background-color: rgb(192, 192, 192);
+  background-color: #383838;
   border-radius: 25px;
-  transition: 0.3s;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
 }
-.add-product-form .add-product-form-images-container .add-product-form-images-container-body .add-product-form-image .add-product-form-image-remove-button:hover {
-  background-color: rgb(175, 175, 175);
-}
-.add-product-form .add-product-form-image-error {
+.my-products-form .my-products-form-image-error {
   border-color: #FF5050;
 }
-.add-product-form .add-product-form-label {
+.my-products-form .my-products-form-label {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1163,7 +1160,18 @@ footer {
   width: 90%;
   max-width: 350px;
 }
-.add-product-form .add-product-form-label .add-product-form-input {
+.my-products-form .my-products-form-label .my-products-form-select {
+  cursor: pointer;
+  font-size: small;
+  border-radius: 5px;
+  padding: 12px 8px;
+  font-weight: 500;
+}
+.my-products-form .my-products-form-label .my-products-form-select:focus {
+  border-color: rgb(105, 165, 255);
+  outline: 2px solid rgb(105, 165, 255);
+}
+.my-products-form .my-products-form-label .my-products-form-input {
   border-radius: 5px;
   font-size: medium;
   width: 100%;
@@ -1172,20 +1180,20 @@ footer {
   margin-top: 8px;
   margin-bottom: 2px;
 }
-.add-product-form .add-product-form-label .add-product-form-input:focus {
+.my-products-form .my-products-form-label .my-products-form-input:focus {
   border-color: rgb(105, 165, 255);
   outline: 2px solid rgb(105, 165, 255);
 }
-.add-product-form .add-product-form-label .add-product-form-input-error {
+.my-products-form .my-products-form-label .my-products-form-input-error {
   border-color: #FF5050;
   color: #FF5050;
   background-color: rgba(255, 240, 240, 0.1);
 }
-.add-product-form .add-product-form-label .add-product-form-input-error:focus {
+.my-products-form .my-products-form-label .my-products-form-input-error:focus {
   border-color: #FF5050;
   outline: 2px solid #FF5050;
 }
-.add-product-form .add-product-form-image-label {
+.my-products-form .my-products-form-image-label {
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -1203,7 +1211,7 @@ footer {
   box-sizing: border-box;
   border-radius: 5px;
 }
-.add-product-form .add-product-form-image-label .add-product-form-image-input {
+.my-products-form .my-products-form-image-label .my-products-form-image-input {
   display: none;
 }
 

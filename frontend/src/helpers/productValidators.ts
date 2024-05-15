@@ -1,12 +1,12 @@
-import type { NewProductFormData, NewProductFormErrors } from '@components/MyProducts/AddProduct/types';
+import type { ProductFormData, ProductFormErrors } from '@components/MyProducts/AddProduct/types';
 
 type IsProductFormValidArgs = {
-    formData: NewProductFormData;
-    setFormErrors: React.Dispatch<React.SetStateAction<NewProductFormErrors>>;
+    formData: ProductFormData;
+    setFormErrors: React.Dispatch<React.SetStateAction<ProductFormErrors>>;
 }
 
-function isNewProductFormDataValid({ formData, setFormErrors }: IsProductFormValidArgs): boolean {
-    const newFormErrors: NewProductFormErrors = { images: '', name: '', description: '', category: '', price: '', amount: '' };
+function isProductFormDataValid({ formData, setFormErrors }: IsProductFormValidArgs): boolean {
+    const newFormErrors: ProductFormErrors = { images: '', name: '', description: '', category: '', price: '', amount: '' };
     const priceAsNumber: number = +formData.price;
     const amountAsNumber: number = +formData.amount;
 
@@ -41,4 +41,4 @@ function isNewProductFormDataValid({ formData, setFormErrors }: IsProductFormVal
     return !Object.values(newFormErrors).some(field => field);
 }
 
-export { isNewProductFormDataValid };
+export { isProductFormDataValid };

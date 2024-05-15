@@ -2,6 +2,7 @@ import type { Product } from '@interfaces/types';
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import obtainCSRFToken from '@utils/csrfToken';
+import GoBackButton from '@components/MyProducts/GoBackButton';
 
 export default function MyProductsEditProduct() {
     const navigate = useNavigate();
@@ -26,7 +27,9 @@ export default function MyProductsEditProduct() {
 
     return product && (
         <main className="my-products-page">
-            <section className="my-products-container"></section>
+            <section className="my-products-container">
+                <GoBackButton />
+            </section>
         </main>
     );
 }
