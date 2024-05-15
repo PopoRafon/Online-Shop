@@ -864,23 +864,16 @@ footer {
   background-color: rgb(40, 120, 240);
 }
 
-.my-products-body {
-  width: 100%;
-  height: 600px;
-  border-radius: 5px;
-  overflow: auto;
-  background-color: white;
-}
-.my-products-body .my-products-table {
+.my-products-table {
   width: 100%;
   min-width: 700px;
   text-align: center;
   border-collapse: collapse;
 }
-.my-products-body .my-products-table th {
+.my-products-table th {
   padding: 12px 0px;
 }
-.my-products-body .my-products-table th .my-products-table-head-button {
+.my-products-table th .my-products-table-head-button {
   cursor: pointer;
   background-color: transparent;
   font-size: large;
@@ -889,14 +882,14 @@ footer {
   padding: 0px;
   text-transform: capitalize;
 }
-.my-products-body .my-products-table tr {
+.my-products-table tr {
   border-width: 0px 0px 1px;
   overflow: hidden;
 }
-.my-products-body .my-products-table tr:hover td {
+.my-products-table tr:hover td {
   background-color: #F0F0F0;
 }
-.my-products-body .my-products-table td {
+.my-products-table td {
   font-size: medium;
   height: 75px;
   padding: 4px;
@@ -907,18 +900,21 @@ footer {
   position: relative;
   transition: 0.2s background-color;
 }
-.my-products-body .my-products-table .my-products-table-offer-cell {
+.my-products-table .my-products-table-offer-cell {
   padding: 0px 80px;
   position: relative;
 }
-.my-products-body .my-products-table .my-products-table-offer-cell .my-products-table-offer-image {
+.my-products-table .my-products-table-offer-cell .my-products-table-offer-image {
   width: 75px;
   height: 75px;
   position: absolute;
   left: 4px;
   top: 4px;
 }
-.my-products-body .my-products-table .my-products-table-offer-edit-button {
+.my-products-table .my-products-table-offer-show-actions-button {
+  cursor: pointer;
+  background-color: transparent;
+  border: 0px;
   display: flex;
   position: absolute;
   padding: 4px;
@@ -928,8 +924,166 @@ footer {
   top: 50%;
   transform: translateY(-50%);
 }
-.my-products-body .my-products-table .my-products-table-offer-edit-button:hover {
+.my-products-table .my-products-table-offer-show-actions-button:hover {
   background-color: #B0B0B0;
+}
+
+.my-products-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  padding: 0.5rem 0.75rem;
+  background-color: white;
+  gap: 4px;
+  z-index: 20;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.1);
+  translate: -100% -50%;
+}
+.my-products-actions::after {
+  content: "";
+  position: absolute;
+  left: 100%;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent #E0E0E0;
+}
+.my-products-actions .my-products-actions-button {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: small;
+  color: white;
+  font-weight: 500;
+  width: 74px;
+  height: 28px;
+  border: 0px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+.my-products-actions .my-products-actions-delete-button {
+  background-color: #FF4256;
+}
+.my-products-actions .my-products-actions-delete-button:hover {
+  background-color: #F9394E;
+}
+
+.my-products-actions-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0px;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.my-products-actions-modal .my-products-actions-modal-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 5px;
+  width: 300px;
+  box-sizing: border-box;
+  padding: 1rem;
+  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.2);
+  animation: scaling 0.5s normal 0s 1;
+  gap: 0.5rem;
+}
+.my-products-actions-modal .my-products-actions-modal-form .my-products-actions-modal-input-label {
+  display: flex;
+  flex-direction: column;
+  font-size: small;
+  font-weight: 500;
+  margin: 0px;
+  gap: 4px;
+  width: 100%;
+}
+.my-products-actions-modal .my-products-actions-modal-form .my-products-actions-modal-input-label .my-products-actions-modal-input {
+  border-radius: 5px;
+  font-size: small;
+  padding: 0.5rem 0.75rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+.my-products-actions-modal .my-products-actions-modal-form .my-products-actions-modal-input-label .my-products-actions-modal-input:focus {
+  border-color: rgb(105, 165, 255);
+  outline: 2px solid rgb(105, 165, 255);
+}
+.my-products-actions-modal .my-products-actions-modal-form .my-products-actions-modal-header {
+  margin: 0px;
+  width: 100%;
+  text-align: left;
+  font-size: large;
+}
+.my-products-actions-modal .my-products-actions-modal-form .my-products-actions-modal-text {
+  margin: 0px;
+  font-weight: 500;
+  font-size: 14px;
+}
+.my-products-actions-modal .my-products-actions-modal-form .my-products-actions-modal-caution {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: small;
+  font-weight: 600;
+  color: #FF3A4F;
+  border-color: #FF3A4F;
+  border-style: solid;
+  border-width: 2px 2px 2px 5px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 0.5rem 0px;
+  position: relative;
+  width: 100%;
+}
+.my-products-actions-modal .my-products-actions-modal-form .my-products-actions-modal-caution .my-products-actions-modal-caution-warning-icon {
+  position: absolute;
+  left: 4px;
+  width: 24px;
+  height: 24px;
+}
+.my-products-actions-modal .my-products-actions-modal-form .my-products-actions-modal-buttons-container {
+  display: flex;
+  justify-content: right;
+  width: 100%;
+  gap: 4px;
+}
+.my-products-actions-modal .my-products-actions-modal-form .my-products-actions-modal-buttons-container .my-products-actions-modal-button {
+  cursor: pointer;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  font-size: small;
+  width: 74px;
+  height: 32px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+.my-products-actions-modal .my-products-actions-modal-form .my-products-actions-modal-buttons-container .my-products-actions-modal-delete-button {
+  background-color: rgb(247, 71, 71);
+}
+.my-products-actions-modal .my-products-actions-modal-form .my-products-actions-modal-buttons-container .my-products-actions-modal-delete-button:hover {
+  background-color: rgb(239, 66, 66);
+}
+.my-products-actions-modal .my-products-actions-modal-form .my-products-actions-modal-buttons-container .my-products-actions-modal-delete-button:disabled {
+  cursor: auto;
+  background-color: rgb(193, 193, 193);
+}
+.my-products-actions-modal .my-products-actions-modal-form .my-products-actions-modal-buttons-container .my-products-actions-modal-cancel-button {
+  color: black;
+  background-color: white;
+}
+.my-products-actions-modal .my-products-actions-modal-form .my-products-actions-modal-buttons-container .my-products-actions-modal-cancel-button:hover {
+  background-color: rgb(250, 250, 250);
 }
 
 .add-product-form {
@@ -1053,62 +1207,6 @@ footer {
   display: none;
 }
 
-.edit-product-delete-button {
-  cursor: pointer;
-  background-color: rgb(255, 50, 50);
-  color: white;
-  font-size: medium;
-  border-radius: 5px;
-  padding: 6px 1rem;
-  border: 1px solid rgb(230, 74, 74);
-  transition: 0.25s;
-}
-.edit-product-delete-button:hover {
-  background-color: rgb(240, 50, 50);
-}
-
-.edit-product-modal {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
-}
-.edit-product-modal .edit-product-modal-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: white;
-  border-radius: 5px;
-  padding: 1rem;
-  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.2);
-  animation: scaling 0.5s normal 0s 1;
-}
-.edit-product-modal .edit-product-modal-container .edit-product-modal-caution {
-  font-size: small;
-  color: red;
-  margin-bottom: 0.5rem;
-}
-.edit-product-modal .edit-product-modal-container .edit-product-modal-buttons-container {
-  display: flex;
-  gap: 0.5rem;
-}
-.edit-product-modal .edit-product-modal-container .edit-product-modal-buttons-container .edit-product-modal-button {
-  color: white;
-  font-weight: 500;
-  font-size: small;
-  padding: 6px 0.5rem;
-}
-.edit-product-modal .edit-product-modal-container .edit-product-modal-buttons-container .edit-product-modal-delete-button {
-  background-color: red;
-}
-.edit-product-modal .edit-product-modal-container .edit-product-modal-buttons-container .edit-product-modal-delete-button:hover {
-  background-color: rgb(240, 0, 0);
-}
-
 .my-products-page {
   flex-grow: 1;
   position: relative;
@@ -1138,7 +1236,7 @@ footer {
   margin: 0px;
 }
 .my-products-page .my-products-header .my-products-header-add-button {
-  font-size: medium;
+  font-size: 14px;
   color: white;
   padding: 0.75rem 1rem;
 }
@@ -1154,6 +1252,14 @@ footer {
 }
 .my-products-page .my-products-header .my-products-header-go-back-button:hover {
   border-color: black;
+}
+.my-products-page .my-products-body {
+  width: 100%;
+  height: 600px;
+  border-radius: 5px;
+  overflow: auto;
+  background-color: white;
+  position: relative;
 }
 
 .product-container {
