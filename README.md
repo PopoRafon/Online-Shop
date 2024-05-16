@@ -5,6 +5,7 @@ Online shop offering ability to sale and buy products from other users.
 - [Node](https://nodejs.org/en/download) >= 18
 - [SASS](https://sass-lang.com/install/)
 - [Git](https://git-scm.com/downloads)
+- [Redis](https://redis.io/downloads/)
 ## Installation
 1. Open up terminal and move to directory you want to install this project using `cd` command.
 2. Clone project from github using `git clone https://github.com/PopoRafon/Online-Shop.git` command.
@@ -22,7 +23,9 @@ Online shop offering ability to sale and buy products from other users.
 ## Usage
 1. Start Django server using `python manage.py runserver` command in your project `backend` directory.
 2. Open new terminal window and start React server using `npm run dev` command inside `frontend` directory.
-3. **(If you want to change any CSS file)** Open new terminal window and move to `frontend/src/styles` directory and compile `main.scss` file into `main.css` by running `sass main.scss main.css` command.
+3. Open new terminal window and start Redis server by running `sudo service redis-server start` command.
+4. In the same terminal start Celery application by running `celery -A core worker` command in `core` directory.
+5. **(If you want to change any CSS file)** Open new terminal window and move to `frontend/src/styles` directory and compile `main.scss` file into `main.css` by running `sass main.scss main.css` command.
 ## Testing
 ### Django
 - run `python manage.py test` command inside `backend` directory in your project.
