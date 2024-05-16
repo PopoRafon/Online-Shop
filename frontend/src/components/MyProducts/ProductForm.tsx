@@ -1,8 +1,10 @@
 import type { ChangeEvent, FormEvent } from 'react';
 import type { ProductFormData, ProductFormErrors } from './types';
-import { useState, useEffect } from 'react';
+import type { NavigateFunction } from 'react-router-dom';
+import type { AlertData } from '@contexts/AlertContext/AlertContextProvider';
+import type { CurrencyType } from '@helpers/currency';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createProduct } from '@utils/product';
 import { isProductFormDataValid } from '@helpers/productValidators';
 import useUserContext from '@contexts/UserContext/useUserContext';
 import useAlertContext from '@contexts/AlertContext/useAlertContext';
@@ -12,21 +14,32 @@ import ProductDescription from './ProductDescription';
 import ProductImages from './ProductImages';
 import ProductUpload from './ProductUpload';
 
-export default function ProductForm() {
+type ProductFuncArgs = {
+    formData: ProductFormData;
+    currency: CurrencyType;
+    navigate: NavigateFunction;
+    setAlert: React.Dispatch<React.SetStateAction<AlertData>>;
+    setFormErrors: React.Dispatch<React.SetStateAction<ProductFormErrors>>;
+}
+
+type ProductFormProps = {
+    images: File[];
+    name: string;
+    description: string;
+    category: string;
+    amount: string;
+    price: string;
+    submitText: string;
+    productFunc(args: ProductFuncArgs): void;
+}
+
+export default function ProductForm({ images, name, description, category, amount, price, submitText, productFunc }: ProductFormProps) {
     const { user } = useUserContext();
     const navigate = useNavigate();
     const { setAlert } = useAlertContext();
-    const [formData, setFormData] = useState<ProductFormData>({ images: [], name: '', description: '', category: '', amount: '', price: '' });
+    const [formData, setFormData] = useState<ProductFormData>({ images, name, description, category, amount, price });
     const [formErrors, setFormErrors] = useState<ProductFormErrors>({ images: '', name: '', description: '', category: '', amount: '', price: '' });
-    const [imagesUrls, setImagesUrls] = useState<string[]>([]);
-
-    useEffect(() => {
-        return () => {
-            for (const image of imagesUrls) {
-                URL.revokeObjectURL(image);
-            }
-        };
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    const [imagesUrls, setImagesUrls] = useState<string[]>(images.map(image => URL.createObjectURL(image)));
 
     function handleChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
         const { name, value } = event.target;
@@ -41,7 +54,7 @@ export default function ProductForm() {
         event.preventDefault();
 
         if (isProductFormDataValid({ formData, setFormErrors })) {
-            createProduct({ formData, currency: user.currency, navigate, setAlert, setFormErrors });
+            productFunc({ formData, currency: user.currency, navigate, setAlert, setFormErrors });
         }
     }
 
@@ -98,7 +111,7 @@ export default function ProductForm() {
             />
             <input
                 type="submit"
-                value="Add product"
+                value={submitText}
                 className="primary-button my-products-form-submit"
             />
         </form>

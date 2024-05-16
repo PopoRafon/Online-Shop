@@ -59,6 +59,24 @@ class ProductSerializer(serializers.ModelSerializer):
 
         return product
 
+    def update(self, instance, validated_data):
+        uploaded_images = validated_data.pop('uploaded_images')
+
+        if uploaded_images is not None:
+            product_images = instance.images.all()
+            images = {image.image.name.split('/')[-1]: image for image in product_images}
+
+            for image in uploaded_images:
+                if image.name in images.keys():
+                    images.pop(image.name)
+                else:
+                    ProductImage.objects.create(product=instance, image=image)
+
+            for image in images.values():
+                image.delete()
+
+        return super().update(instance, validated_data)
+
 
 class ReviewSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(
