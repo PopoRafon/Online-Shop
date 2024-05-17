@@ -1,16 +1,13 @@
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework import status
+from rest_framework import generics
+from .serializers import UserSerializer
+from shop.renderers import ExtendedJSONRenderer
 
 
-class UserView(APIView):
+class UserDetailView(generics.RetrieveUpdateAPIView):
+    serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
+    renderer_classes = [ExtendedJSONRenderer]
 
-    def get(self, request):
-        user = request.user
-
-        return Response({'success': {
-            'email': user.email,
-            'username': user.username
-        }}, status=status.HTTP_200_OK)
+    def get_object(self):
+        return self.request.user

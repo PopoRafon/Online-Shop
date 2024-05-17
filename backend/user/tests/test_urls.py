@@ -1,6 +1,6 @@
 from django.urls import resolve, reverse
 from rest_framework.test import APISimpleTestCase
-from user.views import UserView
+from user.views import UserDetailView
 
 
 class TestUserUrls(APISimpleTestCase):
@@ -9,4 +9,4 @@ class TestUserUrls(APISimpleTestCase):
         resolver = resolve(url)
 
         self.assertEqual(url, '/api/user')
-        self.assertEqual(resolver.func.view_class, UserView)
+        self.assertEqual(resolver.func.view_class, UserDetailView)

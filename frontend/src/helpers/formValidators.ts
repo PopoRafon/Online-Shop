@@ -126,7 +126,7 @@ function isReviewsFormValid({ formData, setFormErrors }: IsFormValidArgs<string,
  * @returns {boolean} Whether form data is valid or not.
  */
 function isSettingsFormValid({ formData, setFormErrors }: IsFormValidArgs<SettingsFormData, SettingsFormErrors>): boolean {
-    const newFormErrors: SettingsFormErrors = { email: '', username: '', firstName: '', lastName: '' };
+    const newFormErrors: SettingsFormErrors = { email: '', username: '', first_name: '', last_name: '' }; // eslint-disable-line @typescript-eslint/naming-convention
 
     if (!formData.email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)) newFormErrors.email = 'Must be valid email address.';
 
@@ -134,12 +134,12 @@ function isSettingsFormValid({ formData, setFormErrors }: IsFormValidArgs<Settin
     else if (formData.username.length > 16) newFormErrors.username = 'Must not be longer than 16 characters.';
     else if (formData.username.length < 8) newFormErrors.username = 'Must not be shorter than 8 characters.';
 
-    if (formData.firstName && (!formData.firstName.match(/^[a-zA-Z]*$/) || formData.firstName.length >= 96)) {
-        newFormErrors.firstName = 'Must be a real name.';
+    if (formData.first_name && (!formData.first_name.match(/^[a-zA-Z]*$/) || formData.first_name.length >= 96)) {
+        newFormErrors.first_name = 'Must be a real name.';
     }
 
-    if (formData.lastName && (!formData.lastName.match(/^[a-zA-Z]*$/) || formData.lastName.length >= 96)) {
-        newFormErrors.lastName = 'Must be a real surname.';
+    if (formData.last_name && (!formData.last_name.match(/^[a-zA-Z]*$/) || formData.last_name.length >= 96)) {
+        newFormErrors.last_name = 'Must be a real surname.';
     }
 
     setFormErrors({ ...newFormErrors });

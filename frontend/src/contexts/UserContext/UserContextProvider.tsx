@@ -5,6 +5,8 @@ export type User = {
     isLoggedIn: boolean;
     username: string;
     email: string;
+    firstName: string;
+    lastName: string;
     currency: CurrencyType;
 }
 
@@ -24,6 +26,8 @@ export default function UserContextProvider({ children }: UserContextProiderProp
         isLoggedIn: false,
         username: '',
         email: '',
+        firstName: '',
+        lastName: '',
         currency: {
             symbol: '',
             multiplier: 0

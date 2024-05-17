@@ -1,4 +1,5 @@
 import type { User } from '@contexts/UserContext/UserContextProvider';
+import type { AlertData } from '@contexts/AlertContext/AlertContextProvider';
 import type { SettingsFormData, SettingsFormErrors } from '@components/Settings/types';
 import Cookies from 'js-cookie';
 
@@ -18,10 +19,15 @@ async function getUserData({ setUser }: GetUserDataArgs): Promise<void> {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
+                const { email, username, first_name, last_name } = data.success; // eslint-disable-line @typescript-eslint/naming-convention
+
                 setUser(prev => ({
                     ...prev,
                     isLoggedIn: true,
-                    ...data.success
+                    email: email,
+                    username: username,
+                    firstName: first_name,
+                    lastName: last_name
                 }));
             }
         })
@@ -33,10 +39,11 @@ async function getUserData({ setUser }: GetUserDataArgs): Promise<void> {
 type UpdateUserDataArgs = {
     formData: SettingsFormData;
     setFormErrors: React.Dispatch<React.SetStateAction<SettingsFormErrors>>;
+    setAlert: React.Dispatch<React.SetStateAction<AlertData>>;
     setUser: React.Dispatch<React.SetStateAction<User>>;
 }
 
-async function updateUserData({ formData, setFormErrors, setUser }: UpdateUserDataArgs): Promise<void> {
+async function updateUserData({ formData, setFormErrors, setAlert, setUser }: UpdateUserDataArgs): Promise<void> {
     const csrfToken: string = Cookies.get('csrftoken') ?? '';
 
     return await fetch('/api/user', {
@@ -54,6 +61,11 @@ async function updateUserData({ formData, setFormErrors, setUser }: UpdateUserDa
                     ...prev,
                     ...data.success
                 }));
+                setAlert({
+                    show: true,
+                    type: 'success',
+                    text: 'Your account information has been successfully updated.'
+                });
             } else if (data.error) {
                 setFormErrors(data.error);
             }

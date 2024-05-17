@@ -4,12 +4,21 @@ import { useState } from 'react';
 import { isSettingsFormValid } from '@helpers/formValidators';
 import { updateUserData } from '@utils/userData';
 import useUserContext from '@contexts/UserContext/useUserContext';
+import useAlertContext from '@contexts/AlertContext/useAlertContext';
 import FormInput from '@components/AuthForm/FormInput';
 
 export default function SettingsForm() {
+    const { setAlert } = useAlertContext();
     const { user, setUser } = useUserContext();
-    const [formData, setFormData] = useState<SettingsFormData>({ email: user.email, username: user.username, firstName: '', lastName: '' });
-    const [formErrors, setFormErrors] = useState<SettingsFormErrors>({ email: '', username: '', firstName: '', lastName: '' });
+    /* eslint-disable @typescript-eslint/naming-convention */
+    const [formErrors, setFormErrors] = useState<SettingsFormErrors>({ email: '', username: '', first_name: '', last_name: '' });
+    const [formData, setFormData] = useState<SettingsFormData>({
+        email: user.email,
+        username: user.username,
+        first_name: user.firstName,
+        last_name: user.lastName
+    });
+    /* eslint-enable @typescript-eslint/naming-convention */
 
     function handleChange(event: ChangeEvent<HTMLInputElement>) {
         const { name, value } = event.target;
@@ -24,7 +33,7 @@ export default function SettingsForm() {
         event.preventDefault();
 
         if (isSettingsFormValid({ formData, setFormErrors })) {
-            updateUserData({ formData, setFormErrors, setUser });
+            updateUserData({ formData, setFormErrors, setAlert, setUser });
         }
     }
 
@@ -51,17 +60,17 @@ export default function SettingsForm() {
             />
             <FormInput
                 label="First Name"
-                name="firstName"
-                value={formData.firstName}
+                name="first_name"
+                value={formData.first_name}
                 handleChange={handleChange}
-                error={formErrors.firstName}
+                error={formErrors.first_name}
             />
             <FormInput
                 label="Last Name"
-                name="lastName"
-                value={formData.lastName}
+                name="last_name"
+                value={formData.last_name}
                 handleChange={handleChange}
-                error={formErrors.lastName}
+                error={formErrors.last_name}
             />
             <input
                 type="submit"
