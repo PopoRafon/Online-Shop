@@ -51,7 +51,7 @@ export default function AccountDropdown({ accountButtonRef, setShowDropdown }: A
                         My products
                     </Link>
                     <Link
-                        to='/'
+                        to='/settings'
                         className="navigation-account-dropdown-button"
                     >
                         Settings

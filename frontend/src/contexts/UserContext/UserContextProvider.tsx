@@ -4,6 +4,7 @@ import { useState, createContext } from 'react';
 export type User = {
     isLoggedIn: boolean;
     username: string;
+    email: string;
     currency: CurrencyType;
 }
 
@@ -22,6 +23,7 @@ export default function UserContextProvider({ children }: UserContextProiderProp
     const [user, setUser] = useState<User>({
         isLoggedIn: false,
         username: '',
+        email: '',
         currency: {
             symbol: '',
             multiplier: 0

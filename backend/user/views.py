@@ -11,5 +11,6 @@ class UserView(APIView):
         user = request.user
 
         return Response({'success': {
+            'email': user.email,
             'username': user.username
         }}, status=status.HTTP_200_OK)

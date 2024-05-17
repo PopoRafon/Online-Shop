@@ -22,6 +22,7 @@ import MyProductsEditProduct from '@pages/MyProductsEditProduct';
 import Product from './pages/Product';
 import Reviews from './pages/Reviews';
 import Search from './pages/Search';
+import Settings from '@pages/Settings';
 
 function App() {
     const { setUser } = useUserContext();
@@ -54,6 +55,7 @@ function App() {
                             <Route path='reviews' element={<Reviews />} />
                         </Route>
                         <Route path='search' element={<Search />} />
+                        <Route path='settings' element={<Settings />} />
                         <Route path='my-products/'>
                             <Route index element={
                                 <ProtectedRoute>

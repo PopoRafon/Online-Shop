@@ -2,6 +2,7 @@ import type { RegisterFormData, RegisterFormErrors } from '@components/Register/
 import type { LoginFormData, LoginFormErrors } from '@components/Login/types';
 import type { PasswordResetFormData, PasswordResetFormErrors } from '@components/Password/Reset/types';
 import type { PasswordResetConfirmFormData, PasswordResetConfirmFormErrors } from '@components/Password/ResetConfirm/types';
+import type { SettingsFormData, SettingsFormErrors } from '@components/Settings/types';
 
 type IsFormValidArgs<Data, Errors> = {
     formData: Data;
@@ -116,4 +117,34 @@ function isReviewsFormValid({ formData, setFormErrors }: IsFormValidArgs<string,
     return !newFormData;
 }
 
-export { isRegisterFormValid, isLoginFormValid, isPasswordResetFormValid, isPasswordResetConfirmFormValid, isReviewsFormValid };
+/**
+ * Validates provided form data and updates errors by using provided state setter function.
+ * 
+ * @param {Object} args
+ * @param {SettingsFormData} args.formData Object containing settings form data to validate.
+ * @param {React.Dispatch<React.SetStateAction<SettingsFormErrors>>} args.setFormErrors React state setter function for form errors.
+ * @returns {boolean} Whether form data is valid or not.
+ */
+function isSettingsFormValid({ formData, setFormErrors }: IsFormValidArgs<SettingsFormData, SettingsFormErrors>): boolean {
+    const newFormErrors: SettingsFormErrors = { email: '', username: '', firstName: '', lastName: '' };
+
+    if (!formData.email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)) newFormErrors.email = 'Must be valid email address.';
+
+    if (!formData.username.match(/^\w*$/)) newFormErrors.username = 'Must contain only letters, numbers and underscores.';
+    else if (formData.username.length > 16) newFormErrors.username = 'Must not be longer than 16 characters.';
+    else if (formData.username.length < 8) newFormErrors.username = 'Must not be shorter than 8 characters.';
+
+    if (formData.firstName && (!formData.firstName.match(/^[a-zA-Z]*$/) || formData.firstName.length >= 96)) {
+        newFormErrors.firstName = 'Must be a real name.';
+    }
+
+    if (formData.lastName && (!formData.lastName.match(/^[a-zA-Z]*$/) || formData.lastName.length >= 96)) {
+        newFormErrors.lastName = 'Must be a real surname.';
+    }
+
+    setFormErrors({ ...newFormErrors });
+
+    return !Object.values(newFormErrors).some(field => field);
+}
+
+export { isRegisterFormValid, isLoginFormValid, isPasswordResetFormValid, isPasswordResetConfirmFormValid, isReviewsFormValid, isSettingsFormValid };
