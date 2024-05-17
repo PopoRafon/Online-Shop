@@ -32,9 +32,9 @@
             gap: 4px;
 
             .product-header-stars {
-                background-size: 21px 21px;
+                background-size: 20px 20px;
                 background-repeat: repeat-x;
-                width: 105px;
+                width: 100px;
                 height: 20px;
             }
 
@@ -44,6 +44,9 @@
 
             .product-header-gray-stars {
                 background-image: url('/images/gray_star.svg');
+                padding: 0px;
+                border: 0px;
+                background-color: transparent;
             }
         }
     }

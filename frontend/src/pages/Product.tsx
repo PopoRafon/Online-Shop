@@ -31,6 +31,7 @@ export default function Product() {
             <div className="product">
                 <ProductContainer
                     product={product}
+                    setProduct={setProduct as React.Dispatch<React.SetStateAction<Product>>}
                 />
                 <article className="primary-border product-description-container">
                     <h3 className="product-description-header">Description</h3>

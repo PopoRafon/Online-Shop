@@ -1,6 +1,6 @@
 from django.conf import settings
-from rest_framework import serializers
-from .models import Product, ProductImage, Review, NewsLetter
+from rest_framework import serializers, validators
+from .models import Product, ProductImage, Review, NewsLetter, Rating
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -102,3 +102,26 @@ class NewsLetterSerializer(serializers.ModelSerializer):
     class Meta:
         model = NewsLetter
         fields = ['email']
+
+
+class RatingSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(
+        default=serializers.CurrentUserDefault(),
+        write_only=True
+    )
+
+    class Meta:
+        model = Rating
+        fields = '__all__'
+        extra_kwargs = {
+            'product': {
+                'write_only': True
+            }
+        }
+        validators = [
+            validators.UniqueTogetherValidator(
+                queryset=model.objects.all(),
+                fields=('user', 'product'),
+                message=('You can only submit one rating per product.')
+            )
+        ]

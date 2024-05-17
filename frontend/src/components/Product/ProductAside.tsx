@@ -1,7 +1,7 @@
 import type { Product } from '@interfaces/types';
 import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import Cookies from 'js-cookie';
+import { updateCart } from '@utils/cart';
 import useUserContext from '@contexts/UserContext/useUserContext';
 import useAlertContext from '@contexts/AlertContext/useAlertContext';
 import PlusIcon from '@assets/images/icons/plus_icon.svg';
@@ -35,35 +35,7 @@ export default function ProductAside({ product }: ProductAsideProps) {
 
     function addToCart() {
         if (user.isLoggedIn) {
-            const csrfToken: string = Cookies.get('csrftoken') ?? '';
-
-            fetch('/api/cart', {
-                method: 'PATCH',
-                headers: {
-                    /* eslint-disable @typescript-eslint/naming-convention */
-                    'X-CSRFToken': csrfToken,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ product_id: product.id })
-                /* eslint-enable @typescript-eslint/naming-convention */
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        setAlert({
-                            show: true,
-                            type: 'success',
-                            text: 'Product has been successfully added to your cart.'
-                        });
-                    }
-                })
-                .catch(() => {
-                    setAlert({
-                        show: true,
-                        type: 'error',
-                        text: 'Product could not be added to your cart.'
-                    });
-                });
+            updateCart({ productId: product.id, setAlert });
         } else {
             const cart: string | null = localStorage.getItem('cart');
 

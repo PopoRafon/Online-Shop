@@ -1,18 +1,41 @@
 import type { Product } from '@interfaces/types';
-import { useRef, useState } from 'react';
+import type { MouseEvent } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { createRating } from '@utils/rating';
+import useUserContext from '@contexts/UserContext/useUserContext';
+import useAlertContext from '@contexts/AlertContext/useAlertContext';
 import LeftArrowHeadIcon from '@assets/images/icons/left_arrowhead_icon.svg';
 import RightArrowHeadIcon from '@assets/images/icons/right_arrowhead_icon.svg';
 
 type ProductContainerProps = {
-    product: Product
+    product: Product;
+    setProduct: React.Dispatch<React.SetStateAction<Product>>;
 }
 
-export default function ProductContainer({ product }: ProductContainerProps) {
-    const starsRef = useRef<number>(product.ratings.reduce((previous, current) => previous + current, 0) / (product.ratings.length * 5) * 5);
+export default function ProductContainer({ product, setProduct }: ProductContainerProps) {
+    const { user } = useUserContext();
+    const { setAlert } = useAlertContext();
+    const [stars, setStars] = useState<number>(product.ratings.reduce((previous, current) => previous + current, 0) / product.ratings.length);
     const [currentSlide, setCurrentSlide] = useState<number>(0);
     const [showBackButton, setShowBackButton] = useState<boolean>(false);
     const [showNextButton, setShowNextButton] = useState<boolean>(false);
+
+    function handleRating(event: MouseEvent<HTMLButtonElement>) {
+        if (user.isLoggedIn) {
+            const { x } = event.currentTarget.getBoundingClientRect();
+            const rating: number = Math.floor((event.clientX - x) / 20) + 1;
+
+            createRating({
+                productId: product.id,
+                rating,
+                setAlert,
+                product,
+                setProduct,
+                setStars
+            });
+        }
+    }
 
     function handleSlideshowMouseLeave() {
         setShowBackButton(false);
@@ -37,13 +60,17 @@ export default function ProductContainer({ product }: ProductContainerProps) {
             <div className="product-header">
                 <h2 className="product-header-name">{product.name}</h2>
                 <div className="product-header-rating">
-                    <span>{starsRef.current ? starsRef.current.toFixed(2) : 0}</span>
-                    <div className="product-header-stars product-header-gray-stars">
+                    <span>{stars ? stars.toFixed(2) : 0}</span>
+                    <button
+                        className="product-header-stars product-header-gray-stars"
+                        style={{ cursor: user.isLoggedIn ? 'pointer' : 'auto' }}
+                        onClick={handleRating}
+                    >
                         <div
                             className="product-header-stars product-header-yellow-stars"
-                            style={{ width: `${21 * starsRef.current}px` }}
+                            style={{ width: `${20 * stars}px` }}
                         ></div>
-                    </div>
+                    </button>
                     <Link
                         to={`/product/${product.id}/reviews`}
                     >

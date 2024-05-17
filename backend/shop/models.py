@@ -86,6 +86,11 @@ class Rating(models.Model):
         ]
     )
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['product', 'user'], name='unique user-product')
+        ]
+
     def __str__(self):
         return f'User: {self.user.username} Product: {self.product.name}'
 
