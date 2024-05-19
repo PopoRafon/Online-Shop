@@ -7,7 +7,7 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.conf import settings
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, renderer_classes
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
@@ -15,14 +15,18 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.exceptions import TokenError
 from .serializers import RegisterSerializer, PasswordResetConfirmSerializer
 from .tasks import send_email
+from shop.renderers import ExtendedJSONRenderer
 
 @api_view(['GET'])
+@renderer_classes([ExtendedJSONRenderer])
 def csrf_token_view(request):
     token = get_token(request)
-    return Response({'success': token})
+    return Response(token, status=status.HTTP_200_OK)
 
 
 class TokenRefreshView(APIView):
+    renderer_classes = [ExtendedJSONRenderer]
+
     def post(self, request):
         refresh_token = request.COOKIES.get('refresh')
 
@@ -30,13 +34,15 @@ class TokenRefreshView(APIView):
             try:
                 access = RefreshToken(refresh_token).access_token
             except TokenError:
-                return Response({
-                    'error': 'Your refresh token is invalid.'
-                }, status=status.HTTP_400_BAD_REQUEST)
+                return Response(
+                    'Your refresh token is invalid.',
+                    status=status.HTTP_400_BAD_REQUEST
+                )
 
-            response = Response({
-                'success': 'Your new access token has been successfully issued.'
-            }, status=status.HTTP_200_OK)
+            response = Response(
+                'Your new access token has been successfully issued.',
+                status=status.HTTP_200_OK
+            )
 
             response.set_cookie(
                 'access',
@@ -47,12 +53,15 @@ class TokenRefreshView(APIView):
 
             return response
         else:
-            return Response({
-                'error': 'You must provide refresh token inorder to issue new access token.'
-            }, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                'You must provide refresh token inorder to issue new access token.',
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
 
 class RegisterView(APIView):
+    renderer_classes = [ExtendedJSONRenderer]
+
     def post(self, request):
         serializer = RegisterSerializer(data=request.data)
 
@@ -70,9 +79,10 @@ class RegisterView(APIView):
             refresh = RefreshToken.for_user(user)
             access = refresh.access_token
 
-            response = Response({
-                'success': 'Your account has been successfully created.'
-            }, status=status.HTTP_201_CREATED)
+            response = Response(
+                'Your account has been successfully created.',
+                status=status.HTTP_201_CREATED
+            )
 
             response.set_cookie(
                 'refresh',
@@ -90,12 +100,12 @@ class RegisterView(APIView):
 
             return response
         else:
-            return Response({
-                'error': serializer.errors
-            }, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LoginView(APIView):
+    renderer_classes = [ExtendedJSONRenderer]
+
     def post(self, request):
         data = request.data
         username = data.get('username')
@@ -106,9 +116,10 @@ class LoginView(APIView):
             refresh = RefreshToken.for_user(user)
             access = refresh.access_token
 
-            response = Response({
-                'success': 'You have been successfully logged in.'
-            }, status=status.HTTP_200_OK)
+            response = Response(
+                'You have been successfully logged in.',
+                status=status.HTTP_200_OK
+            )
 
             response.set_cookie(
                 'refresh',
@@ -127,20 +138,20 @@ class LoginView(APIView):
             return response
         else:
             return Response({
-                'error': {
-                    'username': 'Username is incorrect.',
-                    'password': 'Password is incorrect.'
-                }
+                'username': 'Username is incorrect.',
+                'password': 'Password is incorrect.'
             }, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]
+    renderer_classes = [ExtendedJSONRenderer]
 
     def post(self, request):
-        response = Response({
-            'success': 'You have been successfully logged out.'
-        }, status=status.HTTP_200_OK)
+        response = Response(
+            'You have been successfully logged out.',
+            status=status.HTTP_200_OK
+        )
 
         response.delete_cookie('refresh')
         response.delete_cookie('access')
@@ -149,6 +160,8 @@ class LogoutView(APIView):
 
 
 class PasswordResetView(APIView):
+    renderer_classes = [ExtendedJSONRenderer]
+
     def post(self, request):
         email = request.data.get('email')
         user = User.objects.filter(email=email).first()
@@ -171,16 +184,19 @@ class PasswordResetView(APIView):
                 email=email
             )
 
-            return Response({
-                'success': 'Password reset message has been sent to your email.'
-            }, status=status.HTTP_200_OK)
+            return Response(
+                'Password reset message has been sent to your email.',
+                status=status.HTTP_200_OK
+            )
         else:
             return Response({
-                'error': {'email': 'Must be valid email address.'}
+                'email': 'Must be valid email address.'
             }, status=status.HTTP_400_BAD_REQUEST)
 
 
 class PasswordResetConfirmView(APIView):
+    renderer_classes = [ExtendedJSONRenderer]
+
     def post(self, request, *args, **kwargs):
         uidb64 = kwargs.get('uidb64', '')
 
@@ -188,9 +204,10 @@ class PasswordResetConfirmView(APIView):
             id = urlsafe_base64_decode(uidb64).decode('utf-8')
             user = User.objects.get(id=id)
         except (ValueError, User.DoesNotExist):
-            return Response({
-                'error': 'User id you have provided is incorrect.'
-            }, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                'User id you have provided is incorrect.',
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
         token = kwargs.get('token')
         is_token_valid = PasswordResetTokenGenerator().check_token(user, token)
@@ -204,14 +221,14 @@ class PasswordResetConfirmView(APIView):
                 user.set_password(new_password)
                 user.save()
 
-                return Response({
-                    'success': 'Your password has been successfully changed.'
-                }, status=status.HTTP_200_OK)
+                return Response(
+                    'Your password has been successfully changed.',
+                    status=status.HTTP_200_OK
+                )
             else:
-                return Response({
-                    'error': serializer.errors
-                }, status=status.HTTP_400_BAD_REQUEST)
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         else:
-            return Response({
-                'error': 'Token you provided is incorrect or has expired.'
-            }, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                'Token you provided is incorrect or has expired.',
+                status=status.HTTP_400_BAD_REQUEST
+            )

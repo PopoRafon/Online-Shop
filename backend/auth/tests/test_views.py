@@ -1,9 +1,12 @@
 import re
-from rest_framework.test import APITestCase
-from django.contrib.auth.models import User
-from django.urls import reverse
-from rest_framework_simplejwt.tokens import RefreshToken
 from http.cookies import SimpleCookie
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.contrib.auth.models import User
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
+from django.urls import reverse
+from rest_framework.test import APITestCase
+from rest_framework_simplejwt.tokens import RefreshToken
 
 
 class TestCsrfTokenView(APITestCase):
@@ -127,3 +130,61 @@ class TestLogoutView(APITestCase):
 
         self.assertEqual(response.status_code, 401)
         self.assertIsNone(response.json().get('success'))
+
+
+class TestPasswordResetView(APITestCase):
+    def setUp(self):
+        self.url = reverse('password-reset')
+
+    def test_password_reset_view_POST_receives_error_message_not_valid_email(self):
+        response = self.client.post(self.url, data={'email': 'testemail@example.com'})
+
+        self.assertEqual(response.status_code, 400)
+        self.assertIn('email', response.json()['error'])
+
+    def test_password_reset_view_POST_receives_email(self):
+        user = User.objects.create(email='testemail@example.com', username='testuser')
+        response = self.client.post(self.url, data={'email': user.email})
+
+        self.assertEqual(response.status_code, 200)
+
+
+class TestPasswordResetConfirmView(APITestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(
+            email='testemail@example.com',
+            username='testuser',
+            password='testpassword'
+        )
+        self.uidb64 = urlsafe_base64_encode(force_bytes(self.user.id))
+        self.token = PasswordResetTokenGenerator().make_token(self.user)
+        self.data = {'newPassword1': 'newtestpassword', 'newPassword2': 'newtestpassword'}
+
+    def test_password_reset_confirm_view_POST_password_gets_changed(self):
+        url = reverse('password-reset-confirm', kwargs={'uidb64': self.uidb64, 'token': self.token})
+        response = self.client.post(url, data=self.data)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(User.objects.first().check_password(self.data['newPassword1']))
+
+    def test_password_reset_confirm_view_POST_receives_error_message_not_valid_token(self):
+        url = reverse('password-reset-confirm', kwargs={'uidb64': self.uidb64, 'token': 'token'})
+        response = self.client.post(url, data=self.data)
+
+        self.assertEqual(response.status_code, 400)
+        self.assertFalse(User.objects.first().check_password(self.data['newPassword1']))
+
+    def test_password_reset_confirm_view_POST_receives_error_message_non_existent_user(self):
+        url = reverse('password-reset-confirm', kwargs={'uidb64': 'uidb64', 'token': self.token})
+        response = self.client.post(url, data=self.data)
+
+        self.assertEqual(response.status_code, 400)
+        self.assertFalse(User.objects.first().check_password(self.data['newPassword1']))
+
+    def test_password_reset_confirm_view_POST_receives_error_message_passwords_too_weak(self):
+        url = reverse('password-reset-confirm', kwargs={'uidb64': self.uidb64, 'token': self.token})
+        response = self.client.post(url, data={'newPassword1': 'password', 'newPassword2': 'password'})
+
+        self.assertEqual(response.status_code, 400)
+        self.assertIn('newPassword1', response.json().get('error'))
+        self.assertFalse(User.objects.first().check_password(self.data['newPassword1']))

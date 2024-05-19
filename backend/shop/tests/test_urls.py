@@ -1,7 +1,13 @@
 from rest_framework.test import APISimpleTestCase
 from django.urls import resolve, reverse
-from shop.views import ProductListCreateView, ProductDetailView, CartDetailView, ReviewListCreateView
-
+from shop.views import (
+    ProductListCreateView,
+    ProductDetailView,
+    CartDetailView,
+    ReviewListCreateView,
+    NewsLetterCreateView,
+    RatingCreateView
+)
 
 class TestProductUrls(APISimpleTestCase):
     def test_product_list_create_url_resolves(self):
@@ -37,3 +43,22 @@ class TestReviewUrls(APISimpleTestCase):
 
         self.assertEqual(url, f'/api/products/{product_id}/reviews')
         self.assertEqual(resolver.func.view_class, ReviewListCreateView)
+
+
+class NewsLetterUrls(APISimpleTestCase):
+    def test_newsletter_create_url_resolves(self):
+        url = reverse('newsletter-create')
+        resolver = resolve(url)
+
+        self.assertEqual(url, '/api/newsletter')
+        self.assertEqual(resolver.func.view_class, NewsLetterCreateView)
+
+
+class RatingUrls(APISimpleTestCase):
+    def test_rating_create_url_resolves(self):
+        product_id = 1
+        url = reverse('rating-create', kwargs={'id': product_id})
+        resolver = resolve(url)
+
+        self.assertEqual(url, f'/api/products/{product_id}/ratings')
+        self.assertEqual(resolver.func.view_class, RatingCreateView)

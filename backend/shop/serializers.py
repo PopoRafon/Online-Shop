@@ -60,7 +60,7 @@ class ProductSerializer(serializers.ModelSerializer):
         return product
 
     def update(self, instance, validated_data):
-        uploaded_images = validated_data.pop('uploaded_images')
+        uploaded_images = validated_data.pop('uploaded_images', None)
 
         if uploaded_images is not None:
             product_images = instance.images.all()

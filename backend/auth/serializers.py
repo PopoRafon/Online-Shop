@@ -73,12 +73,12 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
         errors = {}
 
         if password1 != password2:
-            errors['password2'] = 'Passwords must be the same.'
+            errors['newPassword2'] = 'Passwords must be the same.'
 
         try:
             validate_password(password1)
         except ValidationError:
-            errors['password1'] = 'Password is invalid.'
+            errors['newPassword1'] = 'Password is invalid.'
 
         if errors:
             raise serializers.ValidationError(errors)

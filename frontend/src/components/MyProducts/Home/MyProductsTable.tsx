@@ -18,7 +18,7 @@ export default function MyProductsTable({ setActions }: MyProductsTableProps) {
     const [products, setProducts] = useState<Product[]>([]);
 
     useEffect(() => {
-        fetch(`/api/products?username=${user.username}`, {
+        fetch(`/api/products?user=${user.username}`, {
             method: 'GET'
         })
             .then(response => response.json())

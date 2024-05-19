@@ -1,6 +1,6 @@
 from rest_framework.test import APISimpleTestCase
 from django.urls import resolve, reverse
-from auth.views import RegisterView, TokenRefreshView, csrf_token_view, LoginView, LogoutView
+from auth.views import RegisterView, TokenRefreshView, csrf_token_view, LoginView, LogoutView, PasswordResetView, PasswordResetConfirmView
 
 
 class TestCsrfTokenUrls(APISimpleTestCase):
@@ -46,3 +46,21 @@ class TestLogoutUrls(APISimpleTestCase):
 
         self.assertEqual(url, '/api/logout')
         self.assertEqual(resolver.func.view_class, LogoutView)
+
+
+class TestPasswordUrls(APISimpleTestCase):
+    def test_password_reset_url_resolves(self):
+        url = reverse('password-reset')
+        resolver = resolve(url)
+
+        self.assertEqual(url, '/api/password/reset')
+        self.assertEqual(resolver.func.view_class, PasswordResetView)
+
+    def test_password_reset_confirm_url_resolves(self):
+        uidb64 = 'testuidb64'
+        token = 'testtoken'
+        url = reverse('password-reset-confirm', kwargs={'uidb64': uidb64, 'token': token})
+        resolver = resolve(url)
+
+        self.assertEqual(url, f'/api/password/reset/confirm/{uidb64}/{token}')
+        self.assertEqual(resolver.func.view_class, PasswordResetConfirmView)

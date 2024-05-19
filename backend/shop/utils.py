@@ -12,14 +12,10 @@ def filter_products(queryset, query_params):
     """
     Filter and return products queryset based on user provided query parameters.
     """
-    username = query_params.get('username')
     name = query_params.get('name')
     category = query_params.get('category')
     sort = query_params.get('sort')
     user = query_params.get('user')
-
-    if username is not None:
-        queryset = queryset.filter(user__username=username)
 
     if name is not None:
         queryset = queryset.filter(name__icontains=name)

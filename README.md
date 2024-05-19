@@ -28,6 +28,7 @@ Online shop offering ability to sale and buy products from other users.
 5. **(If you want to change any CSS file)** Open new terminal window and move to `frontend/src/styles` directory and compile `main.scss` file into `main.css` by running `sass main.scss main.css` command.
 ## Testing
 ### Django
+- start Redis server by running `sudo service redis-server start`.
 - run `python manage.py test` command inside `backend` directory in your project.
 ### React
 - run `npm test` command inside `frontend` directory in your project.
