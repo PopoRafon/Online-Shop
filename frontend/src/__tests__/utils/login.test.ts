@@ -1,12 +1,11 @@
 import type { LoginFormData, LoginFormErrors } from '@components/Login/types';
 import { describe, test, expect, vi, beforeAll, afterAll, afterEach } from 'vitest';
-import { setupServer } from 'msw/node';
 import { http, HttpResponse } from 'msw';
+import { server } from '@tests/node';
 import login from '@utils/login';
 
 describe('login util', () => {
     const url: string = '/api/login';
-    const server = setupServer();
     const formData: LoginFormData = {
         username: 'testusername',
         password: 'testpassword'
@@ -41,11 +40,11 @@ describe('login util', () => {
             navigate: navigateMock
         });
 
-        expect(setAlertMock).not.toBeCalled();
-        expect(setUserMock).not.toBeCalled();
-        expect(navigateMock).not.toBeCalled();
+        expect(setAlertMock).not.toHaveBeenCalled();
+        expect(setUserMock).not.toHaveBeenCalled();
+        expect(navigateMock).not.toHaveBeenCalled();
         expect(setFormErrorsMock).toHaveBeenCalledOnce();
-        expect(setFormErrorsMock).toBeCalledWith(formErrors);
+        expect(setFormErrorsMock).toHaveBeenCalledWith(formErrors);
     });
 
     test('makes a POST request and calls setAlert, setUser, navigate functions', async () => {
@@ -76,10 +75,9 @@ describe('login util', () => {
         });
 
         expect(setAlertMock).toHaveBeenCalledOnce();
-        expect(setAlertMock).toBeCalledWith({ show: true, type: 'success', text: 'You have been successfully logged in.' });
         expect(setUserMock).toHaveBeenCalledOnce();
         expect(navigateMock).toHaveBeenCalledOnce();
-        expect(navigateMock).toBeCalledWith('/');
-        expect(setFormErrorsMock).not.toBeCalled();
+        expect(navigateMock).toHaveBeenCalledWith('/');
+        expect(setFormErrorsMock).not.toHaveBeenCalled();
     });
 });

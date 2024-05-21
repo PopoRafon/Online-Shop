@@ -20,7 +20,8 @@
       "@utils/*": ["./src/utils/*"],
       "@contexts/*": ["./src/contexts/*"],
       "@interfaces/*": ["./src/interfaces/*"],
-      "@pages/*": ["./src/pages/*"]
+      "@pages/*": ["./src/pages/*"],
+      "@tests/*": ["./src/tests/*"]
     },
 
     /* Linting */

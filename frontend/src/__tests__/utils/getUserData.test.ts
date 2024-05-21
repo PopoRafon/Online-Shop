@@ -1,11 +1,10 @@
 import { describe, test, expect, vi, beforeAll, afterAll, afterEach } from 'vitest';
-import { setupServer } from 'msw/node';
 import { http, HttpResponse } from 'msw';
+import { server } from '@tests/node';
 import { getUserData } from '@utils/userData';
 
 describe('getUserData util', () => {
     const url: string = '/api/user';
-    const server = setupServer();
 
     beforeAll(() => server.listen());
     afterEach(() => server.resetHandlers());
@@ -23,7 +22,7 @@ describe('getUserData util', () => {
 
         await getUserData({ setUser: setUserMock });
 
-        expect(setUserMock).not.toBeCalled();
+        expect(setUserMock).not.toHaveBeenCalled();
     });
 
     test('makes a GET request and calls setUser function with received user data', async () => {

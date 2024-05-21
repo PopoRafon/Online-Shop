@@ -1,11 +1,10 @@
 import { test, describe, expect, beforeEach, afterAll, afterEach, vi } from 'vitest';
 import { http, HttpResponse } from 'msw';
-import { setupServer } from 'msw/node';
+import { server } from '@tests/node';
 import AccessToken from '@utils/accessToken';
 
 describe('accessToken util', () => {
     const url: string = '/api/token/refresh';
-    const server = setupServer();
 
     beforeEach(() => server.listen());
     afterEach(() => server.resetHandlers());
@@ -22,7 +21,7 @@ describe('accessToken util', () => {
         );
         await AccessToken.refreshToken();
 
-        expect(spy).not.toBeCalled();
+        expect(spy).not.toHaveBeenCalled();
     });
 
     test('refreshToken method makes POST request and calls setPeriodicTokenRefresh method', async () => {

@@ -1,12 +1,11 @@
 import { test, describe, expect, beforeAll, afterAll, afterEach } from 'vitest';
-import { setupServer } from 'msw/node';
 import { http, HttpResponse } from 'msw';
+import { server } from '@tests/node';
 import obtainCSRFToken from '@utils/csrfToken';
 import Cookies from 'js-cookie';
 
-describe('csrfToken util', () => {
+describe('obtainCSRFToken util', () => {
     const url: string = '/api/csrftoken';
-    const server = setupServer();
 
     beforeAll(() => server.listen());
     afterEach(() => server.resetHandlers());

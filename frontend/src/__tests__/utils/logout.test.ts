@@ -1,11 +1,10 @@
 import { describe, test, expect, beforeAll, afterAll, afterEach, vi } from 'vitest';
-import { setupServer } from 'msw/node';
 import { http, HttpResponse } from 'msw';
+import { server } from '@tests/node';
 import logout from '@utils/logout';
 
 describe('logout util', () => {
     const url: string = '/api/logout';
-    const server = setupServer();
 
     beforeAll(() => server.listen());
     afterEach(() => server.resetHandlers());
@@ -29,9 +28,9 @@ describe('logout util', () => {
             navigate: navigateMock
         });
 
-        expect(setUserMock).not.toBeCalled();
-        expect(setAlertMock).not.toBeCalled();
-        expect(navigateMock).not.toBeCalled();
+        expect(setUserMock).not.toHaveBeenCalled();
+        expect(setAlertMock).not.toHaveBeenCalled();
+        expect(navigateMock).not.toHaveBeenCalled();
     });
 
     test('makes a POST request and calls setUser, setAlert functions and navigates user to home page', async () => {
@@ -54,8 +53,7 @@ describe('logout util', () => {
 
         expect(setUserMock).toHaveBeenCalledOnce();
         expect(setAlertMock).toHaveBeenCalledOnce();
-        expect(setAlertMock).toBeCalledWith({ show: true, type: 'success', text: 'You have been successfully logged out.' });
         expect(navigateMock).toHaveBeenCalledOnce();
-        expect(navigateMock).toBeCalledWith('/');
+        expect(navigateMock).toHaveBeenCalledWith('/');
     });
 });

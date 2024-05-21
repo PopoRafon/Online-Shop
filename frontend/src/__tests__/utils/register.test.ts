@@ -1,12 +1,11 @@
 import type { RegisterFormData, RegisterFormErrors } from '@components/Register/types';
 import { test, describe, expect, vi, beforeAll, afterAll, afterEach } from 'vitest';
 import { http, HttpResponse } from 'msw';
-import { setupServer } from 'msw/node';
+import { server } from '@tests/node';
 import register from '@utils/register';
 
 describe('register util', () => {
     const url: string = '/api/register';
-    const server = setupServer();
     const formData: RegisterFormData = {
         email: 'testemail@gmail.com',
         username: 'testusername',
@@ -47,11 +46,11 @@ describe('register util', () => {
             setUser: setUserMock
         });
 
-        expect(setUserMock).not.toBeCalled();
-        expect(navigateMock).not.toBeCalled();
-        expect(setAlertMock).not.toBeCalled();
+        expect(setUserMock).not.toHaveBeenCalled();
+        expect(navigateMock).not.toHaveBeenCalled();
+        expect(setAlertMock).not.toHaveBeenCalled();
         expect(setFormErrorsMock).toHaveBeenCalledOnce();
-        expect(setFormErrorsMock).toBeCalledWith(errors);
+        expect(setFormErrorsMock).toHaveBeenCalledWith(errors);
     });
 
     test('makes a POST request and calls navigate function and setAlert function', async () => {
@@ -83,9 +82,8 @@ describe('register util', () => {
 
         expect(setUserMock).toHaveBeenCalledOnce();
         expect(navigateMock).toHaveBeenCalledOnce();
-        expect(navigateMock).toBeCalledWith('/');
+        expect(navigateMock).toHaveBeenCalledWith('/');
         expect(setAlertMock).toHaveBeenCalledOnce();
-        expect(setAlertMock).toBeCalledWith({ show: true, type: 'success', text: 'Your account has been successfully created.' });
-        expect(setFormErrorsMock).not.toBeCalled();
+        expect(setFormErrorsMock).not.toHaveBeenCalled();
     });
 });

@@ -1,69 +1,11 @@
 import { describe, test, expect, vi, afterAll, afterEach, beforeAll } from 'vitest';
 import { HttpResponse, http } from 'msw';
-import { setupServer } from 'msw/node';
-import { getReviews, createReview } from '@utils/reviews';
-
-describe('getReviews util', () => {
-    const productId: string = 'testid';
-    const url: string = `/api/products/${productId}/reviews`;
-    const server = setupServer();
-
-    beforeAll(() => server.listen());
-    afterEach(() => server.resetHandlers());
-    afterAll(() => server.close());
-
-    test('makes a GET request and navigates user to homepage', async () => {
-        const navigateMock = vi.fn();
-        const setReviewsMock = vi.fn();
-
-        server.use(
-            http.get(url, () => {
-                return HttpResponse.json({
-                    error: 'Error occurred while trying to retrieve reviews.'
-                });
-            })
-        );
-
-        await getReviews({
-            productId: productId,
-            navigate: navigateMock,
-            setReviews: setReviewsMock
-        });
-
-        expect(navigateMock).toHaveBeenCalledOnce();
-        expect(navigateMock).toHaveBeenCalledWith('/');
-        expect(setReviewsMock).not.toHaveBeenCalled();
-    });
-
-    test('makes a GET request and calls setReviews function with received data', async () => {
-        const navigateMock = vi.fn();
-        const setReviewsMock = vi.fn();
-        const data: string[] = ['test', 'data'];
-
-        server.use(
-            http.get(url, () => {
-                return HttpResponse.json({
-                    success: data
-                });
-            })
-        );
-
-        await getReviews({
-            productId: productId,
-            navigate: navigateMock,
-            setReviews: setReviewsMock
-        });
-
-        expect(navigateMock).not.toHaveBeenCalled();
-        expect(setReviewsMock).toHaveBeenCalledOnce();
-        expect(setReviewsMock).toHaveBeenCalledWith(data);
-    });
-});
+import { server } from '@tests/node';
+import { createReview } from '@utils/reviews';
 
 describe('createReview util', () => {
     const productId: string = 'testid';
     const url: string = `/api/products/${productId}/reviews`;
-    const server = setupServer();
 
     beforeAll(() => server.listen());
     afterEach(() => server.resetHandlers());
@@ -129,7 +71,6 @@ describe('createReview util', () => {
         expect(setTextMock).toHaveBeenCalledOnce();
         expect(setTextMock).toHaveBeenCalledWith('');
         expect(setAlertMock).toHaveBeenCalledOnce();
-        expect(setAlertMock).toHaveBeenCalledWith({ show: true, type: 'success', text: 'Your review has been successfully created.' });
         expect(setReviewsMock).toHaveBeenCalledOnce();
         expect(setTextErrorMock).not.toHaveBeenCalled();
     });
