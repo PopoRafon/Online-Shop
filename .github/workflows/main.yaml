@@ -7,7 +7,7 @@ on:
     branches: [ master, main ]
 
 jobs:
-  build:
+  backend:
     runs-on: ubuntu-latest
 
     services:
@@ -46,6 +46,12 @@ jobs:
         cd backend/
         python manage.py test
 
+  frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
     - name: Install Node
       uses: actions/setup-node@v4
       with:
@@ -60,3 +66,24 @@ jobs:
       run: |
         cd frontend/
         npm test
+
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: '>=20.x'
+
+    - name: Install Lint Dependencies
+      run: |
+        cd frontend/
+        npm install
+
+    - name: Run Linter
+      run: |
+        cd frontend/
+        npm run lint
