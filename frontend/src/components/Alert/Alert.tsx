@@ -22,12 +22,12 @@ export default function Alert() {
     }, [alert, setAlert]);
 
     return alert.show && (
-        <section className={`alert ${alert.type}-alert`}>
+        <section className={`alert ${alert.type}-alert`} test-id="alert">
             <img
                 height={40}
                 width={40}
                 src={alert.type === 'success' ? SuccessIcon : ErrorIcon}
-                alt="Success icon"
+                alt="Alert icon"
             />
             <div className="alert-info">
                 <h3 className="alert-info-header">{alert.type === 'success' ? 'Success!' : 'Error!'}</h3>

@@ -1,7 +1,8 @@
 import type { RegisterFormData } from '@components/Register/types';
 import type { LoginFormData } from '@components/Login/types';
+import type { PasswordResetFormData } from '@components/Password/Reset/types';
 import { test, describe, expect, vi } from 'vitest';
-import { isRegisterFormValid, isLoginFormValid } from '@helpers/formValidators';
+import { isRegisterFormValid, isLoginFormValid, isPasswordResetFormValid } from '@helpers/formValidators';
 
 describe('isRegisterFormValid helper', () => {
     test('returns false and calls setFormErrors function with errors that occurred while validating form', () => {
@@ -20,7 +21,7 @@ describe('isRegisterFormValid helper', () => {
 
         expect(isFormValid).toBeFalsy();
         expect(setFormErrorsMock).toHaveBeenCalledOnce();
-        expect(setFormErrorsMock).toBeCalledWith({
+        expect(setFormErrorsMock).toHaveBeenCalledWith({
             email: 'Must be valid email address.',
             username: 'Must contain only letters, numbers and underscores.',
             password1: 'Must not be shorter than 8 characters.',
@@ -45,7 +46,7 @@ describe('isRegisterFormValid helper', () => {
 
         expect(isFormValid).toBeTruthy();
         expect(setFormErrorsMock).toHaveBeenCalledOnce();
-        expect(setFormErrorsMock).toBeCalledWith({ email: '', username: '', password1: '', password2: '', rules: '' });
+        expect(setFormErrorsMock).toHaveBeenCalledWith({ email: '', username: '', password1: '', password2: '', rules: '' });
     });
 });
 
@@ -63,7 +64,7 @@ describe('isLoginFormValid helper', () => {
 
         expect(isFormValid).toBeFalsy();
         expect(setFormErrorsMock).toHaveBeenCalledOnce();
-        expect(setFormErrorsMock).toBeCalledWith({
+        expect(setFormErrorsMock).toHaveBeenCalledWith({
             username: 'Username is incorrect.',
             password: 'Password is incorrect.'
         });
@@ -82,6 +83,34 @@ describe('isLoginFormValid helper', () => {
 
         expect(isFormValid).toBeTruthy();
         expect(setFormErrorsMock).toHaveBeenCalledOnce();
-        expect(setFormErrorsMock).toBeCalledWith({ username: '', password: '' });
+        expect(setFormErrorsMock).toHaveBeenCalledWith({ username: '', password: '' });
+    });
+});
+
+describe('isPasswordResetFormValid helper', () => {
+    test('returns false and calls setFormErrors function with errors that occurred while validating form', () => {
+        const setFormErrorsMock = vi.fn();
+        const formData: PasswordResetFormData = { email: 'wrongemail' };
+        const isFormValid = isPasswordResetFormValid({
+            formData: formData,
+            setFormErrors: setFormErrorsMock
+        });
+
+        expect(isFormValid).toBeFalsy();
+        expect(setFormErrorsMock).toHaveBeenCalledOnce();
+        expect(setFormErrorsMock).toHaveBeenCalledWith({ email: 'Must be valid email address.' });
+    });
+
+    test('returns true and calls setFormErrors with empty strings', () => {
+        const setFormErrorsMock = vi.fn();
+        const formData: PasswordResetFormData = { email: 'testemail@example.com' };
+        const isFormValid = isPasswordResetFormValid({
+            formData: formData,
+            setFormErrors: setFormErrorsMock
+        });
+
+        expect(isFormValid).toBeTruthy();
+        expect(setFormErrorsMock).toHaveBeenCalledOnce();
+        expect(setFormErrorsMock).toHaveBeenCalledWith({ email: '' });
     });
 });

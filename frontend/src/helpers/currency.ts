@@ -29,6 +29,10 @@ export default class Currency {
     static changeCurrency(setUser: React.Dispatch<React.SetStateAction<User>>, currencyType: string): void {
         const newCurrency: CurrencyType = this.currencyTypes[currencyType];
 
+        if (!newCurrency) {
+            throw new Error('Provided currency type doesn\'t exist.');
+        }
+
         setUser(prev => ({ ...prev, currency: newCurrency }));
     }
 
