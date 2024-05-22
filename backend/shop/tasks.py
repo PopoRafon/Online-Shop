@@ -1,3 +1,4 @@
+import os
 import secrets
 import string
 from celery import shared_task
@@ -28,3 +29,8 @@ def create_discount_code_and_send_email(email):
         message=message,
         email=email
     )
+
+@shared_task
+def delete_image_file(file_path):
+    if os.path.isfile(file_path):
+        os.remove(file_path)

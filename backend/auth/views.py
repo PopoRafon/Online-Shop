@@ -98,6 +98,16 @@ class RegisterView(APIView):
                 httponly=True
             )
 
+            message = render_to_string('auth/welcome_email.html', context={
+                'site_name': settings.SITE_NAME
+            })
+
+            send_email.delay(
+                f'Welcome to {settings.SITE_NAME}',
+                email,
+                message
+            )
+
             return response
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -1,9 +1,8 @@
-from asgiref.sync import sync_to_async
 from django.db.models.signals import post_save, pre_delete
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from shop.models import Cart, NewsLetter, Discount, ProductImage
-from shop.tasks import create_discount_code_and_send_email
+from shop.tasks import create_discount_code_and_send_email, delete_image_file
 
 @receiver(post_save, sender=User)
 def create_user_cart(instance, created, **kwargs):
@@ -12,9 +11,9 @@ def create_user_cart(instance, created, **kwargs):
         cart.save()
 
 @receiver(pre_delete, sender=ProductImage)
-async def delete_product_image_file(instance, **kwargs):
+def handle_product_image_deletion(instance, **kwargs):
     image = instance.image
-    await sync_to_async(image.delete)()
+    delete_image_file.delay(image.path)
 
 @receiver(post_save, sender=NewsLetter)
 def handle_newsletter_creation(instance, created, **kwargs):

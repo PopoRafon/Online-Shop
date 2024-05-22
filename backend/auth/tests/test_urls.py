@@ -1,6 +1,15 @@
 from rest_framework.test import APISimpleTestCase
 from django.urls import resolve, reverse
-from auth.views import RegisterView, TokenRefreshView, csrf_token_view, LoginView, LogoutView, PasswordResetView, PasswordResetConfirmView
+from auth.views import (
+    RegisterView,
+    TokenRefreshView,
+    csrf_token_view,
+    LoginView,
+    LogoutView,
+    PasswordResetView,
+    PasswordResetConfirmView,
+    PasswordChangeView
+)
 
 
 class TestCsrfTokenUrls(APISimpleTestCase):
@@ -64,3 +73,10 @@ class TestPasswordUrls(APISimpleTestCase):
 
         self.assertEqual(url, f'/api/password/reset/confirm/{uidb64}/{token}')
         self.assertEqual(resolver.func.view_class, PasswordResetConfirmView)
+
+    def test_password_change_url_resolves(self):
+        url = reverse('password-change')
+        resolver = resolve(url)
+
+        self.assertEqual(url, '/api/password/change')
+        self.assertEqual(resolver.func.view_class, PasswordChangeView)

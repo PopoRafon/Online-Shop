@@ -6,7 +6,7 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.urls import reverse
 from rest_framework.test import APITestCase
-from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 
 
 class TestCsrfTokenView(APITestCase):
@@ -188,3 +188,32 @@ class TestPasswordResetConfirmView(APITestCase):
         self.assertEqual(response.status_code, 400)
         self.assertIn('newPassword1', response.json().get('error'))
         self.assertFalse(User.objects.first().check_password(self.data['newPassword1']))
+
+
+class TestPasswordChangeView(APITestCase):
+    def setUp(self):
+        self.url = reverse('password-change')
+        self.user = User.objects.create_user(username='testuser', password='testpassword')
+        self.access_token = AccessToken.for_user(self.user)
+        self.data = {'oldPassword': 'testpassword', 'newPassword1': 'newtestpassword', 'newPassword2': 'newtestpassword'}
+
+    def test_password_change_PATCH_user_password_gets_changed(self):
+        self.client.cookies = SimpleCookie({'access': self.access_token})
+        response = self.client.patch(self.url, data=self.data)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(User.objects.first().check_password(self.data['newPassword1']))
+
+    def test_password_change_PATCH_receives_authentication_error_message(self):
+        response = self.client.patch(self.url, data=self.data)
+
+        self.assertEqual(response.status_code, 401)
+        self.assertFalse(User.objects.first().check_password(self.data['newPassword1']))
+
+    def test_password_change_PATCH_receives_error_message_old_password_is_incorrect(self):
+        data = {'oldPassword': 'wrongpassword', 'newPassword1': 'newtestpassword', 'newPassword2': 'newtestpassword'}
+        self.client.cookies = SimpleCookie({'access': self.access_token})
+        response = self.client.patch(self.url, data=data)
+
+        self.assertEqual(response.status_code, 400)
+        self.assertFalse(User.objects.first().check_password(data['newPassword1']))
