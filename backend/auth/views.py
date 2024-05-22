@@ -13,7 +13,7 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.exceptions import TokenError
-from .serializers import RegisterSerializer, PasswordResetConfirmSerializer
+from .serializers import RegisterSerializer, NewPasswordSerializer
 from .tasks import send_email
 from shop.renderers import ExtendedJSONRenderer
 
@@ -213,7 +213,7 @@ class PasswordResetConfirmView(APIView):
         is_token_valid = PasswordResetTokenGenerator().check_token(user, token)
 
         if is_token_valid:
-            serializer = PasswordResetConfirmSerializer(data=request.data)
+            serializer = NewPasswordSerializer(data=request.data)
 
             if serializer.is_valid():
                 new_password = serializer.validated_data['newPassword1']
@@ -232,3 +232,32 @@ class PasswordResetConfirmView(APIView):
                 'Token you provided is incorrect or has expired.',
                 status=status.HTTP_400_BAD_REQUEST
             )
+
+
+class PasswordChangeView(APIView):
+    permission_classes = [IsAuthenticated]
+    renderer_classes = [ExtendedJSONRenderer]
+
+    def patch(self, request):
+        user = request.user
+        data = request.data
+
+        if user.check_password(data.get('oldPassword')):
+            serializer = NewPasswordSerializer(data=data)
+
+            if serializer.is_valid():
+                new_password = serializer.validated_data['newPassword1']
+
+                user.set_password(new_password)
+                user.save()
+
+                return Response(
+                    'Your password has been successfully changed.',
+                    status=status.HTTP_200_OK
+                )
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({
+                'oldPassword': 'Must be your old password.'
+            }, status=status.HTTP_400_BAD_REQUEST)

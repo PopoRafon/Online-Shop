@@ -57,7 +57,7 @@ class RegisterSerializer(serializers.Serializer):
         return attrs
 
 
-class PasswordResetConfirmSerializer(serializers.Serializer):
+class NewPasswordSerializer(serializers.Serializer):
     newPassword1 = serializers.CharField(
         min_length=8,
         required=True

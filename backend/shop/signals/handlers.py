@@ -23,6 +23,6 @@ def handle_newsletter_creation(instance, created, **kwargs):
         create_discount_code_and_send_email.delay(email)
 
 @receiver(post_save, sender=Discount)
-async def remove_discount_from_database(instance, **kwargs):
+def remove_discount_from_database(instance, **kwargs):
     if instance.quantity <= 0:
-        await sync_to_async(instance.delete)()
+        instance.delete()
