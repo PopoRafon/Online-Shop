@@ -1,16 +1,19 @@
 import { test, describe, expect } from 'vitest';
 import { fireEvent, render } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 import SettingsForm from '@components/Settings/SettingsForm';
 import AlertContextProvider from '@contexts/AlertContext/AlertContextProvider';
 import UserContextProvider from '@contexts/UserContext/UserContextProvider';
 
 const renderWithContexts = () => {
     return render(
-        <AlertContextProvider>
-            <UserContextProvider>
-                <SettingsForm />
-            </UserContextProvider>
-        </AlertContextProvider>
+        <BrowserRouter>
+            <AlertContextProvider>
+                <UserContextProvider>
+                    <SettingsForm />
+                </UserContextProvider>
+            </AlertContextProvider>
+        </BrowserRouter>
     );
 };
 

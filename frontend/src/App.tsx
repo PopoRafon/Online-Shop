@@ -15,6 +15,7 @@ import Login from './pages/Login';
 import Cart from './pages/Cart';
 import PasswordReset from './pages/PasswordReset';
 import PasswordResetConfirm from './pages/PasswordResetConfirm';
+import PasswordChange from '@pages/PasswordChange';
 import Error from './pages/Error';
 import MyProducts from './pages/MyProducts';
 import MyProductsAddProduct from './pages/MyProductsAddProduct';
@@ -55,7 +56,11 @@ function App() {
                             <Route path='reviews' element={<Reviews />} />
                         </Route>
                         <Route path='search' element={<Search />} />
-                        <Route path='settings' element={<Settings />} />
+                        <Route path='settings' element={
+                            <ProtectedRoute>
+                                <Settings />
+                            </ProtectedRoute>
+                        } />
                         <Route path='my-products/'>
                             <Route index element={
                                 <ProtectedRoute>
@@ -76,6 +81,11 @@ function App() {
                         <Route path='password/'>
                             <Route path='reset' element={<PasswordReset />} />
                             <Route path='reset/confirm/:uidb64/:token' element={<PasswordResetConfirm />} />
+                            <Route path='change' element={
+                                <ProtectedRoute>
+                                    <PasswordChange />
+                                </ProtectedRoute>
+                            } />
                         </Route>
                     </Route>
                     <Route path='*' element={<Error />} />

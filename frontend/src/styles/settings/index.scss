@@ -1,0 +1,13 @@
+.settings-panel {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 350px;
+    margin-top: 1rem;
+
+    .settings-panel-button {
+        color: white;
+        padding: 0.5rem;
+        font-size: small;
+    }
+}

@@ -6,6 +6,7 @@ import { updateUserData } from '@utils/userData';
 import useUserContext from '@contexts/UserContext/useUserContext';
 import useAlertContext from '@contexts/AlertContext/useAlertContext';
 import FormInput from '@components/AuthForm/FormInput';
+import SettingsPanel from './SettingsPanel';
 
 export default function SettingsForm() {
     const { setAlert } = useAlertContext();
@@ -76,7 +77,8 @@ export default function SettingsForm() {
                 type="submit"
                 value="Update settings"
                 className="primary-button auth-form-submit"
-            /> 
+            />
+            <SettingsPanel />
         </form>
     );
 }

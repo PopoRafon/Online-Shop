@@ -1,6 +1,7 @@
 import type { RegisterFormData, RegisterFormErrors } from '@components/Register/types';
 import type { LoginFormData, LoginFormErrors } from '@components/Login/types';
 import type { PasswordResetFormData, PasswordResetFormErrors } from '@components/Password/Reset/types';
+import type { PasswordChangeFormData, PasswordChangeFormErrors } from '@components/Password/Change/types';
 import type { PasswordResetConfirmFormData, PasswordResetConfirmFormErrors } from '@components/Password/ResetConfirm/types';
 import type { SettingsFormData, SettingsFormErrors } from '@components/Settings/types';
 
@@ -17,7 +18,7 @@ type IsFormValidArgs<Data, Errors> = {
  * @param {React.Dispatch<React.SetStateAction<RegisterFormErrors>>} args.setFormErrors React state setter function for form errors.
  * @returns {boolean} Whether form data is valid or not.
  */
-function isRegisterFormValid({ formData, setFormErrors }: IsFormValidArgs<RegisterFormData, RegisterFormErrors>): boolean {
+export function isRegisterFormValid({ formData, setFormErrors }: IsFormValidArgs<RegisterFormData, RegisterFormErrors>): boolean {
     const newFormErrors: RegisterFormErrors = { email: '', username: '', password1: '', password2: '', rules: '' };
 
     if (!formData.email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)) newFormErrors.email = 'Must be valid email address.';
@@ -45,7 +46,7 @@ function isRegisterFormValid({ formData, setFormErrors }: IsFormValidArgs<Regist
  * @param {React.Dispatch<React.SetStateAction<LoginFormErrors>>} args.setFormErrors React state setter function for form errors.
  * @returns {boolean} Whether form data is valid or not.
  */
-function isLoginFormValid({ formData, setFormErrors }: IsFormValidArgs<LoginFormData, LoginFormErrors>): boolean {
+export function isLoginFormValid({ formData, setFormErrors }: IsFormValidArgs<LoginFormData, LoginFormErrors>): boolean {
     const newFormErrors: LoginFormErrors = { username: '', password: '' };
 
     if (!formData.username.match(/^\w*$/) ||
@@ -68,7 +69,7 @@ function isLoginFormValid({ formData, setFormErrors }: IsFormValidArgs<LoginForm
  * @param {React.Dispatch<React.SetStateAction<PasswordResetFormErrors>>} args.setFormErrors React state setter function for form errors.
  * @returns {boolean} Whether form data is valid or not.
  */
-function isPasswordResetFormValid({ formData, setFormErrors }: IsFormValidArgs<PasswordResetFormData, PasswordResetFormErrors>): boolean {
+export function isPasswordResetFormValid({ formData, setFormErrors }: IsFormValidArgs<PasswordResetFormData, PasswordResetFormErrors>): boolean {
     const newFormErrors: PasswordResetFormErrors = { email: '' };
 
     if (!formData.email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)) newFormErrors.email = 'Must be valid email address.';
@@ -86,7 +87,7 @@ function isPasswordResetFormValid({ formData, setFormErrors }: IsFormValidArgs<P
  * @param {React.Dispatch<React.SetStateAction<PasswordResetConfirmFormErrors>>} args.setFormErrors React state setter function for form errors.
  * @returns {boolean} Whether form data is valid or not.
  */
-function isPasswordResetConfirmFormValid({ formData, setFormErrors }: IsFormValidArgs<PasswordResetConfirmFormData, PasswordResetConfirmFormErrors>): boolean {
+export function isPasswordResetConfirmFormValid({ formData, setFormErrors }: IsFormValidArgs<PasswordResetConfirmFormData, PasswordResetConfirmFormErrors>): boolean {
     const newFormErrors: PasswordResetConfirmFormErrors = { newPassword1: '', newPassword2: '' };
 
     if (formData.newPassword1.length < 8) newFormErrors.newPassword1 = 'Must not be shorter than 8 characters.';
@@ -106,7 +107,7 @@ function isPasswordResetConfirmFormValid({ formData, setFormErrors }: IsFormVali
  * @param {React.Dispatch<React.SetStateAction<string>>} args.setFormErrors React state setter function for form errors.
  * @returns {boolean} Whether form data is valid or not.
  */
-function isReviewsFormValid({ formData, setFormErrors }: IsFormValidArgs<string, string>): boolean {
+export function isReviewsFormValid({ formData, setFormErrors }: IsFormValidArgs<string, string>): boolean {
     let newFormData: string = '';
 
     if (formData.length < 4) newFormData = 'Must not be shorter than 4 characters.';
@@ -125,7 +126,7 @@ function isReviewsFormValid({ formData, setFormErrors }: IsFormValidArgs<string,
  * @param {React.Dispatch<React.SetStateAction<SettingsFormErrors>>} args.setFormErrors React state setter function for form errors.
  * @returns {boolean} Whether form data is valid or not.
  */
-function isSettingsFormValid({ formData, setFormErrors }: IsFormValidArgs<SettingsFormData, SettingsFormErrors>): boolean {
+export function isSettingsFormValid({ formData, setFormErrors }: IsFormValidArgs<SettingsFormData, SettingsFormErrors>): boolean {
     const newFormErrors: SettingsFormErrors = { email: '', username: '', first_name: '', last_name: '' }; // eslint-disable-line @typescript-eslint/naming-convention
 
     if (!formData.email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)) newFormErrors.email = 'Must be valid email address.';
@@ -147,4 +148,24 @@ function isSettingsFormValid({ formData, setFormErrors }: IsFormValidArgs<Settin
     return !Object.values(newFormErrors).some(field => field);
 }
 
-export { isRegisterFormValid, isLoginFormValid, isPasswordResetFormValid, isPasswordResetConfirmFormValid, isReviewsFormValid, isSettingsFormValid };
+/**
+ * Validates provided form data and updates errors by using provided state setter function.
+ * 
+ * @param {Object} args
+ * @param {PasswordChangeFormData} args.formData Object containing password change form data to validate.
+ * @param {React.Dispatch<React.SetStateAction<PasswordChangeFormErrors>>} args.setFormErrors React state setter function for form errors.
+ * @returns {boolean} Whether form data is valid or not.
+ */
+export function isPasswordChangeFormValid({ formData, setFormErrors }: IsFormValidArgs<PasswordChangeFormData, PasswordChangeFormErrors>): boolean {
+    const newFormErrors: PasswordChangeFormErrors = { oldPassword: '', newPassword1: '', newPassword2: '' };
+
+    if (formData.oldPassword.length < 8) newFormErrors.oldPassword = 'Must be your old password.';
+    
+    if (formData.newPassword1.length < 8) newFormErrors.newPassword1 = 'Must not be shorter than 8 characters.';
+
+    if (formData.newPassword1 !== formData.newPassword2) newFormErrors.newPassword2 = 'Must be the same as password.';
+
+    setFormErrors({ ...newFormErrors });
+
+    return !Object.values(newFormErrors).some(field => field);
+}

@@ -1719,6 +1719,19 @@ footer {
   width: clamp(310px, 80vw, 700px);
 }
 
+.settings-panel {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  max-width: 350px;
+  margin-top: 1rem;
+}
+.settings-panel .settings-panel-button {
+  color: white;
+  padding: 0.5rem;
+  font-size: small;
+}
+
 * {
   font-family: "Roboto", Arial, Helvetica, sans-serif;
 }

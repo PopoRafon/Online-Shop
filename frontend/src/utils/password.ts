@@ -1,6 +1,7 @@
 import type { NavigateFunction } from 'react-router-dom';
 import type { PasswordResetFormData, PasswordResetFormErrors } from '@components/Password/Reset/types';
 import type { PasswordResetConfirmFormData, PasswordResetConfirmFormErrors } from '@components/Password/ResetConfirm/types';
+import type { PasswordChangeFormData, PasswordChangeFormErrors } from '@components/Password/Change/types';
 import type { AlertData } from '@contexts/AlertContext/AlertContextProvider';
 import Cookies from 'js-cookie';
 
@@ -99,4 +100,49 @@ async function passwordResetConfirm({ formData, setFormErrors, navigate, setAler
         });
 }
 
-export { passwordReset, passwordResetConfirm };
+type PasswordChangeArgs = {
+    formData: PasswordChangeFormData;
+    setFormErrors: React.Dispatch<React.SetStateAction<PasswordChangeFormErrors>>;
+    navigate: NavigateFunction;
+    setAlert: React.Dispatch<React.SetStateAction<AlertData>>;
+}
+
+/**
+ * Sends request to server with provided form data.
+ * 
+ * If request succeeds calls `setAlert` function and navigates user to settings page.
+ */
+async function passwordChange({ formData, setFormErrors, navigate, setAlert }: PasswordChangeArgs) {
+    const csrfToken: string = Cookies.get('csrftoken') ?? '';
+
+    return await fetch('/api/password/change', {
+        method: 'PATCH',
+        headers: {
+            'X-CSRFToken': csrfToken, // eslint-disable-line @typescript-eslint/naming-convention
+            'Content-Type': 'application/json' // eslint-disable-line @typescript-eslint/naming-convention
+        },
+        body: JSON.stringify(formData)
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                setAlert({
+                    show: true,
+                    type: 'success',
+                    text: 'Your password has been successfully changed.'
+                });
+                navigate('/settings');
+            } else if (data.error) {
+                setFormErrors({ ...data.error });
+            }
+        })
+        .catch(() => {
+            setAlert({
+                show: true,
+                type: 'error',
+                text: 'Server could not be reached.'
+            });
+        });
+}
+
+export { passwordReset, passwordResetConfirm, passwordChange };
